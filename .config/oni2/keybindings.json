@@ -1,0 +1,8 @@
+[
+  { "key": "jk", "command": "vim.esc", "when": "insertMode" },
+  { "key": "<C-h>", "command": "window.moveLeft", "when": "normalMode" },
+  { "key": "<C-l>", "command": "window.moveRight", "when": "normalMode" },
+  { "key": "<C-j>", "command": "window.moveDown", "when": "normalMode" },
+  { "key": "<C-k>", "command": "window.moveUp", "when": "normalMode" },
+  { "key": "<S-K>", "command": "editor.action.showHover", "when": "normalMode" }
+]

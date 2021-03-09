@@ -1,0 +1,32 @@
+{
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Dracula",
+  "editor.detectIndentation": true,
+  "editor.fontFamily": "Hack Nerd Font Mono",
+  "editor.fontSize": 16,
+  "editor.largeFileOptimizations": true,
+  "editor.highlightActiveIndentGuide": true,
+  "editor.indentSize": 2,
+  "editor.lineNumbers": "on",
+  "editor.matchBrackets": true,
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 120,
+  "editor.minimap.showSlider": true,
+  "editor.renderIndentGuides": true,
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.zenMode.hideTabs": true,
+  "editor.zenMode.singleFile": true,
+  "files.exclude": [
+    "_esy",
+    "node_modules"
+  ],
+  "workbench.activityBar.visible": true,
+  "workbench.editor.showTabs": true,
+  "workbench.sideBar.visible": true,
+  "workbench.statusBar.visible": true,
+  "workbench.tree.indent": 2,
+  "vim.useSystemClipboard": [
+    "yank"
+  ]
+}
