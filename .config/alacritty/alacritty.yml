@@ -1,0 +1,14 @@
+import:
+  - ~/.config/alacritty/themes/dracula/dracula.yml
+
+window:
+  padding:
+    x: 10
+    y: 10
+font:
+  normal:
+    family: Hack Nerd Font Mono
+  size: 18.0
+  offset:
+    x: 0
+    y: 2
