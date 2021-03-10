@@ -96,7 +96,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
 
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
 
 call plug#end()
@@ -142,9 +142,9 @@ imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 " let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_next = '<C-j>'
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_prev = '<C-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
