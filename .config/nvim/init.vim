@@ -99,6 +99,8 @@ Plug 'APZelos/blamer.nvim'
 " Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 call plug#end()
 
 " Theme
