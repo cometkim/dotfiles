@@ -93,10 +93,17 @@ alias ll="lsd -l"
 alias lla="lsd -la"
 alias lt="lsd --tree"
 
-alias zshrc="$EDITOR ~/.zshrc"
-alias vimrc="$EDITOR ~/.config/nvim/init.vim"
-alias tmuxrc="$EDITOR ~/.tmux.conf.local"
-alias alacrittyrc="$EDITOR ~/.config/alacritty/alacritty.yml"
+export ZSHRC="$HOME/.zshrc"
+alias zshrc="$EDITOR $ZSHRC"
+
+export VIMRC="$HOME/.config/nvim/init.vim"
+alias vimrc="$EDITOR $VIMRC"
+
+export TMUXRC="$HOME/.tmux.conf.local"
+alias tmuxrc="$EDITOR $TMUXRC"
+
+export TERMRC="$HOME/.config/alacritty/alacritty.yml"
+alias termrc="$EDITOR $TERMRC"
 
 alias ..="cd .."
 
