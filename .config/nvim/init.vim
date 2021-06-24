@@ -47,7 +47,7 @@ cabbrev ㅈ w
 cabbrev ㅂ q
 cabbrev ㅈㅂ wq
 
-set clipboard=unnamed
+set clipboard^=unnamed,unnamedplus
 
 " Plugins
 call plug#begin(exists('s:plug') ? s:plug : '~/.vim/plugged')
@@ -87,6 +87,10 @@ Plug 'josa42/coc-sh', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'kkiyama117/coc-toml', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'antonk52/coc-cssmodules', { 'do': 'npm ci' }
 Plug 'rescript-lang/vim-rescript'
+" Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'pantharshit00/vim-prisma'
+Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
@@ -95,11 +99,9 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
-
+Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 " Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
-
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 call plug#end()
 
@@ -362,6 +364,17 @@ let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
 let g:vim_markdown_fenced_languages = ['html', 'css', 'scss', 'sql', 'js=javascript', 'jsx=javascriptreact', 'ts=typescript', 'tsx=typescriptreact', 're=reason', 'res=rescript', 'go', 'python', 'bash=sh', 'c', 'ruby']
+
+" fatih/vim-go
+" let g:go_gopls_enabled = 0
+
+" josa42/coc-go
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
+
+let g:blamer_enabled = 1
 
 " Navigation
 vnoremap <silent> <Tab> >gv
