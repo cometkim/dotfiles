@@ -67,8 +67,10 @@ Plug 'neoclide/coc-stylelint', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-yank', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-smartf', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-lists', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'coc-extensions/coc-svelte', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'weirongxu/coc-explorer', { 'do': 'yarn install --frozen-lockfile' }
+
+Plug 'coc-extensions/coc-svelte', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'iamcco/coc-svg', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'iamcco/coc-diagnostic', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'iamcco/coc-spell-checker', { 'do': 'yarn install --frozen-lockfile' }
@@ -91,6 +93,8 @@ Plug 'rescript-lang/vim-rescript'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'pantharshit00/vim-prisma'
 Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'gleam-lang/gleam.vim'
+Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
@@ -100,8 +104,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
-" Plug 'SirVer/ultisnips'
-Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
 
 call plug#end()
 
@@ -112,7 +114,7 @@ syntax on
 color dracula
 colorscheme dracula
 
-set guifont=Hack\ Nerd\ Font\ Mono\ 16
+set guifont=Hack\ Nerd\ Font\ Mono\ 14
 set termguicolors
 
 " for React
@@ -363,7 +365,23 @@ let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
-let g:vim_markdown_fenced_languages = ['html', 'css', 'scss', 'sql', 'js=javascript', 'jsx=javascriptreact', 'ts=typescript', 'tsx=typescriptreact', 're=reason', 'res=rescript', 'go', 'python', 'bash=sh', 'c', 'ruby']
+let g:vim_markdown_fenced_languages = [
+  'html',
+  'css',
+  'scss',
+  'sql',
+  'js=javascript',
+  'jsx=javascriptreact',
+  'ts=typescript',
+  'tsx=typescriptreact',
+  're=reason',
+  'res=rescript',
+  'go',
+  'python',
+  'bash=sh',
+  'c',
+  'ruby'
+]
 
 " fatih/vim-go
 " let g:go_gopls_enabled = 0
@@ -375,6 +393,21 @@ autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
 autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
 let g:blamer_enabled = 1
+
+" rescript-lang/vim-rescript
+"
+" Note that <buffer> allows us to use different commands with the same keybindings depending
+" on the filetype. This is useful if to override your e.g. ALE bindings while working on
+" ReScript projects.
+autocmd FileType rescript nnoremap <silent> <buffer> <localleader>r :RescriptFormat<CR>
+autocmd FileType rescript nnoremap <silent> <buffer> <localleader>t :RescriptTypeHint<CR>
+autocmd FileType rescript nnoremap <silent> <buffer> <localleader>b :RescriptBuild<CR>
+autocmd FileType rescript nnoremap <silent> <buffer> gd :RescriptJumpToDefinition<CR>
+" Hooking up the ReScript autocomplete function
+set omnifunc=rescript#Complete
+" When preview is enabled, omnicomplete will display additional
+" information for a selected item
+set completeopt+=preview
 
 " Navigation
 vnoremap <silent> <Tab> >gv
