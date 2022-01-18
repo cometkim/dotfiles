@@ -57,13 +57,17 @@ export WORKDIR="$HOME/Workspace"
 
 # NodeJS
 export NODE_HOME="$(asdf where nodejs)"
-export PATH="$(npm -g bin):$PATH"
-export PATH="$(yarn global bin):$PATH"
+# export PATH="$(npm -g bin):$PATH"
+# export PATH="$(yarn global bin):$PATH"
 export PATH="$(pnpm -g bin):$PATH"
 
 # Go
 export GOPATH="$WORKDIR"
 export PATH="$GOPATH/bin:$PATH"
+
+# OCaml / OPAM
+export OPAM_HOME="$HOME"
+test -r "$HOME/.opam/opam-init/init.zsh" && source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
 
 # Rust
 export RUST_HOME="$(asdf where rust)"
@@ -77,6 +81,14 @@ export PATH="$CARGO_HOME/bin:$PATH"
 # Java
 source $HOME/.asdf/plugins/java/set-java-home.zsh
 export PATH="$JAVA_HOME/bin:$PATH"
+
+# Ruby
+export RUBY_HOME="$(asdf where ruby)"
+export PATH="$RUBY_HOME/bin:$PATH"
+
+# Deno
+export DENO_HOME="$(asdf where deno)"
+export PATH="$DENO_HOME/.deno/bin:$PATH"
 
 # Personal config
 export EDITOR="nvim"
@@ -108,3 +120,5 @@ alias termrc="$EDITOR $TERMRC"
 alias ..="cd .."
 
 alias tf="terraform"
+
+[[ -f ~/.daangn.zsh ]] && source ~/.daangn.zsh
