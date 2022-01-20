@@ -3,27 +3,12 @@
   "tsserver.npm": "pnpm",
   "eslint.packageManager": "pnpm",
   "eslint.autoFixOnSave": true,
-  "coc.preferences.colorSupport": true,
-  "highlight.colors.enable": true,
-  "highlight.document.enable": true,
   "explorer.icon.enableNerdfont": true,
-  "explorer.icon.enableVimDevicons": true,
+  "explorer.icon.source": "vim-devicons",
   "explorer.datetime.format": "yy/MM/dd HH:mm:ss",
   "coc.preferences.formatOnSaveFiletypes": [
     "reason",
     "rescript"
-  ],
-  "html.enable": true,
-  "html.filetypes": [
-    "html",
-    "handlebars",
-    "htmldjango",
-    "blade",
-    "markdown",
-    "reason",
-    "rescript",
-    "javascriptreact",
-    "typescriptreact"
   ],
   "languageserver": {
     "terraform": {
@@ -33,13 +18,13 @@
     },
     "rescript": {
       "enable": true,
-      "modules": "~/.vim/plugged/vim-rescript/rescript-vscode/extension/server/out/server.js",
+      "module": "~/.vim/plugged/vim-rescript/rescript-vscode/extension/server/out/server.js",
       "args": ["--node-ipc"],
       "filetypes": ["rescript"],
       "rootPatterns": ["bsconfig.json"]
     }
   },
-  "diagnostic-languageserver.filetypes": {
+  "diagnostic.filetypeMap": {
     "sh": "shellcheck",
     "bash": "shellcheck"
   }

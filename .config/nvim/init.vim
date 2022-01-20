@@ -89,8 +89,8 @@ Plug 'josa42/coc-sh', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'kkiyama117/coc-toml', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'antonk52/coc-cssmodules', { 'do': 'npm ci' }
 Plug 'rescript-lang/vim-rescript'
-" Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'pantharshit00/vim-prisma'
 Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'gleam-lang/gleam.vim'
