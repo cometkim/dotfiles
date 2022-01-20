@@ -45,7 +45,7 @@ zinit wait lucid for \
 export PATH="/opt/homebrew/bin:$PATH"
 
 # Autojump
-[ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
+source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
