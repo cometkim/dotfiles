@@ -1,7 +1,7 @@
 [user]
   name = Hyeseong Kim
   email = hey@hyeseong.kim
-  signingkey = A2222A83
+  signingkey = hey@hyeseong.kim
 
 [gpg]
   program = gpg
