@@ -365,23 +365,7 @@ let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
-let g:vim_markdown_fenced_languages = [
-  'html',
-  'css',
-  'scss',
-  'sql',
-  'js=javascript',
-  'jsx=javascriptreact',
-  'ts=typescript',
-  'tsx=typescriptreact',
-  're=reason',
-  'res=rescript',
-  'go',
-  'python',
-  'bash=sh',
-  'c',
-  'ruby'
-]
+let g:vim_markdown_fenced_languages = ['html', 'css', 'scss', 'sql', 'js=javascript', 'jsx=javascriptreact', 'ts=typescript', 'tsx=typescriptreact', 're=reason', 'res=rescript', 'go', 'python', 'bash=sh', 'c', 'ruby']
 
 " fatih/vim-go
 " let g:go_gopls_enabled = 0
