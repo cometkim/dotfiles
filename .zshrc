@@ -9,7 +9,7 @@ fi
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -21,26 +21,28 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
 
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit wait lucid for \
-      zdharma/history-search-multi-word \
-  atinit"zicompinit; zicdreplay" \
-      light zdharma/fast-syntax-highlighting \
+      zdharma-continuum/history-search-multi-word \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
+  blockf \
+      zsh-users/zsh-completions \
   atload"_zsh_autosuggest_start" \
-      light zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
-      light zsh-users/zsh-completions
+      zsh-users/zsh-autosuggestions
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && source /usr/local/etc/profile.d/autojump.sh
@@ -122,3 +124,5 @@ alias ..="cd .."
 alias tf="terraform"
 
 [[ -f ~/.daangn.zsh ]] && source ~/.daangn.zsh
+
+### End of Zinit's installer chunk
