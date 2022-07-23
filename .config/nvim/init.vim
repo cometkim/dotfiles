@@ -95,6 +95,8 @@ Plug 'pantharshit00/vim-prisma'
 Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'gleam-lang/gleam.vim'
 Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-styled-components', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'cdata/vim-tagged-template'
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
@@ -317,6 +319,10 @@ xmap ig <Plug>(coc-git-chunk-inner)
 omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 
+nnoremap <silent> <space>gs  :<C-u>CocList --normal gstatus<CR>
+nnoremap <silent> <space>gc  :<C-u>CocList --normal commits<CR>
+nnoremap <silent> <space>gf  :<C-u>CocList --normal gfiles<CR>
+
 " coc-smartf
 nmap f <Plug>(coc-smartf-forward)
 nmap F <Plug>(coc-smartf-backward)
@@ -392,6 +398,16 @@ set omnifunc=rescript#Complete
 " When preview is enabled, omnicomplete will display additional
 " information for a selected item
 set completeopt+=preview
+
+" cdata/vim-tagged-template
+let g:taggedtemplate#tagSyntaxMap = {
+  \ "html":    "html",
+  \ "md":      "markdown",
+  \ "gql":     "graphql",
+  \ "graphql": "graphql",
+  \ "css":     "css"
+  \}
+autocmd FileType javascript,javascriptreact,typescript,typescriptreact : call taggedtemplate#applySyntaxMap()
 
 " Navigation
 vnoremap <silent> <Tab> >gv
