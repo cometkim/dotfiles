@@ -52,7 +52,9 @@ source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
 export FZF_DEFAULT_COMMAND="fd - type f"
 
 # asdf
-source "$(brew --prefix asdf)/asdf.sh"
+export ASDF_HOME="$(brew --prefix asdf)"
+export ASDF_DIR="$ASDF_HOME/libexec"
+source "$ASDF_HOME/asdf.sh"
 
 export PATH="$HOME/bin:$PATH"
 export WORKDIR="$HOME/Workspace"
@@ -61,6 +63,10 @@ export WORKDIR="$HOME/Workspace"
 export NODE_HOME="$(asdf where nodejs)"
 # export PATH="$(npm -g bin):$PATH"
 # export PATH="$(yarn global bin):$PATH"
+
+# PNPM
+export PNPM_HOME="$(asdf where pnpm)"
+export PATH="$PNPM_HOME:$PATH"
 export PATH="$(pnpm -g bin):$PATH"
 
 # Go
@@ -69,7 +75,7 @@ export PATH="$GOPATH/bin:$PATH"
 
 # OCaml / OPAM
 export OPAM_HOME="$HOME"
-test -r "$HOME/.opam/opam-init/init.zsh" && source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+test -r "$HOME/.opam/opam-init/init.zsh" && source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
 
 # Rust
 export RUST_HOME="$(asdf where rust)"

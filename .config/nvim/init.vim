@@ -396,8 +396,13 @@ set completeopt+=preview
 " Navigation
 vnoremap <silent> <Tab> >gv
 vnoremap <silent> <S-Tab> <gv
+
+nnoremap <silent> <C-S-l> gt
+nnoremap <silent> <C-S-h> gT
+
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
+
 tnoremap <silent> <Esc><Esc> <C-\><C-n>

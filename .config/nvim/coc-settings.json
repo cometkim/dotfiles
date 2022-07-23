@@ -18,10 +18,24 @@
     },
     "rescript": {
       "enable": true,
-      "module": "~/.vim/plugged/vim-rescript/rescript-vscode/extension/server/out/server.js",
+      "module": "~/.vim/plugged/vim-rescript/server/out/server.js",
       "args": ["--node-ipc"],
       "filetypes": ["rescript"],
       "rootPatterns": ["bsconfig.json"]
+    },
+    "protobuf": {
+      "enable": true,
+      "filetypes": ["proto"],
+      "rootPatterns": [
+        "pollapo.yml",
+        "pollapo.yaml",
+        "buf.work.yml",
+        "buf.work.yaml"
+      ],
+      "command": "pb",
+      "args": [
+        "lsp"
+      ]
     }
   },
   "diagnostic.filetypeMap": {
