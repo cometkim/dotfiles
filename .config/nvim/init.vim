@@ -76,7 +76,7 @@ Plug 'iamcco/coc-diagnostic', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'iamcco/coc-spell-checker', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'amiralies/coc-flow', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'voldikss/coc-gist', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'voldikss/coc-browser', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'cometkim/coc-browser', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'felippepuhle/coc-graphql', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'yaegassy/coc-html-css-support', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'yaegassy/coc-htmlhint', { 'do': 'yarn install --frozen-lockfile' }
