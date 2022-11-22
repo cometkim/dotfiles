@@ -39,7 +39,9 @@ zinit wait lucid for \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions
 
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+if [[ -f "$HOME/.p10k.zsh" ]]; then
+  source "$HOME/.p10k.zsh"
+fi
 
 if [[ -d "/opt/homebrew" ]]; then
   export BREW_HOME="/opt/homebrew"
@@ -56,7 +58,9 @@ export WORKDIR="$HOME/Workspace"
 source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -f "$HOME/.fzf.zsh" ]]; then
+  source "$HOME/.fzf.zsh"
+fi
 export FZF_DEFAULT_COMMAND="fd - type f"
 
 # asdf
@@ -75,7 +79,9 @@ export PATH="$GOPATH/bin:$PATH"
 
 # OCaml / OPAM
 export OPAM_HOME="$HOME"
-test -r "$HOME/.opam/opam-init/init.zsh" && source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+if [[ -r "$HOME/.opam/opam-init/init.zsh" ]]; then
+  source "$HOME/.opam/opam-init/init.zsh"
+fi
 
 # Rust
 export RUST_HOME="$(asdf where rust)"
