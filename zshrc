@@ -39,12 +39,20 @@ zinit wait lucid for \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-export PATH="/opt/homebrew/bin:$PATH"
+if [[ -d "/opt/homebrew" ]]; then
+  export BREW_HOME="/opt/homebrew"
+elif [[ -d "/home/linuxbrew" ]]; then
+  export BREW_HOME="/home/linuxbrew/.linuxbrew"
+fi
+export PATH="$BREW_HOME/bin:$PATH"
+eval $(brew shellenv)
 
-# Autojump
+export PATH="$HOME/bin:$PATH"
+export WORKDIR="$HOME/Workspace"
+
+# autojump
 source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
 
 # fzf
@@ -53,21 +61,13 @@ export FZF_DEFAULT_COMMAND="fd - type f"
 
 # asdf
 export ASDF_HOME="$(brew --prefix asdf)"
-export ASDF_DIR="$ASDF_HOME/libexec"
-source "$ASDF_HOME/asdf.sh"
-
-export PATH="$HOME/bin:$PATH"
-export WORKDIR="$HOME/Workspace"
+source "$ASDF_HOME/libexec/asdf.sh"
 
 # NodeJS
 export NODE_HOME="$(asdf where nodejs)"
-# export PATH="$(npm -g bin):$PATH"
+export PATH="$(npm -g bin):$PATH"
 # export PATH="$(yarn global bin):$PATH"
-
-# PNPM
-export PNPM_HOME="$(asdf where pnpm)"
-export PATH="$PNPM_HOME:$PATH"
-export PATH="$(pnpm -g bin):$PATH"
+# export PATH="$(pnpm -g bin):$PATH"
 
 # Go
 export GOPATH="$WORKDIR"
@@ -125,10 +125,13 @@ alias tmuxrc="$EDITOR $TMUXRC"
 export TERMRC="$HOME/.config/alacritty/alacritty.yml"
 alias termrc="$EDITOR $TERMRC"
 
+export IMERC="$HOME/.config/kime/config.yaml"
+alias imerc="$EDITOR $IMERC"
+
 alias ..="cd .."
 
 alias tf="terraform"
 
-[[ -f ~/.daangn.zsh ]] && source ~/.daangn.zsh
-
-### End of Zinit's installer chunk
+if [[ -f ~/.daangn.zsh ]]; then
+  source ~/.daangn.zsh
+fi

@@ -6,3 +6,5 @@
 
 !.config/yarn/global/package.json
 !.config/yarn/global/yarn.lock
+
+Brewfile.lock.json

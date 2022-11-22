@@ -1,0 +1,12 @@
+bun 0.2.1
+deno 1.28.1
+golang 1.19.3
+grain 0.5.4
+java openjdk-19
+nodejs 18.12.1
+ocaml 4.14.0
+pbkit 0.0.56
+python 3.11.0
+ruby 3.1.1
+rust 1.65.0
+terraform 1.3.5

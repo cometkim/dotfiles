@@ -1,7 +1,6 @@
-[submodule ".config/alacritty/themes/dracula"]
-  path = .config/alacritty/themes/dracula
+[submodule "config/alacritty/themes/dracula"]
+  path = config/alacritty/themes/dracula
   url = https://github.com/cometkim/dracula-alacritty.git
-
-[submodule ".tmux"]
-  path = .tmux
+[submodule "tmux"]
+  path = tmux
   url = https://github.com/cometkim/.tmux.git
