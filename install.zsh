@@ -91,6 +91,8 @@ link "tmux/.tmux.conf" "$HOME/.tmux.conf"
 link "config/nvim" "$CONFIG/nvim"
 link "config/kime" "$CONFIG/kime"
 link "config/alacritty" "$CONFIG/alacritty"
+link "config/coc" "$CONFIG/coc"
+link "config/oni2" "$CONFIG/oni2"
 
 install_or_update_zinit; refresh_zsh
 install_or_update_homebrew; refresh_zsh
