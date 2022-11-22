@@ -119,7 +119,7 @@ alias zshrc="$EDITOR $ZSHRC"
 export VIMRC="$HOME/.config/nvim/init.vim"
 alias vimrc="$EDITOR $VIMRC"
 
-export TMUXRC="$HOME/.tmux.conf.local"
+export TMUXRC="$HOME/.tmux.conf"
 alias tmuxrc="$EDITOR $TMUXRC"
 
 export TERMRC="$HOME/.config/alacritty/alacritty.yml"
