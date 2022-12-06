@@ -1,7 +1,7 @@
 {
-  "npm.binPath": "pnpm",
-  "tsserver.npm": "pnpm",
-  "eslint.packageManager": "pnpm",
+  "npm.binPath": "npm",
+  "tsserver.npm": "npm",
+  "eslint.packageManager": "npm",
   "eslint.autoFixOnSave": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "vim-devicons",
