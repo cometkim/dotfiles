@@ -1,10 +1,13 @@
-.config/*
-!.config/alacritty/
-!.config/nvim/
-!.config/gitui/
-!.config/oni2/
+config/**
+!config/coc/extensions/package.json
+!config/alacritty/
+!config/nvim/
+!config/gitui/
+!config/kime/
+!config/oni2/
+!config/fontconfig/
 
-!.config/yarn/global/package.json
-!.config/yarn/global/yarn.lock
+!config/yarn/global/package.json
+!config/yarn/global/yarn.lock
 
 Brewfile.lock.json

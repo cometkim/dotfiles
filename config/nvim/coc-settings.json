@@ -41,5 +41,6 @@
   "diagnostic.filetypeMap": {
     "sh": "shellcheck",
     "bash": "shellcheck"
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

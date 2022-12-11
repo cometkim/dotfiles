@@ -35,6 +35,14 @@ function link() {
   echo
 }
 
+function install_common_dependencies() {
+  if [[ -x "$(command -v apt)" ]]; then
+    sudo apt update && apt install \
+      build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev \
+      cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+  fi
+}
+
 function install_or_update_zinit() {
   local ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
   if [[ ! -d "$(dirname "$ZINIT_HOME")" ]]; then
@@ -95,6 +103,13 @@ link "config/kime" "$CONFIG/kime"
 link "config/alacritty" "$CONFIG/alacritty"
 link "config/coc" "$CONFIG/coc"
 link "config/oni2" "$CONFIG/oni2"
+link "config/fontconfig" "$CONFIG/fontconfig"
+
+FONTS_DIR="$HOME/.local/share/fonts"
+mkdir -p "$FONTS_DIR"
+cp $SOURCE_DIR/fonts/* "$FONTS_DIR"
+
+install_common_dependencies
 
 install_or_update_zinit; refresh_zsh
 install_or_update_homebrew; refresh_zsh
