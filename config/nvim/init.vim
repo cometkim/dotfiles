@@ -106,6 +106,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
+Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.2.1' }
 
 call plug#end()
 
@@ -408,6 +409,21 @@ let g:taggedtemplate#tagSyntaxMap = {
   \ "css":     "css"
   \}
 autocmd FileType javascript,javascriptreact,typescript,typescriptreact : call taggedtemplate#applySyntaxMap()
+
+
+" akinsho/toggleterm.nvim
+" set
+command! -count=1 -complete=shellcmd -nargs=* TermExec lua require'toggleterm'.exec(<q-args>, <count>, 12)
+command! -count=1 ToggleTerm lua require'toggleterm'.toggle(<count>, 12)
+
+autocmd TermEnter term://*toggleterm#*
+  \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+" By applying the mappings this way you can pass a count to your
+" mapping to open a specific window.
+" For example: 2<C-t> will open terminal 2
+nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 " Navigation
 vnoremap <silent> <Tab> >gv
