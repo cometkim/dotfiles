@@ -3,7 +3,7 @@ deno 1.28.1
 golang 1.19.3
 grain 0.5.4
 java openjdk-19
-nodejs 18.12.1
+nodejs 19.3.0
 ocaml 4.14.0
 pbkit 0.0.56
 python 3.11.0
