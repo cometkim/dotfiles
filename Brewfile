@@ -39,6 +39,7 @@ brew "tmux"
 brew "watchman"
 brew "wget"
 brew "yarn"
+brew "zoxide"
 brew "zsh"
 
 brew "cloudflare/cloudflare/cloudflared"

@@ -57,6 +57,9 @@ export WORKDIR="$HOME/Workspace"
 # autojump
 source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # fzf
 if [[ -f "$HOME/.fzf.zsh" ]]; then
   source "$HOME/.fzf.zsh"
