@@ -3,5 +3,5 @@
 email hey@hyeseong.kim
 lastUpdateCheck 1670683236375
 username cometkim
-yarn-offline-mirror "~/npm-packages-offline-cache"
+yarn-offline-mirror "npm-packages-offline-cache"
 yarn-offline-mirror-pruning true
