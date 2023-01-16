@@ -97,6 +97,7 @@ Plug 'gleam-lang/gleam.vim'
 Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-styled-components', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'cdata/vim-tagged-template'
+Plug 'UltiRequiem/coc-zig', { 'do': 'yarn install --frozen-lockfile' }
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
