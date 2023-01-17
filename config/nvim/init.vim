@@ -54,6 +54,7 @@ call plug#begin(exists('s:plug') ? s:plug : '~/.vim/plugged')
 
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'nvim-lua/plenary.nvim'
 
 Plug 'neoclide/coc-tsserver', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
@@ -108,6 +109,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.2.1' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 
 call plug#end()
 
@@ -216,8 +218,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -419,6 +421,12 @@ command! -count=1 ToggleTerm lua require'toggleterm'.toggle(<count>, 12)
 
 autocmd TermEnter term://*toggleterm#*
   \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+" Telescope.nvim
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " By applying the mappings this way you can pass a count to your
 " mapping to open a specific window.
