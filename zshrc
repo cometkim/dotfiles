@@ -54,9 +54,6 @@ eval $(brew shellenv)
 export PATH="$HOME/bin:$PATH"
 export WORKDIR="$HOME/Workspace"
 
-# autojump
-source "$(brew --prefix autojump)/etc/profile.d/autojump.sh"
-
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -137,7 +134,9 @@ alias termrc="$EDITOR $TERMRC"
 export IMERC="$HOME/.config/kime/config.yaml"
 alias imerc="$EDITOR $IMERC"
 
-alias ..="cd .."
+alias cd="z"
+alias j="z"
+alias ..="z .."
 
 alias tf="terraform"
 
