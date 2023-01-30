@@ -76,13 +76,13 @@ function install_or_update_asdf_plugins() {
     "ocaml"
     "python"
     "ruby"
-    "rust"
     "terraform"
   )
   for plugin in "${plugins[@]}"; do
     asdf plugin add "$plugin"
   done
   asdf plugin add pbkit "https://github.com/pbkit/asdf-pbkit.git"
+  asdf plugin add rust "https://github.com/code-lever/asdf-rust.git"
   asdf install java openjdk-19
   asdf install
   echo

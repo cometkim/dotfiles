@@ -8,6 +8,6 @@ ocaml 4.14.0
 pbkit 0.0.56
 python 3.11.0
 ruby 3.1.1
-rust 1.65.0
+rust 1.67.0
 terraform 1.3.5
 zig 0.10.0
