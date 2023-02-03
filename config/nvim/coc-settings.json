@@ -6,10 +6,12 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "vim-devicons",
   "explorer.datetime.format": "yy/MM/dd HH:mm:ss",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "reason",
-    "rescript"
-  ],
+  "[reason]": {
+    "coc.preferences.formatOnSave": true
+  },
+  "[rescript]": {
+    "coc.preferences.formatOnSave": true
+  },
   "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
@@ -36,6 +38,16 @@
       "args": [
         "lsp"
       ]
+    },
+    "ocaml": {
+      "enable": true,
+      "filetypes": ["ocaml"],
+      "rootPatterns": [
+        "dune-project",
+        "dune"
+      ],
+      "command": "opam",
+      "args": ["config", "exec", "--", "ocamllsp"]
     }
   },
   "diagnostic.filetypeMap": {

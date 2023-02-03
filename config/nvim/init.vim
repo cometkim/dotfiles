@@ -422,6 +422,8 @@ command! -count=1 ToggleTerm lua require'toggleterm'.toggle(<count>, 12)
 autocmd TermEnter term://*toggleterm#*
   \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 
+set rtp^="$HOME/.opam/5.0.0/share/ocp-indent/vim"
+
 " Telescope.nvim
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
