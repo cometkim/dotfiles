@@ -97,7 +97,7 @@ link "tool-versions" "$HOME/.tool-versions"
 link "tmux/.tmux.conf" "$HOME/.tmux.conf"
 link "tmux/.tmux.conf.local" "$HOME/.tmux.conf.local"
 link "yarnrc" "$HOME/.yarnrc"
-link "xinputrc" "$HOME/.xinputrc"
+link "xprofile" "$HOME/.xprofile"
 
 link "config/nvim" "$CONFIG/nvim"
 link "config/kime" "$CONFIG/kime"
