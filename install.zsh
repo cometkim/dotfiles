@@ -105,6 +105,7 @@ link "config/alacritty" "$CONFIG/alacritty"
 link "config/coc" "$CONFIG/coc"
 link "config/oni2" "$CONFIG/oni2"
 link "config/fontconfig" "$CONFIG/fontconfig"
+link "config/environment.d" "$CONFIG/environment.d"
 
 FONTS_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONTS_DIR"
