@@ -107,6 +107,7 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'APZelos/blamer.nvim'
+Plug 'wfxr/minimap.vim'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.2.1' }
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
@@ -449,3 +450,6 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-l> <C-w>l
 
 tnoremap <silent> <Esc><Esc> <C-\><C-n>
+
+" Miniapp
+nnoremap <space>m <CMD>MinimapToggle <CR>
