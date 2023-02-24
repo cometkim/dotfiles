@@ -11,7 +11,7 @@ set number relativenumber
 set numberwidth=4
 augroup numbertoggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufEnter,FocusGained,InsertLeave * if index(['minimap'], &ft) < 0 | set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup end
 
@@ -453,3 +453,8 @@ tnoremap <silent> <Esc><Esc> <C-\><C-n>
 
 " Miniapp
 nnoremap <space>m <CMD>MinimapToggle <CR>
+
+let g:minimap_width = 10
+let g:minimap_auto_start_win_enter = 1
+let g:minimap_highlight_search = 1
+let g:minimap_git_colors = 1
