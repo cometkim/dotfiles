@@ -1,15 +1,24 @@
 {
-  "npm.binPath": "npm",
-  "tsserver.npm": "npm",
-  "eslint.packageManager": "npm",
-  "eslint.autoFixOnSave": false,
+  "semanticTokens.enable": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "vim-devicons",
   "explorer.datetime.format": "yy/MM/dd HH:mm:ss",
+  "eslint.autoFixOnSave": false,
+  "[ocaml]": {
+    "inlayHint.enable": true,
+    "coc.preferences.formatOnSave": true
+  },
   "[reason]": {
+    "inlayHint.enable": true,
     "coc.preferences.formatOnSave": true
   },
   "[rescript]": {
+    "inlayHint.enable": true,
+    "coc.preferences.formatOnSave": true
+  },
+  "[rust]": {
+    "inlayHint.enable": true,
+    "codeLens.enable": true,
     "coc.preferences.formatOnSave": true
   },
   "languageserver": {
@@ -47,7 +56,7 @@
         "dune"
       ],
       "command": "opam",
-      "args": ["config", "exec", "--", "ocamllsp"]
+      "args": ["exec", "--", "ocamllsp"]
     }
   },
   "diagnostic.filetypeMap": {
