@@ -18,30 +18,23 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
 ### End of Zinit's installer chunk
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-zinit wait lucid for \
-      zdharma-continuum/history-search-multi-word \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  blockf \
-      zsh-users/zsh-completions \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions
-
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 if [[ -f "$HOME/.p10k.zsh" ]]; then
   source "$HOME/.p10k.zsh"
 fi
+
+zinit load zdharma-continuum/history-search-multi-word
+
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 
 if [[ -d "/opt/homebrew" ]]; then
   export BREW_HOME="/opt/homebrew"
@@ -49,7 +42,7 @@ elif [[ -d "/home/linuxbrew" ]]; then
   export BREW_HOME="/home/linuxbrew/.linuxbrew"
 fi
 export PATH="$BREW_HOME/bin:$PATH"
-eval $(brew shellenv)
+eval "$(brew shellenv)"
 
 export PATH="$HOME/bin:$PATH"
 export WORKDIR="$HOME/Workspace"
@@ -69,31 +62,32 @@ source "$ASDF_HOME/libexec/asdf.sh"
 
 # NodeJS
 export NODE_HOME="$(asdf where nodejs)"
-export PATH="$(npm -g bin):$PATH"
-# export PATH="$(yarn global bin):$PATH"
-# export PATH="$(pnpm -g bin):$PATH"
+eval $(npm completion)
+
+# Bun
+export BUN_HOME="$(asdf where bun)"
+export BUN_LOCAL="$HOME/.bun"
+if [[ -f "$BUN_LOCAL/_bun" ]]; then
+  zinit creinstall -Q $BUN_LOCAL
+fi
 
 # Go
 export GOPATH="$WORKDIR"
 export PATH="$GOPATH/bin:$PATH"
 
 # OCaml / OPAM
-export OPAM_HOME="$HOME"
-if [[ -r "$HOME/.opam/opam-init/init.zsh" ]]; then
-  source "$HOME/.opam/opam-init/init.zsh"
+export OPAM_LOCAL="$HOME/.opam"
+if [[ -f "$OPAM_LOCAL/opam-init/init.zsh" ]]; then
+  source "$OPAM_LOCAL/opam-init/init.zsh"
 fi
 
 # Rust
 export RUST_HOME="$(asdf where rust)"
-source "$RUST_HOME/env"
-#export PATH="$RUST_HOME/bin:$PATH"
-
-# Cargo
-export CARGO_HOME="$HOME/.cargo"
-export PATH="$CARGO_HOME/bin:$PATH"
+export RUST_LOCAL="$RUST_LOCAL/.cargo"
+export PATH="$RUST_LOCAL/bin:$PATH"
 
 # Java
-source $HOME/.asdf/plugins/java/set-java-home.zsh
+export JAVA_HOME="$(asdf where java)"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Ruby
@@ -102,7 +96,8 @@ export PATH="$RUBY_HOME/bin:$PATH"
 
 # Deno
 export DENO_HOME="$(asdf where deno)"
-export PATH="$DENO_HOME/.deno/bin:$PATH"
+export DENO_LOCAL="$HOME/.deno"
+export PATH="$DENO_LOCAL/bin:$PATH"
 
 # Personal config
 export EDITOR="nvim"
