@@ -81,6 +81,7 @@ Plug 'cometkim/coc-browser', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'felippepuhle/coc-graphql', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'yaegassy/coc-html-css-support', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'yaegassy/coc-htmlhint', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'yaegassy/coc-tailwindcss3', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-pyright', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-rust-analyzer', { 'do': 'yarn install --frozen-lockfile' }
