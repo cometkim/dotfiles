@@ -4,6 +4,7 @@
   "explorer.icon.source": "vim-devicons",
   "explorer.datetime.format": "yy/MM/dd HH:mm:ss",
   "eslint.autoFixOnSave": false,
+  "rust-analyzer.check.command": "clippy",
   "[ocaml]": {
     "inlayHint.enable": true,
     "coc.preferences.formatOnSave": true
