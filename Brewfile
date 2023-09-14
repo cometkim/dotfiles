@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
-tap "superfly/tap"
 
 brew "libpng"
 brew "libffi"
