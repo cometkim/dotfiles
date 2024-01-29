@@ -69,6 +69,7 @@ Plug 'neoclide/coc-stylelint', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-smartf', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-lists', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-prettier', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'weirongxu/coc-explorer', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-biome', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'coc-extensions/coc-svelte', { 'do': 'yarn install --frozen-lockfile' }

@@ -33,7 +33,10 @@
       "module": "~/.vim/plugged/vim-rescript/server/out/server.js",
       "args": ["--node-ipc"],
       "filetypes": ["rescript"],
-      "rootPatterns": ["bsconfig.json"]
+      "rootPatterns": [
+        "rescript.json",
+        "bsconfig.json"
+      ]
     },
     "protobuf": {
       "enable": true,
