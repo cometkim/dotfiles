@@ -12,6 +12,15 @@
 [init]
   defaultBranch = main
 
+[log]
+  date = iso
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = -taggerdate
+
 [credential]
   helper = osxkeychain
   helper = store --file .git-credentials
@@ -20,6 +29,21 @@
 [core]
   pager = delta
 
+[push]
+  autoSetupRemote = true
+  followtags = true
+
+[merge]
+  tool = nvimdiff
+  conflictstyle = zdiff3
+
+[rebase]
+  autosquash = true
+  autostash = true
+
+[rerere]
+  enabled = true
+
 [delta]
   plus-style = "syntax #012800"
   minus-style = "syntax #340001"
@@ -27,6 +51,9 @@
 
 [interactive]
   diffFilter = delta --color-only
+
+[diff]
+  algorithm = histogram
 
 [url "git@github.com:"]
   insteadOf = https://github.com/
