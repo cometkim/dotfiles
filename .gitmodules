@@ -5,3 +5,7 @@
 [submodule "zellij-theme"]
 	path = config/zellij/themes
 	url = https://github.com/cometkim/dracula-zellij.git
+
+[submodule "nvchad-config"]
+	path = config/nvim
+	url = https://github.com/cometkim/nvchad-config.git
