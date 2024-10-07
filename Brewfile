@@ -23,9 +23,9 @@ brew "mitmproxy"
 brew "neovim"
 brew "ripgrep"
 brew "shellcheck"
-brew "tmux"
 brew "watchman"
 brew "wget"
+brew "zellij"
 brew "zoxide"
 
 # HTTP/3 enabled cURL

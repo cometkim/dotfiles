@@ -1,0 +1,8 @@
+commands
+explorer-actions
+list_history.dat
+memos.json
+mru
+
+extensions/**/*
+!extensions/package.json
