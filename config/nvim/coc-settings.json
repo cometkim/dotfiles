@@ -30,8 +30,8 @@
     },
     "rescript": {
       "enable": true,
-      "module": "~/.vim/plugged/vim-rescript/server/out/server.js",
-      "args": ["--node-ipc"],
+      "command": "rescript-language-server",
+      "args": ["--stdio"],
       "filetypes": ["rescript"],
       "rootPatterns": [
         "rescript.json",
@@ -67,5 +67,7 @@
     "sh": "shellcheck",
     "bash": "shellcheck"
   },
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "svelte.enable-ts-plugin": false,
+  "svelte.ask-to-enable-ts-plugin": false
 }

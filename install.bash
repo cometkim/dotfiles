@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 SOURCE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -59,7 +59,9 @@ function install_or_update_zinit() {
 function install_or_update_homebrew() {
   if [[ ! -x "$(command -v brew)" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if [[ -f "$HOME/linuxbrew/.linuxbrew/bin/brew" ]]; then
+      eval "$("$HOME/linuxbrew/.linuxbrew/bin/brew shellenv")"
+    fi
   else
     echo "homebrew is ready. skipping"
   fi
@@ -82,16 +84,29 @@ function install_or_update_asdf_plugins() {
     asdf plugin add "$plugin"
   done
   asdf plugin add pbkit "https://github.com/pbkit/asdf-pbkit.git"
-  asdf plugin add rust "https://github.com/code-lever/asdf-rust.git"
   asdf install java openjdk-19
   asdf install
   echo
+}
+
+function install_or_update_cargo() {
+  if [[ ! -x "$(command -v rustup)" ]]; then
+    curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh
+  else
+    rustup self update
+  fi
+
+  if [[ ! -x "$(command -v cargo)" ]]; then
+    rustup install stable
+    rustup default stable
+  fi
 }
 
 link "bin" "$HOME/bin"
 link "zprofile" "$HOME/.zprofile"
 link "p10k.zsh" "$HOME/.p10k.zsh"
 link "zshrc" "$HOME/.zshrc"
+link "zshrc-macos" "$HOME/.zshrc-macos"
 link "gitconfig" "$HOME/.gitconfig"
 link "tool-versions" "$HOME/.tool-versions"
 link "tmux/.tmux.conf" "$HOME/.tmux.conf"
@@ -107,9 +122,9 @@ link "config/oni2" "$CONFIG/oni2"
 link "config/fontconfig" "$CONFIG/fontconfig"
 link "config/environment.d" "$CONFIG/environment.d"
 
-FONTS_DIR="$HOME/.local/share/fonts"
-mkdir -p "$FONTS_DIR"
-cp $SOURCE_DIR/fonts/* "$FONTS_DIR"
+FONT_DIR="$HOME/.local/share/fonts"
+mkdir -p "$FONT_DIR"
+cp "$SOURCE_DIR/fonts/*" "$FONT_DIR"
 
 install_common_dependencies
 
@@ -119,5 +134,6 @@ install_or_update_homebrew; refresh_zsh
 brew bundle --file "$SOURCE_DIR/Brewfile"
 
 install_or_update_asdf_plugins
+install_of_update_cargo
 
 refresh_zsh verbose

@@ -1,0 +1,5 @@
+export GPG_TTY=$(tty)
+
+export PATH="$(brew --prefix gnu-tar)/libexec/gnubin:$PATH"
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"

@@ -47,6 +47,9 @@ eval "$(brew shellenv)"
 export PATH="$HOME/bin:$PATH"
 export WORKDIR="$HOME/Workspace"
 
+# curl (Cloudflare patch for HTTP/3 support)
+export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
+
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -71,24 +74,31 @@ if [[ -f "$BUN_LOCAL/_bun" ]]; then
   zinit creinstall -Q $BUN_LOCAL
 fi
 
+# PNPM
+export PNPM_HOME="$HOME/.pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
 # Go
 export GOPATH="$WORKDIR"
 export PATH="$GOPATH/bin:$PATH"
 
 # OCaml / OPAM
-export OPAM_LOCAL="$HOME/.opam"
-if [[ -f "$OPAM_LOCAL/opam-init/init.zsh" ]]; then
-  source "$OPAM_LOCAL/opam-init/init.zsh"
+export OPAM_HOME="$HOME/.opam"
+if [[ -f "$OPAM_HOME/opam-init/init.zsh" ]]; then
+  source "$OPAM_HOME/opam-init/init.zsh"
 fi
 
 # Rust
-export RUST_HOME="$(asdf where rust)"
-export RUST_LOCAL="$RUST_LOCAL/.cargo"
-export PATH="$RUST_LOCAL/bin:$PATH"
+export CARGO_HOME="$HOME/.cargo"
+# source "$CARGO_HOME/env"
+export PATH="$CARGO_HOME/bin:$PATH"
 
 # Java
 export JAVA_HOME="$(asdf where java)"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+export PYTHON_HOME="$(asdf where python)"
+export PATH="$PYTHON_HOME/bin:$PATH"
 
 # Ruby
 export RUBY_HOME="$(asdf where ruby)"
@@ -135,6 +145,18 @@ alias ..="z .."
 
 alias tf="terraform"
 
-if [[ -f ~/.daangn.zsh ]]; then
-  source ~/.daangn.zsh
+# Corepack
+alias yarn="corepack yarn"
+alias yarnpkg="corepack yarnpkg"
+alias pnpm="corepack pnpm"
+alias pnpx="corepack pnpx"
+alias npm="corepack npm"
+alias npx="corepack npx"
+
+if [[ "$(uname -o)" == "Darwin" ]]; then
+  source "$HOME/.zshrc-macos"
+fi
+
+if [[ -f "$HOME/.zshrc-work" ]]; then
+  source "$HOME/.zshrc-work"
 fi

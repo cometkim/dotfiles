@@ -52,7 +52,7 @@ set clipboard^=unnamed,unnamedplus
 " Plugins
 call plug#begin(exists('s:plug') ? s:plug : '~/.vim/plugged')
 
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-lua/plenary.nvim'
 
@@ -65,6 +65,7 @@ Plug 'neoclide/coc-highlight', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-git', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-css', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-stylelint', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-solargraph', { 'do': 'yarn install --frozen-lockfile' }
 " Plug 'cometkim/coc-yank', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-smartf', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-lists', { 'do': 'yarn install --frozen-lockfile' }
@@ -99,7 +100,6 @@ Plug 'pantharshit00/coc-prisma', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'gleam-lang/gleam.vim'
 Plug 'fannheyward/coc-deno', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-styled-components', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'cdata/vim-tagged-template'
 Plug 'UltiRequiem/coc-zig', { 'do': 'yarn install --frozen-lockfile' }
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
@@ -112,7 +112,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'wfxr/minimap.vim'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'akinsho/toggleterm.nvim', { 'tag' : 'v2.2.1' }
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
 
 call plug#end()
 
@@ -390,32 +390,6 @@ autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
 autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
 let g:blamer_enabled = 1
-
-" rescript-lang/vim-rescript
-"
-" Note that <buffer> allows us to use different commands with the same keybindings depending
-" on the filetype. This is useful if to override your e.g. ALE bindings while working on
-" ReScript projects.
-autocmd FileType rescript nnoremap <silent> <buffer> <localleader>r :RescriptFormat<CR>
-autocmd FileType rescript nnoremap <silent> <buffer> <localleader>t :RescriptTypeHint<CR>
-autocmd FileType rescript nnoremap <silent> <buffer> <localleader>b :RescriptBuild<CR>
-autocmd FileType rescript nnoremap <silent> <buffer> gd :RescriptJumpToDefinition<CR>
-" Hooking up the ReScript autocomplete function
-set omnifunc=rescript#Complete
-" When preview is enabled, omnicomplete will display additional
-" information for a selected item
-set completeopt+=preview
-
-" cdata/vim-tagged-template
-let g:taggedtemplate#tagSyntaxMap = {
-  \ "html":    "html",
-  \ "md":      "markdown",
-  \ "gql":     "graphql",
-  \ "graphql": "graphql",
-  \ "css":     "css"
-  \}
-autocmd FileType javascript,javascriptreact,typescript,typescriptreact : call taggedtemplate#applySyntaxMap()
-
 
 " akinsho/toggleterm.nvim
 " set
