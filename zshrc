@@ -127,7 +127,7 @@ alias lt="lsd --tree"
 export ZSHRC="$HOME/.zshrc"
 alias zshrc="$EDITOR $ZSHRC"
 
-export VIMRC="$HOME/.config/nvim/init.vim"
+export VIMRC="$HOME/.config/nvim/init.lua"
 alias vimrc="$EDITOR $VIMRC"
 
 export TMUXRC="$HOME/.tmux.conf"
