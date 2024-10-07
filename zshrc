@@ -139,9 +139,8 @@ alias termrc="$EDITOR $TERMRC"
 export IMERC="$HOME/.config/kime/config.yaml"
 alias imerc="$EDITOR $IMERC"
 
-alias cd="z"
 alias j="z"
-alias ..="z .."
+alias ..="cd .."
 
 alias tf="terraform"
 
