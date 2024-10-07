@@ -1,6 +1,3 @@
-tap "homebrew/bundle"
-tap "homebrew/core"
-
 brew "asdf"
 brew "aws-vault"
 brew "awscli"
@@ -39,10 +36,6 @@ if OS.linux?
 end
 
 if OS.mac?
-  tap "homebrew/cask"
-  tap "homebrew/cask-versions"
-  tap "homebrew/cask-fonts"
-
   brew "gnu-tar"
   brew "reattach-to-user-namespace"
   brew "pinentry-mac"
@@ -70,6 +63,7 @@ if OS.mac?
   cask "visual-studio-code"
   cask "zoom"
 
+  tap "homebrew/cask-fonts"
   cask "font-hack-nerd-font"
   cask "font-noto-sans-cjk"
   cask "font-noto-sans-cjk-kr"
