@@ -1,7 +1,7 @@
-# Set PATH, MANPATH, etc., for Homebrew.
-if [[ -d "/home/linuxbrew" ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ -d "/opt/homebrew" ]]; then
+  export BREW_HOME="/opt/homebrew"
+elif [[ -d "/home/linuxbrew" ]]; then
+  export BREW_HOME="/home/linuxbrew/.linuxbrew"
 fi
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+export PATH="$BREW_HOME/bin:$PATH"
+eval "$(brew shellenv)"

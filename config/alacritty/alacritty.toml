@@ -20,3 +20,14 @@ option_as_alt = "Both"
 [window.padding]
 x = 10
 y = 10
+
+[keyboard]
+bindings = [
+  # Prefer Zellij
+  { key = "T", mods = "Alt", action = "None" },
+  { key = "N", mods = "Command", action = "None" },
+]
+
+[shell]
+program = "/opt/homebrew/bin/zellij"
+args = ["-l", "welcome"]

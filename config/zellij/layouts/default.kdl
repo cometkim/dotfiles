@@ -1,0 +1,116 @@
+layout {
+    default_tab_template {
+        pane size=2 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/dj95/zjstatus/v0.17.0/zjstatus.wasm" {
+                // Nvchad's Chadracula theme colors
+
+                // base_30
+                color_white         "#f8f8f2"
+                color_darker_black  "#222430"
+                color_black         "#282A36" // nvim bg
+                color_black2        "#2d303e"
+                color_one_bg        "#373844" // real bg of onedark
+                color_one_bg2       "#44475a"
+                color_one_bg3       "#565761"
+                color_grey          "#5e5f69"
+                color_grey_fg       "#666771"
+                color_grey_fg2      "#6e6f79"
+                color_light_grey    "#73747e"
+                color_red           "#ff7070"
+                color_baby_pink     "#ff86d3"
+                color_pink          "#FF79C6"
+                color_line          "#3c3d49" // for lines like vertsplit
+                color_green         "#50fa7b"
+                color_vibrant_green "#5dff88"
+                color_nord_blue     "#8b9bcd"
+                color_blue          "#a1b1e3"
+                color_yellow        "#F1FA8C"
+                color_sun           "#FFFFA5"
+                color_purple        "#BD93F9"
+                color_dark_purple   "#BD93F9"
+                color_teal          "#92a2d4"
+                color_orange        "#FFB86C"
+                color_cyan          "#8BE9FD"
+                color_statusline_bg "#2d2f3b"
+                color_lightbg       "#41434f"
+                color_pmenu_bg      "#b389ef"
+                color_folder_bg     "#BD93F9"
+                
+                // base_16
+                color_base00        "#282936"
+                color_base01        "#3a3c4e"
+                color_base02        "#4d4f68"
+                color_base03        "#626483"
+                color_base04        "#62d6e8"
+                color_base05        "#e9e9f4"
+                color_base06        "#f1f2f8"
+                color_base07        "#f7f7fb"
+                color_base08        "#c197fd"
+                color_base09        "#FFB86C"
+                color_base0A        "#62d6e8"
+                color_base0B        "#F1FA8C"
+                color_base0C        "#8BE9FD"
+                color_base0D        "#50fa7b"
+                color_base0E        "#ff86d3"
+                color_base0F        "#f8f8f2"
+
+                format_left   "{mode}{tabs}#[bg=$grey,fg=$statusline_bg]"
+                format_center ""
+                format_right  "#[bg=$statusline_bg,fg=$red]#[bg=$red,fg=$black,bold] #[bg=$lightbg,fg=$white] {session} #[bg=$lightbg,fg=$green]#[bg=$green,fg=$black]󰃰 #[bg=$lightbg,fg=$white] {datetime} "
+                format_space  "#[bg=$statusline_bg]"
+                format_hide_on_overlength "true"
+                format_precedence "crl"
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=$line]{char}"
+                border_position "bottom"
+
+                hide_frame_for_single_pane "true"
+
+                mode_normal        "#[bg=$green,fg=$black,bold]  NORMAL#[bg=$green,fg=$grey]"
+                mode_locked        "#[bg=#6e738d,fg=$black,bold]  LOCKED#[bg=#6e738d,fg=$grey]"
+                mode_resize        "#[bg=#f38ba8,fg=$black,bold]  RESIZE#[bg=#f38ba8,fg=$grey]"
+                mode_pane          "#[bg=#89b4fa,fg=$black,bold]  PANE#[bg=#89b4fa,fg=$grey]"
+                mode_tab           "#[bg=#b4befe,fg=$black,bold]  TAB#[bg=#b4befe,fg=$grey]"
+                mode_scroll        "#[bg=$cyan,fg=$black,bold]  SCROLL#[bg=$cyan,fg=$grey]"
+                mode_session       "#[bg=#74c7ec,fg=$black,bold]  SESSION#[bg=#74c7ec,fg=$grey]"
+                mode_move          "#[bg=#f5c2e7,fg=$black,bold]  MOVE#[bg=#f5c2e7,fg=$grey]"
+                mode_prompt        "#[bg=#8aadf4,fg=$black,bold]  PROMPT#[bg=#8aadf4,fg=$grey]"
+                mode_tmux          "#[bg=$orange,fg=$black,bold]  TMUX#[bg=$orange,fg=$grey]"
+                mode_search        "#[bg=#8aadf4,fg=#black,bold]  SEARCH#[bg=#8aadf4,fg=$grey]"
+                mode_enter_search  "#[bg=#8aadf4,fg=#black,bold]  ENT-SEARCH#[bg=#8aadf4,fg=$grey]"
+                mode_rename_tab    "#[bg=#b4befe,fg=#black,bold]  RENAME-TAB#[bg=#b4befe,fg=$grey]"
+                mode_rename_pane   "#[bg=#89b4fa,fg=#black,bold]  RENAME-PANE#[bg=#89b4fa,fg=$grey]"
+
+                // formatting for inactive tabs
+                tab_normal              "#[bg=$grey,fg=$statusline_bg]#[bg=$statusline_bg,fg=#878891,bold] {name}{floating_indicator} #[bg=$statusline_bg,fg=$grey]"
+                tab_normal_fullscreen   "#[bg=$grey,fg=$statusline_bg]#[bg=$statusline_bg,fg=#878891,bold] {name}{fullscreen_indicator} #[bg=$statusline_bg,fg=$grey]"
+                tab_normal_sync         "#[bg=$grey,fg=$statusline_bg]#[bg=$statusline_bg,fg=#878891,bold] {name}{sync_indicator} #[bg=$statusline_bg,fg=$grey]"
+
+                // formatting for the current active tab
+                tab_active              "#[bg=$grey,fg=$lightbg]#[bg=$lightbg,fg=$white] {name}{floating_indicator} #[bg=$lightbg,fg=$grey]"
+                tab_active_fullscreen   "#[bg=$grey,fg=$lightbg]#[bg=$lightbg,fg=$white] {name}{fullscreen_indicator} #[bg=$lightbg,fg=$grey]"
+                tab_active_sync         "#[bg=$grey,fg=$lightbg]#[bg=$lightbg,fg=$white] {name}{sync_indicator} #[bg=$lightbg,fg=$grey]"
+
+                // separator between the tabs
+                tab_separator ""
+
+                // indicators
+                tab_sync_indicator       " "
+                tab_fullscreen_indicator " 󰊓"
+                tab_floating_indicator   " 󰹙"
+
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=blue] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
+
+                datetime        "{format}"
+                datetime_format "%Y-%m-%d %H:%M"
+                datetime_timezone "Asia/Seoul"
+            }
+        }
+        children
+    }
+}

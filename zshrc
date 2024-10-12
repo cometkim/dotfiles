@@ -1,32 +1,16 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.local/share/zinit/source/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
-### End of Zinit's installer chunk
 
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 if [[ -f "$HOME/.p10k.zsh" ]]; then
   source "$HOME/.p10k.zsh"
 fi
-
-zinit load zdharma-continuum/history-search-multi-word
 
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
@@ -37,9 +21,9 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions
 
 if [[ -d "/opt/homebrew" ]]; then
-  export BREW_HOME="/opt/homebrew"
+  BREW_HOME="/opt/homebrew"
 elif [[ -d "/home/linuxbrew" ]]; then
-  export BREW_HOME="/home/linuxbrew/.linuxbrew"
+  BREW_HOME="/home/linuxbrew/.linuxbrew"
 fi
 export PATH="$BREW_HOME/bin:$PATH"
 eval "$(brew shellenv)"
@@ -59,55 +43,25 @@ if [[ -f "$HOME/.fzf.zsh" ]]; then
 fi
 export FZF_DEFAULT_COMMAND="fd - type f"
 
-# asdf
-export ASDF_HOME="$(brew --prefix asdf)"
-source "$ASDF_HOME/libexec/asdf.sh"
+# mise
+eval "$(mise activate zsh)"
 
-# NodeJS
-export NODE_HOME="$(asdf where nodejs)"
-eval $(npm completion)
+# pnpm for NPM package installation
+export PATH="$HOME/.pnpm:$PATH"
 
-# Bun
-export BUN_HOME="$(asdf where bun)"
-export BUN_LOCAL="$HOME/.bun"
-if [[ -f "$BUN_LOCAL/_bun" ]]; then
-  zinit creinstall -Q $BUN_LOCAL
-fi
-
-# PNPM
-export PNPM_HOME="$HOME/.pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-# Go
+# Classic GOPATH
 export GOPATH="$WORKDIR"
 export PATH="$GOPATH/bin:$PATH"
 
 # OCaml / OPAM
-export OPAM_HOME="$HOME/.opam"
+OPAM_HOME="$HOME/.opam"
 if [[ -f "$OPAM_HOME/opam-init/init.zsh" ]]; then
   source "$OPAM_HOME/opam-init/init.zsh"
 fi
 
-# Rust
-export CARGO_HOME="$HOME/.cargo"
-# source "$CARGO_HOME/env"
+# Rust / Cargo
+CARGO_HOME="$HOME/.cargo"
 export PATH="$CARGO_HOME/bin:$PATH"
-
-# Java
-export JAVA_HOME="$(asdf where java)"
-export PATH="$JAVA_HOME/bin:$PATH"
-
-export PYTHON_HOME="$(asdf where python)"
-export PATH="$PYTHON_HOME/bin:$PATH"
-
-# Ruby
-export RUBY_HOME="$(asdf where ruby)"
-export PATH="$RUBY_HOME/bin:$PATH"
-
-# Deno
-export DENO_HOME="$(asdf where deno)"
-export DENO_LOCAL="$HOME/.deno"
-export PATH="$DENO_LOCAL/bin:$PATH"
 
 # Personal config
 export EDITOR="nvim"
@@ -144,14 +98,6 @@ alias j="z"
 alias ..="z .."
 
 alias tf="terraform"
-
-# Corepack
-alias yarn="corepack yarn"
-alias yarnpkg="corepack yarnpkg"
-alias pnpm="corepack pnpm"
-alias pnpx="corepack pnpx"
-alias npm="corepack npm"
-alias npx="corepack npx"
 
 if [[ "$(uname -o)" == "Darwin" ]]; then
   source "$HOME/.zshrc-macos"

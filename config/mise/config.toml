@@ -1,0 +1,17 @@
+[plugins]
+pbkit = "https://github.com/pbkit/asdf-pbkit.git"
+
+[tools]
+deno = "2.0.0"
+java = "temurin-23.0.0+37"
+python = "3.12.2"
+ruby = "3.3.4"
+terraform = "1.9.7"
+node = "22.9.0"
+go = "1.23.2"
+bun = "1.1.30"
+pbkit = "0.0.72"
+zig = "0.13.0"
+
+[settings]
+asdf_compat = true

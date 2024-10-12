@@ -44,7 +44,7 @@ function install_common_dependencies() {
 }
 
 function install_or_update_zinit() {
-  local ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+  local ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/source"
   if [[ ! -d "$(dirname "$ZINIT_HOME")" ]]; then
     echo "installing zinit to $ZINIT_HOME ..."
     mkdir -p "$(dirname "$ZINIT_HOME")"
@@ -61,32 +61,11 @@ function install_or_update_homebrew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     if [[ -f "$HOME/linuxbrew/.linuxbrew/bin/brew" ]]; then
       eval "$("$HOME/linuxbrew/.linuxbrew/bin/brew shellenv")"
+      ln -sf "$HOME/linuxbrew/.linuxbrew" "/opt/homebrew"
     fi
   else
     echo "homebrew is ready. skipping"
   fi
-}
-
-function install_or_update_asdf_plugins() {
-  local plugins=(
-    "bun"
-    "deno"
-    "golang"
-    "grain"
-    "java"
-    "nodejs"
-    "ocaml"
-    "python"
-    "ruby"
-    "terraform"
-  )
-  for plugin in "${plugins[@]}"; do
-    asdf plugin add "$plugin"
-  done
-  asdf plugin add pbkit "https://github.com/pbkit/asdf-pbkit.git"
-  asdf install java openjdk-19
-  asdf install
-  echo
 }
 
 function install_or_update_cargo() {
@@ -103,36 +82,35 @@ function install_or_update_cargo() {
 }
 
 link "bin" "$HOME/bin"
+link "xprofile" "$HOME/.xprofile"
 link "zprofile" "$HOME/.zprofile"
-link "p10k.zsh" "$HOME/.p10k.zsh"
 link "zshrc" "$HOME/.zshrc"
+link "p10k.zsh" "$HOME/.p10k.zsh"
 link "zshrc-macos" "$HOME/.zshrc-macos"
 link "gitconfig" "$HOME/.gitconfig"
-link "tool-versions" "$HOME/.tool-versions"
 link "yarnrc" "$HOME/.yarnrc"
-link "xprofile" "$HOME/.xprofile"
 
-link "config/nvim" "$CONFIG/nvim"
-link "config/kime" "$CONFIG/kime"
-link "config/alacritty" "$CONFIG/alacritty"
-link "config/coc" "$CONFIG/coc"
-link "config/oni2" "$CONFIG/oni2"
-link "config/fontconfig" "$CONFIG/fontconfig"
 link "config/environment.d" "$CONFIG/environment.d"
+link "config/fontconfig" "$CONFIG/fontconfig"
+link "config/kime" "$CONFIG/kime"
+link "config/mise" "$CONFIG/mise"
+link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
+link "config/nvim" "$CONFIG/nvim"
 
 FONT_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONT_DIR"
-cp "$SOURCE_DIR/fonts/*" "$FONT_DIR"
+cp $SOURCE_DIR/fonts/* "$FONT_DIR"
 
 install_common_dependencies
 
 install_or_update_zinit; refresh_zsh
-install_or_update_homebrew; refresh_zsh
 
+install_or_update_homebrew; refresh_zsh
 brew bundle --file "$SOURCE_DIR/Brewfile"
 
-install_or_update_asdf_plugins
-install_of_update_cargo
+mise install
+
+install_or_update_cargo
 
 refresh_zsh verbose
