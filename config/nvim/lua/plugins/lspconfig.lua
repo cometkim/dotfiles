@@ -7,35 +7,16 @@ return {
 
     nvlsp.defaults()
 
-    -- lsps with default config
-    local servers = { "html", "cssls", "ts_ls", "lua_ls", "biome" }
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup {
-        on_attach = nvlsp.on_attach,
-        on_init = nvlsp.on_init,
-        capabilities = nvlsp.capabilities,
-      }
-    end
-
-    -- JSON
-    lspconfig.jsonls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-      settings = {
+    local servers = {
+      html = {},
+      cssls = {},
+      jsonls = {
         json = {
           validate = { enable = true },
           schemas = schemastore.json.schemas(),
         },
       },
-    }
-
-    -- YAML
-    lspconfig.yamlls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-      settings = {
+      yamlls = {
         yaml = {
           validate = true,
           schemaStore = {
@@ -45,13 +26,85 @@ return {
           schemas = schemastore.yaml.schemas(),
         },
       },
+      taplo = {}, -- TOML
+      ts_ls = {},
+      lua_ls = {},
+      biome = {},
+      ocamllsp = {
+        ocamllsp = {
+          extendedHover = {
+            enable = true,
+          },
+          duneDiagnostics = {
+            enable = true,
+          },
+          inlayHints = {
+            enable = true,
+            hintLetBindings = true,
+            hintPatternVariables = true,
+          },
+          codelens = {
+            enable = true,
+          },
+        },
+      },
+      rust_analyzer = {
+        ["rust-analyzer"] = {
+          imports = {
+            granularity = {
+              group = "module",
+            },
+            prefix = "self",
+          },
+          cargo = {
+            buildScripts = {
+              enable = true,
+            },
+          },
+          procMacro = {
+            enable = true,
+          },
+          checkOnSave = {
+            command = "clippy",
+          },
+        },
+      },
     }
 
-    -- TOML
-    lspconfig.taplo.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
+    local on_attach = function(client, bufnr)
+      nvlsp.on_attach(client, bufnr)
+
+      -- handled via conform.nvim
+      -- if client.server_capabilities.documentFormattingProvider then
+      --   vim.api.nvim_create_autocmd("BufWritePre", {
+      --     buffer = bufnr,
+      --     callback = function()
+      --       vim.lsp.buf.format { async = false }
+      --     end,
+      --   })
+      -- end
+
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end
+
+      if client.server_capabilities.codeLensProvider then
+        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "CursorHold" }, {
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.codelens.refresh()
+          end,
+        })
+      end
+    end
+
+    for lsp, settings in pairs(servers) do
+      lspconfig[lsp].setup {
+        on_attach = on_attach,
+        on_init = nvlsp.on_init,
+        capabilities = nvlsp.capabilities,
+        settings = settings,
+      }
+    end
   end,
 }
