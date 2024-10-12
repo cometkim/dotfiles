@@ -93,6 +93,8 @@ alias cd="z"
 alias j="z"
 alias ..="z .."
 
+alias asdf="mise"
+
 alias tf="terraform"
 
 if [[ "$(uname -o)" == "Darwin" ]]; then
