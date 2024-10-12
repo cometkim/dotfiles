@@ -189,7 +189,6 @@ keybinds clear-defaults=true {
         bind "Ctrl s" { SwitchToMode "Scroll"; }
     }
     shared_except "session" "locked" {
-        bind "Ctrl o" { SwitchToMode "Session"; }
         bind "Alt o" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
