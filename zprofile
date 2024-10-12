@@ -1,7 +1,5 @@
 if [[ -d "/opt/homebrew" ]]; then
-  export BREW_HOME="/opt/homebrew"
+  eval "/opt/homebrew/bin/brew shellenv"
 elif [[ -d "/home/linuxbrew" ]]; then
-  export BREW_HOME="/home/linuxbrew/.linuxbrew"
+  eval "/home/linuxbrew/.linuxbrew/bin/brew shellenv"
 fi
-export PATH="$BREW_HOME/bin:$PATH"
-eval "$(brew shellenv)"

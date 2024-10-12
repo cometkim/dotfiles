@@ -20,22 +20,17 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
-if [[ -d "/opt/homebrew" ]]; then
-  BREW_HOME="/opt/homebrew"
-elif [[ -d "/home/linuxbrew" ]]; then
-  BREW_HOME="/home/linuxbrew/.linuxbrew"
-fi
-export PATH="$BREW_HOME/bin:$PATH"
-eval "$(brew shellenv)"
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# zoxide
+eval "$(zoxide init zsh)"
 
 export PATH="$HOME/bin:$PATH"
 export WORKDIR="$HOME/Workspace"
 
 # curl (Cloudflare patch for HTTP/3 support)
 export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
-
-# zoxide
-eval "$(zoxide init zsh)"
 
 # fzf
 if [[ -f "$HOME/.fzf.zsh" ]]; then
@@ -60,7 +55,8 @@ if [[ -f "$OPAM_HOME/opam-init/init.zsh" ]]; then
 fi
 
 # Rust / Cargo
-CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/.rustup"
+export CARGO_HOME="$HOME/.cargo"
 export PATH="$CARGO_HOME/bin:$PATH"
 
 # Personal config

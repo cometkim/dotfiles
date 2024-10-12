@@ -8,18 +8,6 @@ mkdir -p "$DATA"
 CONFIG="${XDG_CONFIG_HOME:=$HOME/.config}"
 mkdir -p "$CONFIG"
 
-function refresh_zsh() {
-  local flag="$1"
-
-  echo "refresing env ..."
-  echo
-  if [[ "$flag" == "verbose" ]]; then
-    source "$HOME/.zshrc"
-  else
-    source "$HOME/.zshrc" &> /dev/null
-  fi
-}
-
 function link() {
   local SRC="$SOURCE_DIR/$1"
   local DEST="$2"
@@ -37,15 +25,31 @@ function link() {
 
 function install_common_dependencies() {
   if [[ -x "$(command -v apt)" ]]; then
-    sudo apt update && apt install \
-      build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev \
-      cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    sudo apt update && sudo apt install -y \
+      zlib1g-dev \
+      libncurses5-dev \
+      libgdbm-dev \
+      libnss3-dev \
+      libssl-dev \
+      libreadline-dev \
+      libffi-dev \
+      libsqlite3-dev \
+      libbz2-dev \
+      libfreetype6-dev \
+      libfontconfig1-dev \
+      libxcb-xfixes0-dev \
+      libxkbcommon-dev \
+      build-essential \
+      cmake \
+      pkg-config \
+      python3 \
+      wget
   fi
 }
 
 function install_or_update_zinit() {
   local ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/source"
-  if [[ ! -d "$(dirname "$ZINIT_HOME")" ]]; then
+  if [[ ! -d "$ZINIT_HOME" ]]; then
     echo "installing zinit to $ZINIT_HOME ..."
     mkdir -p "$(dirname "$ZINIT_HOME")"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -58,14 +62,13 @@ function install_or_update_zinit() {
 
 function install_or_update_homebrew() {
   if [[ ! -x "$(command -v brew)" ]]; then
+    echo "installing Homebrew ..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if [[ -f "$HOME/linuxbrew/.linuxbrew/bin/brew" ]]; then
-      eval "$("$HOME/linuxbrew/.linuxbrew/bin/brew shellenv")"
-      ln -sf "$HOME/linuxbrew/.linuxbrew" "/opt/homebrew"
+    if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+      sudo ln -sf "/home/linuxbrew/.linuxbrew" "/opt/homebrew"
     fi
-  else
-    echo "homebrew is ready. skipping"
   fi
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 function install_or_update_cargo() {
@@ -103,14 +106,10 @@ mkdir -p "$FONT_DIR"
 cp $SOURCE_DIR/fonts/* "$FONT_DIR"
 
 install_common_dependencies
+install_or_update_zinit
+install_or_update_homebrew
+install_or_update_cargo
 
-install_or_update_zinit; refresh_zsh
-
-install_or_update_homebrew; refresh_zsh
 brew bundle --file "$SOURCE_DIR/Brewfile"
 
 mise install
-
-install_or_update_cargo
-
-refresh_zsh verbose
