@@ -57,7 +57,9 @@ if OS.mac?
   cask "slack"
   cask "typora"
   cask "visual-studio-code"
-  cask "zoom"
+
+  # May conflict with MDM
+  # cask "zoom"
 
   cask "font-hack-nerd-font"
   cask "font-noto-sans-cjk"
