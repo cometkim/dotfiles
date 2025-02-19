@@ -42,6 +42,8 @@ if OS.mac?
   brew "gnu-tar"
   brew "reattach-to-user-namespace"
   brew "pinentry-mac"
+
+  tap "jorgelbg/tap"
   brew "jorgelbg/tap/pinentry-touchid"
 
   cask "1password"
@@ -50,7 +52,7 @@ if OS.mac?
   cask "android-platform-tools"
   cask "discord"
   cask "figma"
-  cask "firefox-developer-edition"
+  cask "firefox@developer-edition"
   cask "google-chrome"
   cask "keeweb"
   cask "keybase"
