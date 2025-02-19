@@ -45,10 +45,12 @@ if OS.mac?
   cask "1password-cli"
   cask "alacritty"
   cask "android-platform-tools"
+  cask "chatgpt"
   cask "discord"
   cask "figma"
   cask "firefox@developer-edition"
   cask "google-chrome"
+  cask "google-drive"
   cask "keeweb"
   cask "keybase"
   cask "keycastr"
@@ -57,6 +59,7 @@ if OS.mac?
   cask "slack"
   cask "typora"
   cask "visual-studio-code"
+  cask "zed"
 
   # May conflict with MDM
   # cask "zoom"
