@@ -65,4 +65,5 @@ if OS.mac?
   cask "font-noto-sans-cjk"
   cask "font-noto-sans-cjk-kr"
   cask "font-sf-pro"
+  cakk "font-pretendard"
 end
