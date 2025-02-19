@@ -7,7 +7,6 @@ return {
 
     local nvtree = require "nvim-tree"
     local api = require "nvim-tree.api"
-    local lib = require "nvim-tree.lib"
 
     local function custom_on_attach(bufnr)
       local function opts(desc)
@@ -24,7 +23,7 @@ return {
       map("n", "+", api.tree.change_root_to_node, opts "CD")
       map("n", "?", api.tree.toggle_help, opts "Help")
       map("n", "l", function()
-        local node = lib.get_node_at_cursor()
+        local node = api.tree.get_node_under_cursor()
         if not node then
           return
         end
@@ -36,7 +35,7 @@ return {
         end
       end, opts "Open")
       map("n", "h", function()
-        local node = lib.get_node_at_cursor()
+        local node = api.tree.get_node_under_cursor()
         if not node then
           return
         end
