@@ -146,6 +146,12 @@ keybinds clear-defaults=true {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
 
+        bind "Alt f" {
+            LaunchPlugin "filepicker" {
+                close_on_selection true
+            }
+        }
+
         // bind "Ctrl h" {
         //     MessagePlugin "file:~/.config/zellij/plugins/hiasr/vim-zellij-navigator/0.2.1/vim-zellij-navigator.wasm" {
         //         name "move_focus_or_tab";
