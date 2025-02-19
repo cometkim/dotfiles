@@ -14,6 +14,7 @@ pbkit = "0.0.72"
 zig = "0.13.0"
 bun = "1.2.2"
 hermes = "0.13.0"
+binaryen = "122"
 
 [settings]
 asdf_compat = true
