@@ -109,7 +109,10 @@ cp $SOURCE_DIR/fonts/* "$FONT_DIR"
 install_common_dependencies
 install_or_update_zinit
 install_or_update_homebrew
-install_or_update_cargo
+
+# Rustup may detect the rust installed by Homebrew
+RUSTUP_INIT_SKIP_PATH_CHECK=yes \
+  install_or_update_cargo
 
 brew bundle --file "$SOURCE_DIR/Brewfile"
 
