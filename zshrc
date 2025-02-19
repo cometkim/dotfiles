@@ -20,6 +20,9 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+# Common
+export PATH="/usr/local/bin:$PATH"
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

@@ -5,3 +5,5 @@ export PATH="$(brew --prefix gnu-tar)/libexec/gnubin:$PATH"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 source "$HOME/.orbstack/shell/init.zsh" 2>/dev/null || :
+
+alias pinentry="pinentry-mac"
