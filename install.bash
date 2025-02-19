@@ -100,6 +100,7 @@ link "p10k.zsh" "$HOME/.p10k.zsh"
 link "zshrc-macos" "$HOME/.zshrc-macos"
 link "gitconfig" "$HOME/.gitconfig"
 link "yarnrc" "$HOME/.yarnrc"
+link "fonts" "$HOME/.fonts"
 
 link "config/environment.d" "$CONFIG/environment.d"
 link "config/fontconfig" "$CONFIG/fontconfig"
@@ -108,10 +109,6 @@ link "config/mise" "$CONFIG/mise"
 link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
 link "config/nvim" "$CONFIG/nvim"
-
-FONT_DIR="$HOME/.local/share/fonts"
-mkdir -p "$FONT_DIR"
-cp $SOURCE_DIR/fonts/* "$FONT_DIR"
 
 install_common_dependencies
 install_or_update_zinit
