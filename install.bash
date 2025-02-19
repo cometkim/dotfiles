@@ -74,6 +74,7 @@ function install_or_update_homebrew() {
 function install_or_update_cargo() {
   if [[ ! -x "$(command -v rustup)" ]]; then
     curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh
+    source "$HOME/.cargo/env"
   else
     rustup self update
   fi
