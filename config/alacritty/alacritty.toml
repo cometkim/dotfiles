@@ -1,4 +1,3 @@
-import = ["~/.config/alacritty/themes/dracula.toml"]
 
 [font]
 size = 18.0
@@ -28,6 +27,11 @@ bindings = [
   { key = "N", mods = "Command", action = "None" },
 ]
 
-[shell]
+[general]
+import = ["~/.config/alacritty/themes/dracula.toml"]
+
+[terminal]
+
+[terminal.shell]
 program = "/opt/homebrew/bin/zellij"
 args = ["-l", "welcome"]
