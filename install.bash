@@ -8,6 +8,10 @@ mkdir -p "$DATA"
 CONFIG="${XDG_CONFIG_HOME:=$HOME/.config}"
 mkdir -p "$CONFIG"
 
+WORKDIR="$HOME/Workspace"
+mkdir -p "$WORKDIR/src"
+mkdir -p "$WORKDIR/tmp"
+
 function link() {
   local SRC="$SOURCE_DIR/$1"
   local DEST="$2"
@@ -41,6 +45,7 @@ function install_common_dependencies() {
       libxkbcommon-dev \
       build-essential \
       cmake \
+      g++ \
       pkg-config \
       python3 \
       wget
@@ -48,13 +53,15 @@ function install_common_dependencies() {
 }
 
 function install_or_update_zinit() {
-  local ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/source"
+  local ZINIT_HOME
+  ZINIT_HOME="$DATA/zinit/source"
+
   if [[ ! -d "$ZINIT_HOME" ]]; then
-    echo "installing zinit to $ZINIT_HOME ..."
+    echo "installing zinit to $ZINIT_HOME..."
     mkdir -p "$(dirname "$ZINIT_HOME")"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+    git clone "https://github.com/zdharma-continuum/zinit.git" "$ZINIT_HOME"
   else
-    echo "updating zinit ..."
+    echo "updating zinit..."
     git -C "$ZINIT_HOME" pull
   fi
   echo
@@ -63,7 +70,7 @@ function install_or_update_zinit() {
 function install_or_update_homebrew() {
   if [[ ! -x "$(command -v brew)" ]]; then
     echo "installing Homebrew ..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" | bash
     if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
       sudo ln -sf "/home/linuxbrew/.linuxbrew" "/opt/homebrew"
     fi
@@ -75,7 +82,7 @@ function install_or_update_cargo() {
   source "$HOME/.cargo/env" &> /dev/null |:
 
   if [[ ! -x "$(command -v rustup)" ]]; then
-    curl --proto '=https' --tlsv1.2 -sSf "https://sh.rustup.rs" | sh
+    curl -fsSL "https://sh.rustup.rs" | bash
   else
     rustup self update
   fi
@@ -83,6 +90,46 @@ function install_or_update_cargo() {
   if [[ ! -x "$(command -v cargo)" ]]; then
     rustup install stable
     rustup default stable
+  fi
+}
+
+function install_or_update_alacritty() {
+  local ALACRITTY_HOME
+  ALACRITTY_HOME="$DATA/alacritty"
+
+  if [[ "$(uname)" == "Darwin" ]]; then
+    echo "skip installing Alacritty, may be managed by Homebrew"
+  else # must be Ubuntu
+    if [[ ! -d "$ALACRITTY_HOME" ]]; then
+      echo "download Alacritty to $ALACRITTY_HOME..."
+
+      mkdir -p "$(dirname "$ALACRITTY_HOME")"
+      git clone "https://github.com/alacritty/alacritty.git" "$ALACRITTY_HOME"
+
+      pushd "$ALACRITTY_HOME" || exit
+      cargo build --release
+      sudo ln -sf "$(pwd)/target/release/alacritty" "/usr/local/bin/"
+      sudo ln -sf "$(pwd)/extra/logo/alacritty-term.svg" "/usr/share/pixmaps//Alacritty.svg"
+      desktop-file-install "extra/linux/Alacritty.desktop"
+      update-desktop-database "$DATA/applications"
+      popd || exit
+    else
+      pushd "$ALACRITTY_HOME" || exit
+
+      local BEFORE_HASH
+      BEFORE_HASH="$(git rev-parse HEAD)"
+
+      git pull
+
+      local AFTER_HASH
+      AFTER_HASH="$(git rev-parse HEAD)"
+
+      if [[ "$BEFORE_HASH" != "$AFTER_HASH" ]]; then
+        echo "update detected, rebuilding Alacritty..."
+        cargo build --release
+      fi
+      popd || exit
+    fi
   fi
 }
 
