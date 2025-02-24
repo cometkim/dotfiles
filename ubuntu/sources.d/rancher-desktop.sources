@@ -1,0 +1,25 @@
+Types: deb
+URIs: https://download.opensuse.org/repositories/isv:/Rancher:/stable/deb/
+Architectures: amd64
+Suites: ./
+Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
+ Version: GnuPG v1.4.5 (GNU/Linux)
+ .
+ mQENBGF7wZQBCACy9cuiwov61OW+UAAzDj2p+qVJuryvKp72KnGptVSN48hpOhKI
+ V+CXmxzOAHOCZuSivkfrSOm3NH0QjtpNUGuT4zeM9nCd5t1zgaGbqXroteUTKlaA
+ n3ApOWRneBe7ZdlpJTvSyP6iXWRTBAeXcmFmMVDDNHraTi8UsRfFGPQXB6SiFJP1
+ fitu0wb8IVBmjOiJOxg73EJ1xrarqiWt/xaSbwxyaLOqxfdsWGTST1aWsb7SiiIR
+ Im5k1h/WFGP7hWH1MznRoHuNpIXc/jBPKoaNmNQ/Koprp8adHIJRWpvtjPabcZXX
+ ZdoLZ4x2I06MrZp1VT+OrxZ3zVCo2mdBzBcHABEBAAG0OGlzdjpSYW5jaGVyIE9C
+ UyBQcm9qZWN0IDxpc3Y6UmFuY2hlckBidWlsZC5vcGVuc3VzZS5vcmc+iQE+BBMB
+ CAAoBQJliVrQAhsDBQkILEk8BgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRAf
+ gz+hpj/nWIizB/4sy1Jf71BsArws8tS7ytCpYeegKbYtR5WlsjmNqY/wFFlgNR36
+ ygS/vTzo2e3g8cP9ye5ErDe3jSW7qUuJrcWK9HLBjh8+inqXhMYPI5q4gY3jspPM
+ lKM0r8eWuLgQyHCF5wMFszwO8Xco0cPQUbmgqmH9UCZThZ2eQagBjFRGsvAvIFZF
+ SZWTmXBOgUxH/z/DtsKqViWHaakIQjGkz15ByrTwf4iUMnw6WoasyinIY2KR4MWb
+ T8qaTRHbhCBTL4ofYtXMa/Zg2BO6Dv8bXHXUdMSuUz15IhjSbZlJMMpvWVzlwSlv
+ W0hc45dQBvp2fhAPU25mXqYCddQPDtVM1jk1iEYEExECAAYFAmF7wZQACgkQOzAR
+ t2udZSNwVwCeP31zoY10AaWZIt431x8m1d/nGC0Ani4ov0n2wtdO5952YJ/YFbUn
+ ka9H
+ =UL3e
+ -----END PGP PUBLIC KEY BLOCK-----

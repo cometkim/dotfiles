@@ -27,8 +27,9 @@ function link() {
   echo
 }
 
-function install_common_dependencies() {
+function install_apt_dependencies() {
   if [[ -x "$(command -v apt)" ]]; then
+    # Common dependencies
     sudo apt update && sudo apt install -y \
       zlib1g-dev \
       libncurses5-dev \
@@ -49,6 +50,25 @@ function install_common_dependencies() {
       pkg-config \
       python3 \
       wget
+
+    local INSTALL_DIR="/etc/apt/sources.list.d"
+
+    find "ubuntu/sources.d" -type f -maxdepth 1 -name "*.sources" | while read -r file; do
+      echo "Preparing $file"
+      sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
+    done
+
+    local DIST_NAME
+    DIST_NAME="$(lsb_release -sc 2>/dev/null)"
+
+    if [[ -d "ubuntu/sources.d/$DIST_NAME" ]]; then
+      find "ubuntu/sources.d/$DIST_NAME" -type f -name "*.sources" | while read -r file; do
+        echo "Preparing $file"
+        sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
+      done
+    fi
+
+    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
   fi
 }
 
@@ -167,7 +187,8 @@ link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
 link "config/nvim" "$CONFIG/nvim"
 
-install_common_dependencies
+install_apt_dependencies
+
 install_or_update_zinit
 install_or_update_homebrew
 

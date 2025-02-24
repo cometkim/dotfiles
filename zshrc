@@ -67,6 +67,11 @@ export PATH="$CARGO_HOME/bin:$PATH"
 export PNPM_HOME="$HOME/.pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+# Rancher Desktop
+if [[ -d "$HOME/.rd" ]]; then
+  export PATH="$HOME/.rd/bin:$PATH"
+fi
+
 # Personal config
 export EDITOR="nvim"
 export VISUAL="nvim"
