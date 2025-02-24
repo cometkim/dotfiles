@@ -7,16 +7,35 @@ return {
 
     nvlsp.defaults()
 
-    local servers = {
-      html = {},
-      cssls = {},
-      jsonls = {
+    lspconfig.html.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    lspconfig.cssls.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    lspconfig.jsonls.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+      settings = {
         json = {
           validate = { enable = true },
           schemas = schemastore.json.schemas(),
         },
       },
-      yamlls = {
+    }
+
+    lspconfig.yamlls.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+      settings = {
         yaml = {
           validate = true,
           schemaStore = {
@@ -26,11 +45,41 @@ return {
           schemas = schemastore.yaml.schemas(),
         },
       },
-      taplo = {}, -- TOML
-      ts_ls = {},
-      lua_ls = {},
-      biome = {},
-      ocamllsp = {
+    }
+
+    -- TOML
+    lspconfig.taplo.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    -- TypeScript
+    lspconfig.ts_ls.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    -- Lua
+    lspconfig.lua_ls.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    -- https://biomejs.dev
+    lspconfig.biome.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    lspconfig.ocamllsp.setup {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+      settings = {
         ocamllsp = {
           extendedHover = {
             enable = true,
@@ -48,7 +97,13 @@ return {
           },
         },
       },
-      rust_analyzer = {
+    }
+
+    lspconfig.rust_analyzer.setup = {
+      on_attach = nvlsp.on_attach,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+      settings = {
         ["rust-analyzer"] = {
           imports = {
             granularity = {
@@ -70,41 +125,5 @@ return {
         },
       },
     }
-
-    local on_attach = function(client, bufnr)
-      nvlsp.on_attach(client, bufnr)
-
-      -- handled via conform.nvim
-      -- if client.server_capabilities.documentFormattingProvider then
-      --   vim.api.nvim_create_autocmd("BufWritePre", {
-      --     buffer = bufnr,
-      --     callback = function()
-      --       vim.lsp.buf.format { async = false }
-      --     end,
-      --   })
-      -- end
-
-      if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end
-
-      if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "CursorHold" }, {
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.codelens.refresh()
-          end,
-        })
-      end
-    end
-
-    for lsp, settings in pairs(servers) do
-      lspconfig[lsp].setup {
-        on_attach = on_attach,
-        on_init = nvlsp.on_init,
-        capabilities = nvlsp.capabilities,
-        settings = settings,
-      }
-    end
   end,
 }

@@ -63,6 +63,10 @@ export RUSTUP_HOME="$HOME/.rustup"
 export CARGO_HOME="$HOME/.cargo"
 export PATH="$CARGO_HOME/bin:$PATH"
 
+# PNPM (for global bins)
+export PNPM_HOME="$HOME/.pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
 # Personal config
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -108,3 +112,9 @@ fi
 if [[ -f "$HOME/.zshrc-work" ]]; then
   source "$HOME/.zshrc-work"
 fi
+
+# So many telemetries...
+export BINSTALL_DISABLE_TELEMETRY="true"
+export GATSBY_TELEMETRY_DISABLED="1"
+export NEXT_TELEMETRY_DISABLED="1"
+export REDWOOD_DISABLE_TELEMETRY="1"

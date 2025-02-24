@@ -91,6 +91,16 @@ function install_or_update_cargo() {
     rustup install stable
     rustup default stable
   fi
+
+  if [[ ! -x "$(command -v cargo-binstall)" ]]; then
+    curl -fsSL "https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh" | bash
+  else
+    cargo binstall cargo-binstall --no-confirm
+  fi
+
+  cargo binstall cargo-update --no-confirm
+  cargo binstall cargo-run-bin --no-confirm
+  cargo binstall cargo-nextest --no-confirm
 }
 
 function install_or_update_alacritty() {
