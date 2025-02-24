@@ -1,6 +1,6 @@
 brew "aws-vault"
 brew "awscli"
-brew "awslocal"
+brew "awscli-local"
 brew "bat"
 brew "cmake"
 brew "code-minimap"
