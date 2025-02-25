@@ -7,7 +7,9 @@
     "library": [
       "lua",
       "$VIMRUNTIME",
-      "${3rd}/luv/library"
+      "${3rd}/luv/library",
+      "~/.local/share/nvim/lazy/ui/nvchad_types",
+      "~/.local/share/nvim/lazy/lazy.nvim/lua/lazy"
     ],
     "checkThirdParty": false
   }
