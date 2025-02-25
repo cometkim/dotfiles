@@ -4,7 +4,7 @@ hermes = "asdf:cometkim/asdf-hermes"
 binaryen = "asdf:cometkim/asdf-binaryen"
 
 [tools]
-deno = "2.0.0"
+deno = "2.2.2"
 java = "temurin-23.0.0+37"
 python = "3.12.2"
 terraform = "1.9.7"
