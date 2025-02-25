@@ -4,6 +4,7 @@ return {
     local nvlsp = require "nvchad.configs.lspconfig"
     local lspconfig = require "lspconfig"
     local schemastore = require "schemastore"
+    local utils = require "utils"
 
     nvlsp.defaults()
 
@@ -56,7 +57,26 @@ return {
 
     -- TypeScript
     lspconfig.ts_ls.setup {
-      on_attach = nvlsp.on_attach,
+      on_attach = function(client, bufnr)
+        if not utils.is_deno() then
+          nvlsp.on_attach(client, bufnr)
+        else
+          client.stop(true)
+        end
+      end,
+      on_init = nvlsp.on_init,
+      capabilities = nvlsp.capabilities,
+    }
+
+    -- Deno
+    lspconfig.denols.setup {
+      on_attach = function(client, bufnr)
+        if utils.is_deno() then
+          nvlsp.on_attach(client, bufnr)
+        else
+          client.stop(true)
+        end
+      end,
       on_init = nvlsp.on_init,
       capabilities = nvlsp.capabilities,
     }
@@ -75,6 +95,7 @@ return {
       capabilities = nvlsp.capabilities,
     }
 
+    -- OCaml Platform
     lspconfig.ocamllsp.setup {
       on_attach = nvlsp.on_attach,
       on_init = nvlsp.on_init,
@@ -99,6 +120,7 @@ return {
       },
     }
 
+    -- Rust
     lspconfig.rust_analyzer.setup = {
       on_attach = nvlsp.on_attach,
       on_init = nvlsp.on_init,
