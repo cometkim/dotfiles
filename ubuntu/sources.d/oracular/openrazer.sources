@@ -2,8 +2,7 @@ Types: deb
 URIs: https://ppa.launchpadcontent.net/openrazer/stable/ubuntu/
 Suites: oracular
 Components: main
-Signed-By: 
- -----BEGIN PGP PUBLIC KEY BLOCK-----
+Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFlJjOQBEADsb9Tcwkiaa9uZyKqD1O+35tlm7q1IucSobFrLCG5R8Mlm6v4f
  ndkT78ut7e1ioeBqfOnClURB2UTA/20wKhtCInMHKl1HhugatM5N4lvDOPCbc3zh

@@ -2,8 +2,7 @@ Types: deb
 URIs: https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu/
 Suites: oracular
 Components: main
-Signed-By: 
- -----BEGIN PGP PUBLIC KEY BLOCK-----
+Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFRDMp8BEADAvCww2zAiC7riFzyF6r654ANmRz4DG2unfd63thzotexQ5xq2
  lf6jHByDwfMlSUokGjKk7iM8ohM0XBnKOwBi7lLmjTNUW9oQ7y44yQ2q99XR6Qyn
