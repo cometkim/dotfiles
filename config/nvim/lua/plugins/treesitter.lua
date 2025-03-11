@@ -8,6 +8,7 @@ return {
       "html",
       "css",
       "typescript",
+      "rescript",
       "kdl",
     },
   },
