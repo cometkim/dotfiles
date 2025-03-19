@@ -1,7 +1,5 @@
 [alias]
 pbkit = "asdf:pbkit/asdf-pbkit"
-hermes = "asdf:cometkim/asdf-hermes"
-binaryen = "asdf:cometkim/asdf-binaryen"
 
 [tools]
 deno = "2.2.2"
