@@ -29,17 +29,23 @@
 [core]
   pager = delta
 
+[checkout]
+  defaultRemote = origin
+
 [push]
   autoSetupRemote = true
-  followtags = true
+  followTags = true
+
+[pull]
+  rebase = true
 
 [merge]
   tool = nvimdiff
-  conflictstyle = zdiff3
+  conflictStyle = zdiff3
 
 [rebase]
-  autosquash = true
-  autostash = true
+  autoSquash = true
+  autoStash = true
 
 [rerere]
   enabled = true
