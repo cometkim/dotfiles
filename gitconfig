@@ -11,6 +11,7 @@
 
 [init]
   defaultBranch = main
+  defaultRefFormat = reftable
 
 [log]
   date = iso
