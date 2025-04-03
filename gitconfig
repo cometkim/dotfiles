@@ -11,7 +11,8 @@
 
 [init]
   defaultBranch = main
-  defaultRefFormat = reftable
+  # Disabled due to a few implementations (e.g. libgit2) isn't ready yet
+  # defaultRefFormat = reftable
 
 [log]
   date = iso
