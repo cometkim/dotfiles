@@ -181,7 +181,12 @@ link "fonts" "$HOME/.fonts"
 
 link "config/environment.d" "$CONFIG/environment.d"
 link "config/fontconfig" "$CONFIG/fontconfig"
-link "config/kime" "$CONFIG/kime"
+
+# Kime is not working properly on Ubuntu on Wayland.
+# Use iBus for now.
+#
+# link "config/kime" "$CONFIG/kime"
+
 link "config/mise" "$CONFIG/mise"
 link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
