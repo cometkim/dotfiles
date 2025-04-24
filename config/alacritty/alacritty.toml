@@ -29,8 +29,3 @@ bindings = [
 
 [general]
 import = ["~/.config/alacritty/themes/dracula.toml"]
-
-[terminal]
-
-[terminal.shell]
-program = "/opt/homebrew/bin/zellij"

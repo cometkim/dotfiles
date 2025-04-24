@@ -1,17 +1,25 @@
+## Common
+export WORKDIR="$HOME/Workspace"
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Auto-start Zellij
+export ZELLIJ_AUTO_EXIT="true"
+eval "$(zellij setup --generate-auto-start zsh)"
+
+# p10k
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 source "$HOME/.local/share/zinit/source/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 if [[ -f "$HOME/.p10k.zsh" ]]; then
   source "$HOME/.p10k.zsh"
 fi
-
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
@@ -20,18 +28,8 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
-# Common
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # zoxide
 eval "$(zoxide init zsh)"
-
-export PATH="$HOME/bin:$PATH"
-export WORKDIR="$HOME/Workspace"
 
 # curl (Cloudflare patch for HTTP/3 support)
 export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
@@ -110,10 +108,16 @@ alias asdf="mise"
 
 alias tf="terraform"
 
+# Local bins
+export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
 if [[ "$(uname -o)" == "Darwin" ]]; then
   source "$HOME/.zshrc-macos"
 fi
 
+# Work profile
 if [[ -f "$HOME/.zshrc-work" ]]; then
   source "$HOME/.zshrc-work"
 fi
