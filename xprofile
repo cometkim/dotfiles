@@ -1,4 +1,0 @@
-export XIM="kim"
-export XMODIFIERS="@im=kime"
-export GTK_IM_MODULE=kime
-export QT_IM_MODULE=kime

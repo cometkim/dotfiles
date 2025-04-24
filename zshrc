@@ -38,13 +38,12 @@ export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
 if [[ -f "$HOME/.fzf.zsh" ]]; then
   source "$HOME/.fzf.zsh"
 fi
-export FZF_DEFAULT_COMMAND="fd - type f"
+export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--ansi"
 
 # mise
 eval "$(mise activate zsh)"
-
-# pnpm for NPM package installation
-export PATH="$HOME/.pnpm:$PATH"
 
 # Classic GOPATH
 export GOPATH="$WORKDIR"
@@ -91,14 +90,8 @@ alias zshrc="$EDITOR $ZSHRC"
 export VIMRC="$HOME/.config/nvim/init.lua"
 alias vimrc="$EDITOR $VIMRC"
 
-export TMUXRC="$HOME/.tmux.conf"
-alias tmuxrc="$EDITOR $TMUXRC"
-
 export TERMRC="$HOME/.config/alacritty/alacritty.yml"
 alias termrc="$EDITOR $TERMRC"
-
-export IMERC="$HOME/.config/kime/config.yaml"
-alias imerc="$EDITOR $IMERC"
 
 alias cd="z"
 alias j="z"
