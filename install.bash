@@ -176,7 +176,6 @@ link "zshrc" "$HOME/.zshrc"
 link "p10k.zsh" "$HOME/.p10k.zsh"
 link "zshrc-macos" "$HOME/.zshrc-macos"
 link "gitconfig" "$HOME/.gitconfig"
-link "yarnrc" "$HOME/.yarnrc"
 link "fonts" "$HOME/.fonts"
 
 link "config/environment.d" "$CONFIG/environment.d"
