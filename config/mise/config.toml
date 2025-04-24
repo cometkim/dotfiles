@@ -16,3 +16,4 @@ binaryen = "122"
 
 [settings]
 asdf_compat = true
+idiomatic_version_file_enable_tools = ["python"]
