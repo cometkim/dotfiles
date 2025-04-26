@@ -1,56 +1,66 @@
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = {
+    "ConformInfo",
+    "AutoFormatToogle",
+    "AutoFormatEnable",
+    "AutoFormatDisable",
+  },
+  keys = {
+    {
+      "<leader>fmf",
+      function()
+        require("conform").format({
+          async = true,
+          lsp_format = "first"
+        })
+      end,
+      mode = "",
+      desc = "Format buffer",
+    },
+    {
+      "<leader>fma",
+      "<CMD>AutoFormatToggle<CR>",
+      mode = "",
+      desc = "Toggle auto-format",
+    },
+  },
   config = function()
-    local conform = require "conform"
-
     require("conform").setup({
       format_on_save = function(bufnr)
-        if vim.g.enable_autoformat or vim.b[bufnr].enable_autoformat then
-          return {
-            timeout_ms = 500,
-            lsp_format = "prefer"
-          }
+        if not vim.g.enable_autoformat then
+          return
         end
+
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        if bufname:match("/node_modules/") then
+          return
+        end
+
+        return {
+          timeout_ms = 500,
+          lsp_format = "first"
+        }
       end,
     })
 
     vim.api.nvim_create_user_command("AutoFormatEnable", function()
-      vim.b.enable_autoformat = true
       vim.g.enable_autoformat = true
     end, {
       desc = "Enable autoformat-on-save",
     })
 
     vim.api.nvim_create_user_command("AutoFormatDisable", function(args)
-      if args.bang then
-        vim.b.enable_autoformat = false
-      else
-        vim.g.enable_autoformat = false
-      end
+      vim.g.enable_autoformat = false
     end, {
       desc = "Disable autoformat-on-save",
-      bang = true,
     })
 
-    vim.api.nvim_create_user_command("FormatRange", function(args)
-      local range = nil
-      if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-        range = {
-          start = { args.line1, 0 },
-          ["end"] = { args.line2, end_line:len() },
-        }
-      end
-      conform.format({
-        lsp_format = "prefer",
-        range = range
-      })
-    end, { range = true })
-
-    vim.api.nvim_create_user_command("Format", function()
-      conform.format({
-        lsp_format = "prefer",
-      })
-    end, { range = true })
+    vim.api.nvim_create_user_command("AutoFormatToggle", function()
+      vim.g.enable_autoformat = not vim.g.enable_autoformat
+    end, {
+      desc = "Toggle autoformat-on-save",
+    })
   end
 }
