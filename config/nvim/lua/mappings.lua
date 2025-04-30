@@ -18,4 +18,10 @@ map("n", "<C-k>", "<CMD>ZellijNavigateUp<CR>", { silent = true, desc = "Zellij: 
 map("n", "<C-h>", "<CMD>ZellijNavigateLeft<CR>", { silent = true, desc = "Zellij: Move to left pane" })
 map("n", "<C-l>", "<CMD>ZellijNavigateRight<CR>", { silent = true, desc = "Zellij: Move to right pane" })
 
+-- Comments
+map("n", "<C-/>", "gcc", { desc = "toggle comment", remap = true })
+map("v", "<C-/>", "gc", { desc = "toggle comment", remap = true })
+map("n", "<leader>/", "<CMD>Commentless<CR>", { desc = "Toggle Comments", remap = true })
+map("v", "<leader>/", "<CMD>Commentless<CR>", { desc = "Toggle Comments", remap = true })
+
 map("t", "<Esc><Esc><Esc>", "<C-\\><C-n>", { silent = true })

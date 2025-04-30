@@ -1,7 +1,11 @@
 return {
   "fedepujol/move.nvim",
   config = function()
-    require("move").setup {}
+    require("move").setup {
+      -- line = {
+      --   indent = false,
+      -- },
+    }
   end,
   keys = {
     { mode = { "n" }, "<A-j>", "<CMD>MoveLine(1)<CR>",    silent = true },
