@@ -17,3 +17,5 @@ map("n", "<C-j>", "<CMD>ZellijNavigateDown<CR>", { silent = true, desc = "Zellij
 map("n", "<C-k>", "<CMD>ZellijNavigateUp<CR>", { silent = true, desc = "Zellij: Move to up pane" })
 map("n", "<C-h>", "<CMD>ZellijNavigateLeft<CR>", { silent = true, desc = "Zellij: Move to left pane" })
 map("n", "<C-l>", "<CMD>ZellijNavigateRight<CR>", { silent = true, desc = "Zellij: Move to right pane" })
+
+map("t", "<Esc><Esc><Esc>", "<C-\\><C-n>", { silent = true })
