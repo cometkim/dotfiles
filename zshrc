@@ -131,6 +131,11 @@ if [[ -f "$HOME/.zshrc-work" ]]; then
   source "$HOME/.zshrc-work"
 fi
 
+# Credentials
+if [[ -f "$HOME/.zshrc-credentials" ]]; then
+  source "$HOME/.zshrc-credentials"
+fi
+
 # So many telemetries...
 export BINSTALL_DISABLE_TELEMETRY="true"
 export GATSBY_TELEMETRY_DISABLED="1"
