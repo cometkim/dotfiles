@@ -28,6 +28,11 @@
       ]
     }
   },
-  "nativeMCPServers": [
-  ]
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled_prompts": [
+        "parrot"
+      ]
+    }
+  }
 }

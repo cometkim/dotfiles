@@ -19,7 +19,7 @@ return {
       use_bundled_binary = true,
       extensions = {
         avante = {
-          make_slash_commands = true,
+          make_slash_commands = false,
         },
       },
     }

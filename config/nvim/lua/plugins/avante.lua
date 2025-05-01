@@ -100,36 +100,36 @@ local config = {
         timeout = 60000,
       },
     },
-    rag_service = {
-      enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
-      host_mount = os.getenv("WORKDIR"),
-      runner = "docker",
-      provider = "openai",
-      llm_model = "gpt-4.1-mini",
-      embed_model = "text-embedding-3-small",
-      endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
-    },
-    system_prompt = function()
-      local hub = require("mcphub").get_hub_instance()
-      return hub:get_active_servers_prompt()
-    end,
-    custom_tools = function()
-      return {
-        require("mcphub.extensions.avante").mcp_tool(),
-      }
-    end,
+    -- rag_service = {
+    --   enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
+    --   host_mount = os.getenv("WORKDIR"),
+    --   runner = "docker",
+    --   provider = "openai",
+    --   llm_model = "gpt-4.1-mini",
+    --   embed_model = "text-embedding-3-small",
+    --   endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
+    -- },
+    -- system_prompt = function()
+    --   local hub = require("mcphub").get_hub_instance()
+    --   return hub:get_active_servers_prompt()
+    -- end,
+    -- custom_tools = function()
+    --   return {
+    --     require("mcphub.extensions.avante").mcp_tool(),
+    --   }
+    -- end,
     disable_tools = {
       -- Might be conflic with mcphub.nvim
-      "list_files",
-      "search_files",
-      "read_file",
-      "create_file",
-      "rename_file",
-      "delete_file",
-      "create_dir",
-      "rename_dir",
-      "delete_dir",
-      "bash",
+      -- "list_files",
+      -- "search_files",
+      -- "read_file",
+      -- "create_file",
+      -- "rename_file",
+      -- "delete_file",
+      -- "create_dir",
+      -- "rename_dir",
+      -- "delete_dir",
+      -- "bash",
       -- Tell them don't use python
       "python",
     },
@@ -148,7 +148,6 @@ local config = {
     "nvim-tree/nvim-web-devicons",
     "HakonHarnes/img-clip.nvim",
     "MeanderingProgrammer/render-markdown.nvim",
-    "ravitemer/mcphub.nvim",
   },
 }
 
