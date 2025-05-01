@@ -54,6 +54,7 @@ if OS.mac?
   cask "figma"
   cask "firefox@developer-edition"
   cask "google-chrome"
+  cask "google-cloud-sdk"
   cask "google-drive"
   cask "keeweb"
   cask "keybase"
