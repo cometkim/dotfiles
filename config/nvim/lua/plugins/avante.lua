@@ -99,7 +99,15 @@ local config = {
         model = "gemma3:latest",
         timeout = 60000,
       },
-
+    },
+    rag_service = {
+      enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
+      host_mount = os.getenv("WORKDIR"),
+      runner = "docker",
+      provider = "openai",
+      llm_model = "gpt-4.1-mini",
+      embed_model = "text-embedding-3-small",
+      endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
     },
   },
   build = "make",
