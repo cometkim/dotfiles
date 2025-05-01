@@ -182,6 +182,7 @@ link "config/mise" "$CONFIG/mise"
 link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
 link "config/nvim" "$CONFIG/nvim"
+link "config/mcphub" "$CONFIG/mcphub"
 
 install_apt_dependencies
 
