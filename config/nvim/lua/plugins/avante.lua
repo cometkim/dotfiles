@@ -7,13 +7,12 @@ local vendor = (function()
   end
 end)()
 
-local default_vendor = vendor("anthropic")
 local config = {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = default_vendor,
+    provider = "0-anthropic",
     claude = {
       endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/anthropic",
       hide_in_model_selector = true,
@@ -36,9 +35,15 @@ local config = {
         keep_alive = "5m",
       },
     },
-
     vendors = {
-      [default_vendor] = {
+      [vendor("anthropic")] = {
+        __inherited_from = "claude",
+        model = "claude-3-5-sonnet-20241022",
+        timeout = 60000,
+        temperature = 0,
+        max_tokens = 8192,
+      },
+      [vendor("anthropic")] = {
         __inherited_from = "claude",
         model = "claude-3-7-sonnet-20250219",
         timeout = 60000,
