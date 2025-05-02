@@ -27,6 +27,8 @@ return {
     },
   },
   config = function()
+    vim.g.enable_autoformat = true
+
     require("conform").setup({
       format_on_save = function(bufnr)
         if not vim.g.enable_autoformat then
@@ -51,7 +53,7 @@ return {
       desc = "Enable autoformat-on-save",
     })
 
-    vim.api.nvim_create_user_command("AutoFormatDisable", function(args)
+    vim.api.nvim_create_user_command("AutoFormatDisable", function()
       vim.g.enable_autoformat = false
     end, {
       desc = "Disable autoformat-on-save",

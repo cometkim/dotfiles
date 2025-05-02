@@ -27,13 +27,9 @@ local config = {
       hide_in_model_selector = true,
     },
     ollama = {
-      endpoint = "http://127.0.0.1:11434",
+      endpoint = "http://localhost:11434",
       hide_in_model_selector = true,
-      options = {
-        temperature = 0,
-        num_ctx = 20480,
-        keep_alive = "5m",
-      },
+      disable_tools = true,
     },
     vendors = {
       [vendor("anthropic")] = {
@@ -91,15 +87,26 @@ local config = {
       },
       [vendor("ollama")] = {
         __inherited_from = "ollama",
-        model = "qwen3:latest",
+        model = "qwen3:8b",
         timeout = 60000,
+        options = {
+          temperature = 0,
+          num_ctx = 2048,
+          keep_alive = "5m",
+        },
       },
       [vendor("ollama")] = {
         __inherited_from = "ollama",
-        model = "gemma3:latest",
+        model = "gemma3:4b",
         timeout = 60000,
+        options = {
+          temperature = 0,
+          num_ctx = 1024,
+          keep_alive = "5m",
+        },
       },
     },
+    -- Don't use RAG service yet.
     -- rag_service = {
     --   enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
     --   host_mount = os.getenv("WORKDIR"),
@@ -109,30 +116,6 @@ local config = {
     --   embed_model = "text-embedding-3-small",
     --   endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
     -- },
-    -- system_prompt = function()
-    --   local hub = require("mcphub").get_hub_instance()
-    --   return hub:get_active_servers_prompt()
-    -- end,
-    -- custom_tools = function()
-    --   return {
-    --     require("mcphub.extensions.avante").mcp_tool(),
-    --   }
-    -- end,
-    disable_tools = {
-      -- Might be conflic with mcphub.nvim
-      -- "list_files",
-      -- "search_files",
-      -- "read_file",
-      -- "create_file",
-      -- "rename_file",
-      -- "delete_file",
-      -- "create_dir",
-      -- "rename_dir",
-      -- "delete_dir",
-      -- "bash",
-      -- Tell them don't use python
-      "python",
-    },
   },
   build = "make",
   dependencies = {
@@ -152,13 +135,24 @@ local config = {
 }
 
 local hide_providers = {
-  "aihubmix", "aihubmix-claude", "azure", "bedrock",
-  "bedrock-claude-3.7-sonnet", "cohere", "copilot",
-  "claude-opus", "claude-haiku", "openai-gpt-4o-mini",
+  "azure",
+  "bedrock",
+  "cohere",
+  "copilot",
   "vertex", "vertex_claude"
 }
 for _, name in ipairs(hide_providers) do
   config.opts[name] = { hide_in_model_selector = true }
+end
+
+local hide_vendors = {
+  "aihubmix", "aihubmix-claude",
+  "bedrock-claude-3.7-sonnet",
+  "claude-opus", "claude-haiku",
+  "openai-gpt-4o-mini",
+}
+for _, name in ipairs(hide_vendors) do
+  config.opts.vendors[name] = { hide_in_model_selector = true }
 end
 
 return config
