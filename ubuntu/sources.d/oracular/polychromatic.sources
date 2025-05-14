@@ -2,8 +2,7 @@ Types: deb
 URIs: https://ppa.launchpadcontent.net/polychromatic/stable/ubuntu/
 Suites: oracular
 Components: main
-Signed-By: 
- -----BEGIN PGP PUBLIC KEY BLOCK-----
+Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFoirUABEADYYx3ZoUr/mJd6HFFXK1Cr9sF6w27J5CKX80O/FJ8nM0RjgEdb
  sSWf6NcMObpoiIVS4NsdPZ6YhD71qh5iJp2RaEZONRLx9rGxKEvVY4PtLPrWQC+w
