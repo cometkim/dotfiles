@@ -121,6 +121,7 @@ function install_or_update_cargo() {
   cargo binstall cargo-update --no-confirm --force
   cargo binstall cargo-run-bin --no-confirm --force
   cargo binstall cargo-nextest --no-confirm --force
+  cargo binstall cargo-bloat --no-confirm --force
 }
 
 function install_or_update_alacritty() {
