@@ -26,7 +26,9 @@ require("lazy").setup({
 }, lazy_config)
 
 -- load theme
+dofile(vim.g.base46_cache .. "syntax")
 dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "treesitter")
 dofile(vim.g.base46_cache .. "statusline")
 
 require "options"

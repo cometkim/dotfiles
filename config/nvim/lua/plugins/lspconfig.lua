@@ -1,8 +1,10 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
-    local nvlsp = require "nvchad.configs.lspconfig"
+    dofile(vim.g.base46_cache .. "semantic_tokens")
+
     local lspconfig = require "lspconfig"
+    local nvlsp = require "nvchad.configs.lspconfig"
     local schemastore = require "schemastore"
     local utils = require "utils"
 
@@ -77,13 +79,6 @@ return {
           client.stop(true)
         end
       end,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
-
-    -- Lua
-    lspconfig.lua_ls.setup {
-      on_attach = nvlsp.on_attach,
       on_init = nvlsp.on_init,
       capabilities = nvlsp.capabilities,
     }

@@ -1,7 +1,11 @@
 return {
   "RRethy/vim-illuminate",
-  config = function(_, opts)
+  lazy = false,
+  config = function()
     dofile(vim.g.base46_cache .. "vim-illuminate")
-    require("illuminate").configure(opts)
+    require("illuminate").configure {
+      providers = { "lsp", "treesitter", "regex" },
+      delay = 300,
+    }
   end,
 }

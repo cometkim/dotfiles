@@ -8,11 +8,7 @@ local M = {}
 M.base46 = {
   theme = "chadracula",
   integrations = {
-    "lsp",
-    "syntax",
-    "semantic_tokens",
-    "treesitter",
-    "telescope",
+    "render-markdown",
   },
 }
 
