@@ -38,7 +38,6 @@ local config = {
         timeout = 60000,
         temperature = 0,
         max_tokens = 8192,
-        disabled_tools = { "python" },
       },
       [vendor("anthropic")] = {
         __inherited_from = "claude",
@@ -46,7 +45,6 @@ local config = {
         timeout = 60000,
         temperature = 0,
         max_tokens = 20480,
-        disabled_tools = { "python" },
       },
       [vendor("openai")] = {
         __inherited_from = "openai",
@@ -122,6 +120,7 @@ local config = {
     --   embed_model = "text-embedding-3-small",
     --   endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
     -- },
+    disabled_tools = { "python" },
   },
   build = "make",
   dependencies = {
