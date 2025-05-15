@@ -7,7 +7,13 @@ local M = {}
 
 M.base46 = {
   theme = "chadracula",
-  integrations = { "neogit" },
+  integrations = {
+    "lsp",
+    "syntax",
+    "semantic_tokens",
+    "treesitter",
+    "telescope",
+  },
 }
 
 return M

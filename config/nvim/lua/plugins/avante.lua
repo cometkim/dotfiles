@@ -11,6 +11,10 @@ local config = {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false,
+  config = function(_, opts)
+    dofile(vim.g.base46_cache .. "avante")
+    require("avante").setup(opts)
+  end,
   opts = {
     provider = "0-anthropic",
     claude = {
