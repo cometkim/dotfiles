@@ -106,6 +106,10 @@ local config = {
         },
       },
     },
+    web_search_engine = {
+      provider = "tavily",
+      proxy = nil,
+    },
     -- Don't use RAG service yet.
     -- rag_service = {
     --   enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
