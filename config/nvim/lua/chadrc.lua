@@ -8,7 +8,10 @@ local M = {}
 M.base46 = {
   theme = "chadracula",
   integrations = {
+    "neogit",
     "render-markdown",
+    "telescope",
+    "treesitter",
   },
 }
 

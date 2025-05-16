@@ -17,6 +17,10 @@ local config = {
   end,
   opts = {
     provider = "0-anthropic",
+    cursor_applying_provider = "0-groq",
+    behaviour = {
+      enable_cursor_planning_mode = true,
+    },
     claude = {
       endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/anthropic",
       hide_in_model_selector = true,
@@ -36,6 +40,13 @@ local config = {
       disable_tools = true,
     },
     vendors = {
+      ["0-groq"] = {
+        __inherited_from = "openai",
+        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/groq",
+        api_key_name = "GROQ_API_KEY",
+        model = "llama-3.3-70b-versatile",
+        max_completion_tokens = 32768,
+      },
       [vendor("anthropic")] = {
         __inherited_from = "claude",
         model = "claude-3-5-sonnet-20241022",
