@@ -1,3 +1,5 @@
+local ai_gateway = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router"
+
 local vendor = (function()
   local count = 0
   return function(name)
@@ -22,16 +24,15 @@ local config = {
       enable_cursor_planning_mode = true,
     },
     claude = {
-      endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/anthropic",
+      endpoint = ai_gateway .. "/anthropic",
       hide_in_model_selector = true,
     },
     openai = {
-      endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
+      endpoint = ai_gateway .. "/openai",
       hide_in_model_selector = true,
     },
     gemini = {
-      endpoint =
-      "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/google-ai-studio/v1beta/models",
+      endpoint = ai_gateway .. "/google-ai-studio/v1beta/models",
       hide_in_model_selector = true,
     },
     ollama = {
@@ -42,7 +43,7 @@ local config = {
     vendors = {
       ["0-groq"] = {
         __inherited_from = "openai",
-        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/groq",
+        endpoint = ai_gateway .. "/groq",
         api_key_name = "GROQ_API_KEY",
         model = "llama-3.3-70b-versatile",
         max_completion_tokens = 32768,
@@ -103,14 +104,14 @@ local config = {
       },
       [vendor("cloudflare")] = {
         __inherited_from = "openai",
-        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/workers-ai/v1",
+        endpoint = ai_gateway .. "/workers-ai/v1",
         api_key_name = "CLOUDFLARE_AI_API_TOKEN",
         model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
         disable_tools = true,
       },
       [vendor("cloudflare")] = {
         __inherited_from = "openai",
-        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/workers-ai/v1",
+        endpoint = ai_gateway .. "/workers-ai/v1",
         api_key_name = "CLOUDFLARE_AI_API_TOKEN",
         model = "@cf/meta/llama-4-scout-17b-16e-instruct",
         disable_tools = true,
