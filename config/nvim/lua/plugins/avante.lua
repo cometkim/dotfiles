@@ -47,6 +47,7 @@ local config = {
         model = "llama-3.3-70b-versatile",
         max_completion_tokens = 32768,
       },
+
       [vendor("anthropic")] = {
         __inherited_from = "claude",
         model = "claude-3-5-sonnet-20241022",
@@ -99,6 +100,20 @@ local config = {
         __inherited_from = "gemini",
         model = "gemini-2.5-pro-preview-03-25",
         timeout = 60000,
+      },
+      [vendor("cloudflare")] = {
+        __inherited_from = "openai",
+        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/workers-ai/v1",
+        api_key_name = "CLOUDFLARE_AI_API_TOKEN",
+        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        disable_tools = true,
+      },
+      [vendor("cloudflare")] = {
+        __inherited_from = "openai",
+        endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/workers-ai/v1",
+        api_key_name = "CLOUDFLARE_AI_API_TOKEN",
+        model = "@cf/meta/llama-4-scout-17b-16e-instruct",
+        disable_tools = true,
       },
       [vendor("ollama")] = {
         __inherited_from = "ollama",
