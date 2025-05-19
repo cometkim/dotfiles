@@ -54,6 +54,7 @@ OPAM_HOME="$HOME/.opam"
 if [[ -f "$OPAM_HOME/opam-init/init.zsh" ]]; then
   source "$OPAM_HOME/opam-init/init.zsh"
 fi
+export DUNE_CACHE="enabled"
 
 # Rust / Cargo
 export RUSTUP_HOME="$HOME/.rustup"
