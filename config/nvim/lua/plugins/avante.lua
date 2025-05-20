@@ -17,6 +17,26 @@ local config = {
     dofile(vim.g.base46_cache .. "avante")
     require("avante").setup(opts)
   end,
+  keys = {
+    {
+      "<leader>a+",
+      function()
+        local tree_ext = require("avante.extensions.nvim_tree")
+        tree_ext.add_file()
+      end,
+      desc = "Select file in NvimTree",
+      ft = "NvimTree",
+    },
+    {
+      "<leader>a-",
+      function()
+        local tree_ext = require("avante.extensions.nvim_tree")
+        tree_ext.remove_file()
+      end,
+      desc = "Deselect file in NvimTree",
+      ft = "NvimTree",
+    },
+  },
   opts = {
     provider = "0-anthropic",
     cursor_applying_provider = "0-groq",
@@ -152,6 +172,9 @@ local config = {
     --   endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
     -- },
     disabled_tools = { "python" },
+    selector = {
+      exclude_auto_select = { "NvimTree" },
+    },
   },
   build = "make",
   dependencies = {
