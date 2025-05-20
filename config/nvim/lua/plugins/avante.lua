@@ -1,22 +1,126 @@
-local ai_gateway = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router"
-
 local vendor = (function()
-  local count = 0
+  local counters = {}
   return function(name)
-    name = count .. "-" .. name
-    count = count + 1
-    return name
+    local count = counters[name] or 0
+    local id = name .. "-" .. count
+    counters[name] = count + 1
+    return id
   end
 end)()
+
+local get_avante_provider_opts = function()
+  local P = require("plugins.ai-gateway.providers")
+  local p = {
+    claude = {
+      endpoint = P.models.anthropic.endpoint,
+      hide_in_model_selector = true,
+    },
+    openai = {
+      endpoint = P.models.openai.endpoint,
+      hide_in_model_selector = true,
+    },
+    gemini = {
+      endpoint = P.models.google.endpoint,
+      hide_in_model_selector = true,
+    },
+    ollama = {
+      endpoint = P.models.ollama.endpoint,
+      hide_in_model_selector = true,
+      disable_tools = true,
+    },
+    vendors = {},
+  }
+
+  -- Add Anthropic models
+  for model_name, model_config in pairs(P.models.anthropic.models) do
+    local vendor_name = vendor("anthropic")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "claude",
+      api_key_name = P.models.anthropic.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Add OpenAI models
+  for model_name, model_config in pairs(P.models.openai.models) do
+    local vendor_name = vendor("openai")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
+      api_key_name = P.models.openai.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Add Google models
+  for model_name, model_config in pairs(P.models.google.models) do
+    local vendor_name = vendor("google")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "gemini",
+      api_key_name = P.models.google.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Add Cloudflare models
+  for model_name, model_config in pairs(P.models.cloudflare.models) do
+    local vendor_name = vendor("cloudflare")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
+      endpoint = P.models.cloudflare.endpoint .. "/v1",
+      api_key_name = P.models.cloudflare.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Add Groq models
+  for model_name, model_config in pairs(P.models.groq.models) do
+    local vendor_name = vendor("groq")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
+      api_key_name = P.models.groq.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Add Ollama models
+  for model_name, model_config in pairs(P.models.ollama.models) do
+    local vendor_name = vendor("ollama")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "ollama",
+      model = model_name,
+    }, model_config)
+  end
+
+  -- Hide these providers in avante.nvim model selector
+  for _, name in ipairs({
+    "azure",
+    "bedrock",
+    "cohere",
+    "copilot",
+    "vertex",
+    "vertex_claude" }) do
+    p[name] = { hide_in_model_selector = true }
+  end
+
+  -- Hide these vendors in avante.nvim model selector
+  for _, name in ipairs({
+    "aihubmix",
+    "aihubmix-claude",
+    "bedrock-claude-3.7-sonnet",
+    "claude-opus",
+    "claude-haiku",
+    "openai-gpt-4o-mini",
+  }) do
+    p[name] = { hide_in_model_selector = true }
+  end
+
+  return p
+end
 
 local config = {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false,
-  config = function(_, opts)
-    dofile(vim.g.base46_cache .. "avante")
-    require("avante").setup(opts)
-  end,
   keys = {
     {
       "<leader>a+",
@@ -37,145 +141,39 @@ local config = {
       ft = "NvimTree",
     },
   },
-  opts = {
-    provider = "0-anthropic",
-    cursor_applying_provider = "0-groq",
-    behaviour = {
-      enable_cursor_planning_mode = true,
-    },
-    claude = {
-      endpoint = ai_gateway .. "/anthropic",
-      hide_in_model_selector = true,
-    },
-    openai = {
-      endpoint = ai_gateway .. "/openai",
-      hide_in_model_selector = true,
-    },
-    gemini = {
-      endpoint = ai_gateway .. "/google-ai-studio/v1beta/models",
-      hide_in_model_selector = true,
-    },
-    ollama = {
-      endpoint = "http://localhost:11434",
-      hide_in_model_selector = true,
-      disable_tools = true,
-    },
-    vendors = {
-      ["0-groq"] = {
-        __inherited_from = "openai",
-        endpoint = ai_gateway .. "/groq",
-        api_key_name = "GROQ_API_KEY",
-        model = "llama-3.3-70b-versatile",
-        max_completion_tokens = 32768,
-      },
+  config = function()
+    dofile(vim.g.base46_cache .. "avante")
 
-      [vendor("anthropic")] = {
-        __inherited_from = "claude",
-        model = "claude-3-5-sonnet-20241022",
-        timeout = 60000,
-        temperature = 0,
-        max_tokens = 8192,
-      },
-      [vendor("anthropic")] = {
-        __inherited_from = "claude",
-        model = "claude-3-7-sonnet-20250219",
-        timeout = 60000,
-        temperature = 0,
-        max_tokens = 20480,
-      },
-      [vendor("openai")] = {
-        __inherited_from = "openai",
-        model = "gpt-4.1",
-        timeout = 30000,
-        temperature = 0,
-        max_completion_tokens = 8192,
-      },
-      [vendor("openai")] = {
-        __inherited_from = "openai",
-        model = "gpt-4.1-mini",
-        timeout = 30000,
-        temperature = 0,
-        max_completion_tokens = 8192,
-      },
-      -- https://github.com/yetone/avante.nvim/issues/1890
-      -- [vendor("openai")] = {
-      --   __inherited_from = "openai",
-      --   model = "o4-mini",
-      --   timeout = 60000,
-      --   temperature = 0,
-      --   max_completion_tokens = 8192,
-      --   reasoning_effort = "medium",
-      -- },
-      [vendor("google")] = {
-        __inherited_from = "gemini",
-        model = "gemini-2.0-flash",
-        timeout = 30000,
-        temperature = 0,
-        max_tokens = 20480,
-      },
-      [vendor("google")] = {
-        __inherited_from = "gemini",
-        model = "gemini-2.5-flash-preview-04-17",
-      },
-      [vendor("google")] = {
-        __inherited_from = "gemini",
-        model = "gemini-2.5-pro-preview-03-25",
-        timeout = 60000,
-      },
-      [vendor("cloudflare")] = {
-        __inherited_from = "openai",
-        endpoint = ai_gateway .. "/workers-ai/v1",
-        api_key_name = "CLOUDFLARE_AI_API_TOKEN",
-        model = "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-        disable_tools = true,
-      },
-      [vendor("cloudflare")] = {
-        __inherited_from = "openai",
-        endpoint = ai_gateway .. "/workers-ai/v1",
-        api_key_name = "CLOUDFLARE_AI_API_TOKEN",
-        model = "@cf/meta/llama-4-scout-17b-16e-instruct",
-        disable_tools = true,
-      },
-      [vendor("ollama")] = {
-        __inherited_from = "ollama",
-        model = "qwen3:8b",
-        timeout = 60000,
-        options = {
-          temperature = 0,
-          num_ctx = 2048,
-          keep_alive = "5m",
+    local opts = get_avante_provider_opts()
+
+    require("avante").setup(
+      vim.tbl_extend("force", opts, {
+        provider = "anthropic-0",
+        cursor_applying_provider = "groq-0",
+        behaviour = {
+          enable_cursor_planning_mode = true,
         },
-      },
-      [vendor("ollama")] = {
-        __inherited_from = "ollama",
-        model = "gemma3:4b",
-        timeout = 60000,
-        options = {
-          temperature = 0,
-          num_ctx = 1024,
-          keep_alive = "5m",
+        selector = {
+          exclude_auto_select = { "NvimTree" },
         },
-      },
-    },
-    web_search_engine = {
-      provider = "tavily",
-      proxy = nil,
-    },
-    -- Don't use RAG service yet.
-    -- rag_service = {
-    --   enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
-    --   host_mount = os.getenv("WORKDIR"),
-    --   runner = "docker",
-    --   provider = "openai",
-    --   llm_model = "gpt-4.1-mini",
-    --   embed_model = "text-embedding-3-small",
-    --   endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router/openai",
-    -- },
-    disabled_tools = { "python" },
-    selector = {
-      exclude_auto_select = { "NvimTree" },
-    },
-  },
+        web_search_engine = {
+          provider = "tavily",
+          proxy = nil,
+        },
+        -- RAG service configuration (commented out for now)
+        -- rag_service = {
+        --   enabled = os.getenv("DISABLE_RAG_SERVICE") == nil,
+        --   host_mount = os.getenv("WORKDIR"),
+        --   runner = "docker",
+        --   provider = "openai",
+        --   llm_model = "gpt-4.1-mini",
+        --   embed_model = "text-embedding-3-small",
+        --   endpoint = providers.ai_gateway .. "/openai",
+        -- }
+        disabled_tools = { "python" },
+      })
+    )
+  end,
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
@@ -192,26 +190,5 @@ local config = {
     "MeanderingProgrammer/render-markdown.nvim",
   },
 }
-
-local hide_providers = {
-  "azure",
-  "bedrock",
-  "cohere",
-  "copilot",
-  "vertex", "vertex_claude"
-}
-for _, name in ipairs(hide_providers) do
-  config.opts[name] = { hide_in_model_selector = true }
-end
-
-local hide_vendors = {
-  "aihubmix", "aihubmix-claude",
-  "bedrock-claude-3.7-sonnet",
-  "claude-opus", "claude-haiku",
-  "openai-gpt-4o-mini",
-}
-for _, name in ipairs(hide_vendors) do
-  config.opts.vendors[name] = { hide_in_model_selector = true }
-end
 
 return config
