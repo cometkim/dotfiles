@@ -8,10 +8,13 @@ local M = {}
 M.base46 = {
   theme = "chadracula",
   integrations = {
+    "avante",
     "neogit",
     "render-markdown",
     "telescope",
     "treesitter",
+    "semantic_tokens",
+    "vim-illuminate"
   },
 }
 
