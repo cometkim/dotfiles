@@ -41,6 +41,7 @@ if OS.mac?
   brew "gnu-tar"
   brew "reattach-to-user-namespace"
   brew "pinentry-mac"
+  brew "pngpaste"
 
   tap  "jorgelbg/tap"
   brew "pinentry-touchid"
