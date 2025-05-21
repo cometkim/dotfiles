@@ -148,8 +148,8 @@ local config = {
 
     require("avante").setup(
       vim.tbl_extend("force", opts, {
-        provider = "anthropic-0",
-        cursor_applying_provider = "groq-0",
+        provider = "google-0",
+        cursor_applying_provider = "cloudflare-0",
         behaviour = {
           enable_cursor_planning_mode = true,
         },
