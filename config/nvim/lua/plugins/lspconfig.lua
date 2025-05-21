@@ -1,5 +1,8 @@
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    "b0o/schemastore.nvim",
+  },
   config = function()
     dofile(vim.g.base46_cache .. "semantic_tokens")
 

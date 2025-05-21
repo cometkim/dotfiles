@@ -1,6 +1,6 @@
 return {
   "milanglacier/minuet-ai.nvim",
-  event = { "BufWritePre" },
+  event = "VeryLazy",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "hrsh7th/nvim-cmp" },
@@ -12,9 +12,9 @@ return {
         auto_trigger_ft = { "*" },
         auto_trigger_ignore_ft = { "NvimTree" },
         keymap = {
-          accept = "<A-A>",
-          accept_line = "<A-a>",
-          accept_n_lines = "<A-z>",
+          accept = "<Tab>",
+          -- accept_line = "<A-a>",
+          -- accept_n_lines = "<A-z>",
           prev = "<A-[>",
           next = "<A-]>",
           dismiss = "<A-e>",
@@ -24,7 +24,7 @@ return {
       --
       -- Because Cloudflare AI gateway doesn't support `/completions` endpoint,
       -- but only the `/chat/completions` endpoint.
-      provider = "openai_compatible",
+      provider = "gemini",
       request_timeout = 3,
       throttle = 600, -- Increase to reduce costs and avoid rate limits
       debounce = 300, -- Increase to reduce costs and avoid rate limits
@@ -41,12 +41,13 @@ return {
         -- },
         -- gemini = {
         --   api_key = P.models.google.api_key_name,
-        --   model = "gemini-2.0-flash",
+        --   model = "gemini-2.0-flash-lite",
         --   stream = true,
+        --   max_tokens = 512,
         -- },
         -- openai = {
         --   api_key = P.models.openai.api_key_name,
-        --   model = "gpt-4.1-mini",
+        --   model = "gpt-4.1-nano",
         --   stream = true,
         --   optional = {
         --     max_tokens = 512,

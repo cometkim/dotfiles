@@ -1,6 +1,6 @@
 return {
   "RRethy/vim-illuminate",
-  lazy = false,
+  event = "VeryLazy",
   config = function()
     dofile(vim.g.base46_cache .. "vim-illuminate")
     require("illuminate").configure {
