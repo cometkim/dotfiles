@@ -6,6 +6,11 @@ return {
     require("illuminate").configure {
       providers = { "lsp", "treesitter", "regex" },
       delay = 300,
+      filetypes_denylist = {
+        "NvimTree",
+        "AvanteInput",
+      },
+      modes_denylist = { "v", "i" },
     }
   end,
 }
