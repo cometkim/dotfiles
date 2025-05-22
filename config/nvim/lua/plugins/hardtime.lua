@@ -3,8 +3,8 @@ return {
   lazy = false,
   dependencies = { "MunifTanjim/nui.nvim" },
   opts = {
-    max_time = 3000,
-    max_count = 10,
+    max_time = 5000,
+    max_count = 25,
     disable_mouse = false,
   },
 }
