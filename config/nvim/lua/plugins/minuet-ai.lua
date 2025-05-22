@@ -16,6 +16,7 @@ return {
         auto_trigger_ignore_ft = {
           "NvimTree",
           "Telescope",
+          "TelescopePrompt",
           "OverseerForm",
         },
         keymap = {
