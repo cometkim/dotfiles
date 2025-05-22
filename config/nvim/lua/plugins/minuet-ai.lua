@@ -6,7 +6,7 @@ return {
     { "hrsh7th/nvim-cmp" },
   },
   config = function()
-    local P = require("plugins.ai-gateway.providers")
+    local P = require("ai-gateway.providers")
     require("minuet").setup {
       cmp = {
         enable_auto_complete = true,
@@ -19,6 +19,7 @@ return {
           "TelescopePrompt",
           "DressingInput",
           "OverseerForm",
+          "AvanteInput",
         },
         keymap = {
           accept = "<Tab>",
@@ -33,7 +34,7 @@ return {
       --
       -- Because Cloudflare AI gateway doesn't support `/completions` endpoint,
       -- but only the `/chat/completions` endpoint.
-      provider = "codestral",
+      provider = "openai_compatible",
       request_timeout = 3,
       throttle = 600, -- Increase to reduce costs and avoid rate limits
       debounce = 300, -- Increase to reduce costs and avoid rate limits
@@ -43,19 +44,19 @@ return {
         -- See https://github.com/milanglacier/minuet-ai.nvim/issues/92
         --
         -- claude = {
-        --   api_key = P.models.anthropic.api_key_name,
+        --   api_key = P.providers.anthropic.api_key_name,
         --   model = "claude-3-5-haiku-latest",
         --   stream = true,
         --   max_tokens = 512,
         -- },
         -- gemini = {
-        --   api_key = P.models.google.api_key_name,
+        --   api_key = P.providers.google.api_key_name,
         --   model = "gemini-2.0-flash-lite",
         --   stream = true,
         --   max_tokens = 512,
         -- },
         -- openai = {
-        --   api_key = P.models.openai.api_key_name,
+        --   api_key = P.providers.openai.api_key_name,
         --   model = "gpt-4.1-nano",
         --   stream = true,
         --   optional = {
@@ -63,10 +64,10 @@ return {
         --   },
         -- },
         openai_compatible = {
-          name = "devstral",
-          model = "devstral-small-2505",
-          end_point = P.models.mistral.endpoint .. "/v1/chat/completions",
-          api_key = P.models.mistral.api_key_name,
+          name = "codestral",
+          model = "codestral-latest",
+          end_point = P.providers.mistral.endpoint .. "/v1/chat/completions",
+          api_key = P.providers.mistral.api_key_name,
           stream = true,
           optional = {
             max_tokens = 512,

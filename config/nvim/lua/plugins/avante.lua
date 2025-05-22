@@ -1,30 +1,20 @@
-local vendor = (function()
-  local counters = {}
-  return function(name)
-    local count = counters[name] or 0
-    local id = name .. "-" .. count
-    counters[name] = count + 1
-    return id
-  end
-end)()
-
 local get_avante_provider_opts = function()
-  local P = require("plugins.ai-gateway.providers")
+  local P = require("ai-gateway.providers")
   local p = {
     claude = {
-      endpoint = P.models.anthropic.endpoint,
+      endpoint = P.providers.anthropic.endpoint,
       hide_in_model_selector = true,
     },
     openai = {
-      endpoint = P.models.openai.endpoint,
+      endpoint = P.providers.openai.endpoint,
       hide_in_model_selector = true,
     },
     gemini = {
-      endpoint = P.models.google.endpoint,
+      endpoint = P.providers.google.endpoint,
       hide_in_model_selector = true,
     },
     ollama = {
-      endpoint = P.models.ollama.endpoint,
+      endpoint = P.providers.ollama.endpoint,
       hide_in_model_selector = true,
       disable_tools = true,
     },
@@ -32,71 +22,64 @@ local get_avante_provider_opts = function()
   }
 
   -- Add Anthropic models
-  for model_name, model_config in pairs(P.models.anthropic.models) do
-    local vendor_name = vendor("anthropic")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.anthropic.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "claude",
-      api_key_name = P.models.anthropic.api_key_name,
+      api_key_name = P.providers.anthropic.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add OpenAI models
-  for model_name, model_config in pairs(P.models.openai.models) do
-    local vendor_name = vendor("openai")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.openai.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
-      api_key_name = P.models.openai.api_key_name,
+      api_key_name = P.providers.openai.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add Google models
-  for model_name, model_config in pairs(P.models.google.models) do
-    local vendor_name = vendor("google")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.google.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "gemini",
-      api_key_name = P.models.google.api_key_name,
+      api_key_name = P.providers.google.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add Cloudflare models
-  for model_name, model_config in pairs(P.models.cloudflare.models) do
-    local vendor_name = vendor("cloudflare")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.cloudflare.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
-      endpoint = P.models.cloudflare.endpoint .. "/v1",
-      api_key_name = P.models.cloudflare.api_key_name,
+      endpoint = P.providers.cloudflare.endpoint .. "/v1",
+      api_key_name = P.providers.cloudflare.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add Groq models
-  for model_name, model_config in pairs(P.models.groq.models) do
-    local vendor_name = vendor("groq")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.groq.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
-      api_key_name = P.models.groq.api_key_name,
+      api_key_name = P.providers.groq.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add Mistral models
-  for model_name, model_config in pairs(P.models.mistral.models) do
-    local vendor_name = vendor("mistral")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.mistral.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
-      endpoint = P.models.mistral.endpoint .. "/v1",
-      api_key_name = P.models.mistral.api_key_name,
+      endpoint = P.providers.mistral.endpoint .. "/v1",
+      api_key_name = P.providers.mistral.api_key_name,
       model = model_name,
     }, model_config)
   end
 
   -- Add Ollama models
-  for model_name, model_config in pairs(P.models.ollama.models) do
-    local vendor_name = vendor("ollama")
-    p.vendors[vendor_name] = vim.tbl_extend("force", {
+  for model_name, model_config in pairs(P.providers.ollama.models) do
+    p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "ollama",
       model = model_name,
     }, model_config)
@@ -155,12 +138,13 @@ local config = {
   config = function()
     dofile(vim.g.base46_cache .. "avante")
 
+    local P = require("ai-gateway.providers")
     local opts = get_avante_provider_opts()
 
     require("avante").setup(
       vim.tbl_extend("force", opts, {
-        provider = "google-0",
-        cursor_applying_provider = "cloudflare-0",
+        provider = P.providers.google.models["gemini-2.5-flash-preview-05-20"].vendor_key,
+        cursor_applying_provider = P.providers.cloudflare.models["@cf/qwen/qwen2.5-coder-32b-instruct"].vendor_key,
         behaviour = {
           enable_cursor_planning_mode = true,
         },

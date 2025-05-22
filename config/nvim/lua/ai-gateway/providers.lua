@@ -4,7 +4,7 @@ local M = {}
 M.ai_gateway = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/router"
 
 -- Models configuration
-M.models = {
+M.providers = {
   -- Anthropic models
   anthropic = {
     endpoint = M.ai_gateway .. "/anthropic",
@@ -45,8 +45,7 @@ M.models = {
       },
       -- Only exist on ChatGPT app...?
       -- ["o4-mini-high"] = {
-      --   timeout = 60000,
-      --   temperature = 0,
+      --   timeout = 60000, temperature = 0,
       --   max_completion_tokens = 8192,
       -- },
     },
@@ -152,5 +151,23 @@ M.models = {
     },
   },
 }
+
+local vendor_key = (function()
+  local counters = {}
+  return function(name)
+    local count = counters[name] or 0
+    local id = name .. "-" .. count
+    counters[name] = count + 1
+    return id
+  end
+end)()
+
+for vendor_name, vendor_tbl in pairs(M.providers) do
+  for model_name, model_tbl in pairs(vendor_tbl.models) do
+    model_tbl.vendor = vendor_name
+    model_tbl.vendor_key = vendor_key(vendor_name)
+    model_tbl.model_name = model_name
+  end
+end
 
 return M
