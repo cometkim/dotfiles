@@ -27,7 +27,7 @@ local get_avante_provider_opts = function()
       __inherited_from = "claude",
       api_key_name = P.providers.anthropic.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add OpenAI models
@@ -36,7 +36,7 @@ local get_avante_provider_opts = function()
       __inherited_from = "openai",
       api_key_name = P.providers.openai.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add Google models
@@ -45,7 +45,7 @@ local get_avante_provider_opts = function()
       __inherited_from = "gemini",
       api_key_name = P.providers.google.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add Cloudflare models
@@ -55,7 +55,7 @@ local get_avante_provider_opts = function()
       endpoint = P.providers.cloudflare.endpoint .. "/v1",
       api_key_name = P.providers.cloudflare.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add Groq models
@@ -64,7 +64,7 @@ local get_avante_provider_opts = function()
       __inherited_from = "openai",
       api_key_name = P.providers.groq.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add Mistral models
@@ -74,7 +74,7 @@ local get_avante_provider_opts = function()
       endpoint = P.providers.mistral.endpoint .. "/v1",
       api_key_name = P.providers.mistral.api_key_name,
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Add Ollama models
@@ -82,7 +82,7 @@ local get_avante_provider_opts = function()
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "ollama",
       model = model_name,
-    }, model_config)
+    }, model_config.params)
   end
 
   -- Hide these providers in avante.nvim model selector
