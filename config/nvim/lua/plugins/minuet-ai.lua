@@ -13,7 +13,7 @@ return {
       },
       virtualtext = {
         auto_trigger_ft = { "*" },
-        auto_trigger_ignore_ft = { "NvimTree" },
+        auto_trigger_ignore_ft = { "NvimTree", "Telescope" },
         keymap = {
           accept = "<Tab>",
           -- accept_line = "<A-a>",
