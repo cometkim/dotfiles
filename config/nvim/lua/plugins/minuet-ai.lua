@@ -17,6 +17,7 @@ return {
           "NvimTree",
           "Telescope",
           "TelescopePrompt",
+          "DressingInput",
           "OverseerForm",
         },
         keymap = {
