@@ -82,6 +82,17 @@ local get_avante_provider_opts = function()
     }, model_config)
   end
 
+  -- Add Mistral models
+  for model_name, model_config in pairs(P.models.mistral.models) do
+    local vendor_name = vendor("mistral")
+    p.vendors[vendor_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
+      endpoint = P.models.mistral.endpoint .. "/v1",
+      api_key_name = P.models.mistral.api_key_name,
+      model = model_name,
+    }, model_config)
+  end
+
   -- Add Ollama models
   for model_name, model_config in pairs(P.models.ollama.models) do
     local vendor_name = vendor("ollama")

@@ -63,11 +63,14 @@ return {
         --   },
         -- },
         openai_compatible = {
-          name = "qwen2.5",
-          model = "@cf/qwen/qwen2.5-coder-32b-instruct",
-          end_point = P.models.cloudflare.endpoint .. "/v1/chat/completions",
-          api_key = P.models.cloudflare.api_key_name,
+          name = "codestral",
+          model = "codestral-latest",
+          end_point = P.models.mistral.endpoint .. "/v1/chat/completions",
+          api_key = P.models.mistral.api_key_name,
           stream = true,
+          optional = {
+            max_tokens = 512,
+          },
         },
       },
     }

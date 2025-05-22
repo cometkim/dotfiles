@@ -112,6 +112,17 @@ M.models = {
     },
   },
 
+  mistral = {
+    endpoint = M.ai_gateway .. "/mistral",
+    api_key_name = "MISTRAL_API_KEY",
+    models = {
+      ["codestral-latest"] = {
+        disable_tools = true,
+        max_tokens = 4096,
+      },
+    },
+  },
+
   -- Ollama models
   ollama = {
     endpoint = "http://localhost:11434",
