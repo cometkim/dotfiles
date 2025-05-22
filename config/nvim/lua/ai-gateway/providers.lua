@@ -68,9 +68,44 @@ M.providers = {
     endpoint = M.ai_gateway .. "/groq",
     api_key_name = "GROQ_API_KEY",
     models = {
+      ["qwen-qwq-32b"] = {
+        params = {
+          timeout = 10000,
+          stream = true,
+          temperature = 0,
+          max_completion_tokens = 32768,
+        },
+      },
+      ["deepseek-r1-distill-llama-70b"] = {
+        params = {
+          timeout = 10000,
+          stream = true,
+          temperature = 0,
+          max_completion_tokens = 32768,
+        },
+      },
       ["llama-3.3-70b-versatile"] = {
         params = {
+          timeout = 10000,
+          stream = true,
+          temperature = 0,
           max_completion_tokens = 32768,
+        },
+      },
+      ["meta-llama/llama-4-scout-17b-16e-instruct"] = {
+        params = {
+          timeout = 10000,
+          stream = true,
+          temperature = 0,
+          max_completion_tokens = 8192,
+        },
+      },
+      ["meta-llama/llama-4-maverick-17b-128e-instruct"] = {
+        params = {
+          timeout = 10000,
+          stream = true,
+          temperature = 0,
+          max_completion_tokens = 8192,
         },
       },
     },
@@ -85,6 +120,12 @@ M.providers = {
         params = {
           timeout = 10000,
           temperature = 0,
+          disable_tools = true,
+          generationConfig = {
+            thinkingConfig = {
+              thinkingBudget = 0,
+            },
+          },
         },
       },
       ["gemini-2.5-pro-preview-05-06"] = {
@@ -116,6 +157,8 @@ M.providers = {
   },
 
   -- Cloudflare models
+  --
+  -- Too expensive and slow -- prefer Groq
   cloudflare = {
     endpoint = M.ai_gateway .. "/workers-ai",
     api_key_name = "CLOUDFLARE_AI_API_TOKEN",
@@ -206,7 +249,9 @@ for vendor_name, vendor_tbl in pairs(M.providers) do
   for model_name, model_tbl in pairs(vendor_tbl.models) do
     model_tbl.vendor = vendor_name
     model_tbl.vendor_key = vendor_key(vendor_name)
-    model_tbl.model_name = model_name
+    if not model_tbl.model_name then
+      model_tbl.model_name = model_name
+    end
   end
 end
 

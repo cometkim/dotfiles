@@ -64,8 +64,8 @@ return {
         --   },
         -- },
         openai_compatible = {
-          name = "codestral",
-          model = "codestral-latest",
+          name = "devstral",
+          model = "devstral-small-2505",
           end_point = P.providers.mistral.endpoint .. "/v1/chat/completions",
           api_key = P.providers.mistral.api_key_name,
           stream = true,

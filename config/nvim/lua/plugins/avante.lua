@@ -22,66 +22,67 @@ local get_avante_provider_opts = function()
   }
 
   -- Add Anthropic models
-  for model_name, model_config in pairs(P.providers.anthropic.models) do
+  for _, model_config in pairs(P.providers.anthropic.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "claude",
       api_key_name = P.providers.anthropic.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add OpenAI models
-  for model_name, model_config in pairs(P.providers.openai.models) do
+  for _, model_config in pairs(P.providers.openai.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       api_key_name = P.providers.openai.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add Google models
-  for model_name, model_config in pairs(P.providers.google.models) do
+  for _, model_config in pairs(P.providers.google.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "gemini",
       api_key_name = P.providers.google.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add Cloudflare models
-  for model_name, model_config in pairs(P.providers.cloudflare.models) do
+  for _, model_config in pairs(P.providers.cloudflare.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       endpoint = P.providers.cloudflare.endpoint .. "/v1",
       api_key_name = P.providers.cloudflare.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add Groq models
-  for model_name, model_config in pairs(P.providers.groq.models) do
+  for _, model_config in pairs(P.providers.groq.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
+      endpoint = P.providers.groq.endpoint,
       api_key_name = P.providers.groq.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add Mistral models
-  for model_name, model_config in pairs(P.providers.mistral.models) do
+  for _, model_config in pairs(P.providers.mistral.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       endpoint = P.providers.mistral.endpoint .. "/v1",
       api_key_name = P.providers.mistral.api_key_name,
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
   -- Add Ollama models
-  for model_name, model_config in pairs(P.providers.ollama.models) do
+  for _, model_config in pairs(P.providers.ollama.models) do
     p.vendors[model_config.vendor_key] = vim.tbl_extend("force", {
       __inherited_from = "ollama",
-      model = model_name,
+      model = model_config.model_name,
     }, model_config.params)
   end
 
@@ -144,7 +145,7 @@ local config = {
     require("avante").setup(
       vim.tbl_extend("force", opts, {
         provider = P.providers.google.models["gemini-2.5-flash-preview-05-20"].vendor_key,
-        cursor_applying_provider = P.providers.cloudflare.models["@cf/qwen/qwen2.5-coder-32b-instruct"].vendor_key,
+        cursor_applying_provider = P.providers.mistral.models["devstral-small-2505"].vendor_key,
         behaviour = {
           enable_cursor_planning_mode = true,
         },
@@ -165,7 +166,13 @@ local config = {
         --   embed_model = "text-embedding-3-small",
         --   endpoint = providers.ai_gateway .. "/openai",
         -- }
-        disabled_tools = { "python" },
+        disabled_tools = {
+          "python",
+          "run_python",
+          "git_commit",
+          "delete_file",
+          "delete_dir",
+        },
       })
     )
   end,
