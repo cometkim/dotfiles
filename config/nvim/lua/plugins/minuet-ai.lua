@@ -8,6 +8,9 @@ return {
   config = function()
     local P = require("plugins.ai-gateway.providers")
     require("minuet").setup {
+      cmp = {
+        enable_auto_complete = true,
+      },
       virtualtext = {
         auto_trigger_ft = { "*" },
         auto_trigger_ignore_ft = { "NvimTree" },
@@ -24,7 +27,7 @@ return {
       --
       -- Because Cloudflare AI gateway doesn't support `/completions` endpoint,
       -- but only the `/chat/completions` endpoint.
-      provider = "gemini",
+      provider = "openai_compatible",
       request_timeout = 3,
       throttle = 600, -- Increase to reduce costs and avoid rate limits
       debounce = 300, -- Increase to reduce costs and avoid rate limits
@@ -54,7 +57,7 @@ return {
         --   },
         -- },
         openai_compatible = {
-          name = "AI gateway",
+          name = "qwen2.5",
           model = "@cf/qwen/qwen2.5-coder-32b-instruct",
           end_point = P.models.cloudflare.endpoint .. "/v1/chat/completions",
           api_key = P.models.cloudflare.api_key_name,
