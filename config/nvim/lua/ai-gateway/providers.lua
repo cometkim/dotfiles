@@ -10,18 +10,18 @@ M.providers = {
     endpoint = M.ai_gateway .. "/anthropic",
     api_key_name = "ANTHROPIC_API_KEY",
     models = {
-      ["claude-3-7-sonnet-latest"] = {
+      ["claude-4-sonnet-20250514"] = {
         params = {
           timeout = 30000,
           temperature = 0,
-          max_tokens = 8192,
+          stream = true,
         },
       },
       ["claude-3-5-haiku-latest"] = {
         params = {
           timeout = 10000,
           temperature = 0,
-          max_tokens = 8192,
+          stream = true,
         },
       },
     },
@@ -36,21 +36,21 @@ M.providers = {
         params = {
           timeout = 10000,
           temperature = 0,
-          max_completion_tokens = 8192,
+          stream = true,
         },
       },
       ["gpt-4.1-mini"] = {
         params = {
           timeout = 10000,
           temperature = 0,
-          max_completion_tokens = 8192,
+          stream = true,
         },
       },
       ["o4-mini"] = {
         params = {
           timeout = 30000,
           temperature = 0,
-          max_completion_tokens = 8192,
+          stream = true,
         },
       },
       -- Only exist on ChatGPT app...?
