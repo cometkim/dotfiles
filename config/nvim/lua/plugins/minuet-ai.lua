@@ -33,7 +33,7 @@ return {
       --
       -- Because Cloudflare AI gateway doesn't support `/completions` endpoint,
       -- but only the `/chat/completions` endpoint.
-      provider = "openai_compatible",
+      provider = "codestral",
       request_timeout = 3,
       throttle = 600, -- Increase to reduce costs and avoid rate limits
       debounce = 300, -- Increase to reduce costs and avoid rate limits
@@ -63,8 +63,8 @@ return {
         --   },
         -- },
         openai_compatible = {
-          name = "codestral",
-          model = "codestral-latest",
+          name = "devstral",
+          model = "devstral-small-2505",
           end_point = P.models.mistral.endpoint .. "/v1/chat/completions",
           api_key = P.models.mistral.api_key_name,
           stream = true,

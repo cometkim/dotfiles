@@ -120,6 +120,10 @@ M.models = {
         disable_tools = true,
         max_tokens = 4096,
       },
+      ["devstral-small-2505"] = {
+        disable_tools = true,
+        max_tokens = 4096,
+      },
     },
   },
 
