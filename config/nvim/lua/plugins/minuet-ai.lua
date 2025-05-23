@@ -20,6 +20,7 @@ return {
           "DressingInput",
           "OverseerForm",
           "AvanteInput",
+          "AvantePromptInput",
         },
         keymap = {
           accept = "<Tab>",
