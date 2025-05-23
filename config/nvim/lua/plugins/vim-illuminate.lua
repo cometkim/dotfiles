@@ -7,8 +7,18 @@ return {
       providers = { "lsp", "treesitter", "regex" },
       delay = 300,
       filetypes_denylist = {
+        "gitcommit",
+        "NvTerm_sp",
+        "NvTerm_vsp",
         "NvimTree",
+        "Telescope",
+        "TelescopePrompt",
+        "DressingInput",
+        "OverseerForm",
+        "Avante",
         "AvanteInput",
+        "AvantePromptInput",
+        "AvanteSelectedFiles",
       },
       modes_denylist = { "v", "i" },
     }

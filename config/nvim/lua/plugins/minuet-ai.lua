@@ -14,16 +14,21 @@ return {
       virtualtext = {
         auto_trigger_ft = { "*" },
         auto_trigger_ignore_ft = {
+          "gitcommit",
+          "NvTerm_sp",
+          "NvTerm_vsp",
           "NvimTree",
           "Telescope",
           "TelescopePrompt",
           "DressingInput",
           "OverseerForm",
+          "Avante",
           "AvanteInput",
           "AvantePromptInput",
+          "AvanteSelectedFiles",
         },
         keymap = {
-          accept = "<Tab>",
+          accept = "<A-Enter>",
           -- accept_line = "<A-a>",
           -- accept_n_lines = "<A-z>",
           prev = "<A-[>",
