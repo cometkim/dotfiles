@@ -144,7 +144,7 @@ local config = {
 
     require("avante").setup(
       vim.tbl_extend("force", opts, {
-        provider = P.providers.google.models["gemini-2.5-flash-preview-05-20"].vendor_key,
+        provider = P.providers.anthropic.models["claude-4-sonnet-20250514"].vendor_key,
         cursor_applying_provider = P.providers.mistral.models["devstral-small-2505"].vendor_key,
         behaviour = {
           enable_cursor_planning_mode = true,
