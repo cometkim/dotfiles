@@ -60,16 +60,19 @@ function include() {
 function install_apt_dependencies() {
   local DIST_NAME="$(lsb_release -sc 2>/dev/null)"
   local INSTALL_DIR="/etc/apt/sources.list.d"
+  local ADDITIONAL_PACKAGES=()
 
   find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources" | while read -r file; do
     echo "Preparing $file"
     sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
+    ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
   done
 
   if [[ -d "ubuntu/sources.d/$DIST_NAME" ]]; then
     find "ubuntu/sources.d/$DIST_NAME" -type f -name "*.sources" | while read -r file; do
       echo "Preparing $file"
       sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
+      ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
     done
   fi
 
@@ -96,7 +99,8 @@ function install_apt_dependencies() {
     pkg-config \
     python3 \
     wget \
-    alacritty
+    alacritty \
+    "${ADDITIONAL_PACKAGES[@]}"
 
   sudo apt autoremove -y
 }
