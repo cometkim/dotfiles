@@ -25,8 +25,7 @@
 
 [credential]
   helper = osxkeychain
-  helper = store --file .git-credentials
-  helper = cache --timeout 30000
+  helper = gnome-keyring
 
 [core]
   pager = delta
