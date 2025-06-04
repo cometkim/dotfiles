@@ -1,8 +1,11 @@
 ## Common
 export WORKDIR="$HOME/Workspace"
 
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ -d "/opt/homebrew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -d "/home/linuxbrew" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # Auto-start Zellij
 export ZELLIJ_AUTO_EXIT="true"
@@ -12,7 +15,8 @@ eval "$(zellij setup --generate-auto-start zsh)"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-source "$HOME/.local/share/zinit/source/zinit.zsh"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/source"
+source "$ZINIT_SOURCE/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit ice depth=1
@@ -21,11 +25,11 @@ if [[ -f "$HOME/.p10k.zsh" ]]; then
   source "$HOME/.p10k.zsh"
 fi
 zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma-continuum/fast-syntax-highlighting \
- blockf \
+  blockf \
     zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
+  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
 # zoxide
@@ -65,8 +69,12 @@ export PATH="$CARGO_HOME/bin:$PATH"
 export PNPM_HOME="$HOME/.pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# Rancher Desktop
-if [[ -d "$HOME/.rd" ]]; then
+# Docker Client
+if [[ -d "~/.orbstack" ]]; then
+  # Use OrbStack on MacOS
+  source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+elif [[ -d "$HOME/.rd" ]]; then
+  # Rancher Desktop on Linux
   export PATH="$HOME/.rd/bin:$PATH"
 fi
 

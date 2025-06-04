@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 SOURCE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 DATA="${XDG_DATA_HOME:-${HOME}/.local/share}"
@@ -12,13 +14,23 @@ WORKDIR="$HOME/Workspace"
 mkdir -p "$WORKDIR/src"
 mkdir -p "$WORKDIR/tmp"
 
+function do_prefix() {
+  case "$1" in
+    "$HOME"/*|"$HOME") echo -n "" ;;
+    *) echo -n "sudo" ;;
+  esac
+}
+
 function link() {
   local SRC="$SOURCE_DIR/$1"
   local DEST="$2"
 
+  local DO
+  DO="$(do_prefix "$DEST")"
+
   echo -n "installing $1 ... "
-  if [[ ! -e "$DEST" ]]; then
-    ln -sf "$SRC" "$DEST"
+  if ! $DO test -e "$DEST"; then
+    $DO ln -sf "$SRC" "$DEST"
     echo "is done"
     echo "$SRC → $DEST"
   else
@@ -27,55 +39,70 @@ function link() {
   echo
 }
 
+function include() {
+  local SRC="$SOURCE_DIR/$1"
+  local DEST="$2"
+
+  local DO
+  DO="$(do_prefix "$DEST")"
+
+  $DO touch "$DEST"
+  echo "ensuring $2 to include $1 ... "
+  while IFS= read -r line; do
+    [[ -z "$line" || "$line" =~ ^# ]] && continue
+
+    if ! $DO grep -Fxq "$line" "$DEST"; then
+      echo "$line" | $DO tee -a "$DEST" > /dev/null
+    fi
+  done < "$SRC"
+}
+
 function install_apt_dependencies() {
-  if [[ -x "$(command -v apt)" ]]; then
-    # Common dependencies
-    sudo apt update && sudo apt install -y \
-      zlib1g-dev \
-      libncurses5-dev \
-      libgdbm-dev \
-      libnss3-dev \
-      libssl-dev \
-      libreadline-dev \
-      libffi-dev \
-      libsqlite3-dev \
-      libbz2-dev \
-      libfreetype6-dev \
-      libfontconfig1-dev \
-      libxcb-xfixes0-dev \
-      libxkbcommon-dev \
-      build-essential \
-      cmake \
-      g++ \
-      pkg-config \
-      python3 \
-      wget
+  local DIST_NAME="$(lsb_release -sc 2>/dev/null)"
+  local INSTALL_DIR="/etc/apt/sources.list.d"
 
-    local INSTALL_DIR="/etc/apt/sources.list.d"
+  find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources" | while read -r file; do
+    echo "Preparing $file"
+    sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
+  done
 
-    find "ubuntu/sources.d" -type f -maxdepth 1 -name "*.sources" | while read -r file; do
+  if [[ -d "ubuntu/sources.d/$DIST_NAME" ]]; then
+    find "ubuntu/sources.d/$DIST_NAME" -type f -name "*.sources" | while read -r file; do
       echo "Preparing $file"
       sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
     done
-
-    local DIST_NAME
-    DIST_NAME="$(lsb_release -sc 2>/dev/null)"
-
-    if [[ -d "ubuntu/sources.d/$DIST_NAME" ]]; then
-      find "ubuntu/sources.d/$DIST_NAME" -type f -name "*.sources" | while read -r file; do
-        echo "Preparing $file"
-        sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
-      done
-    fi
-
-    sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
   fi
+
+  sudo apt update
+  sudo apt upgrade -y
+
+  sudo apt install -y \
+    zlib1g-dev \
+    libncurses5-dev \
+    libgdbm-dev \
+    libnss3-dev \
+    libssl-dev \
+    libreadline-dev \
+    libffi-dev \
+    libsqlite3-dev \
+    libbz2-dev \
+    libfreetype6-dev \
+    libfontconfig1-dev \
+    libxcb-xfixes0-dev \
+    libxkbcommon-dev \
+    build-essential \
+    cmake \
+    g++ \
+    pkg-config \
+    python3 \
+    wget \
+    alacritty
+
+  sudo apt autoremove -y
 }
 
 function install_or_update_zinit() {
-  local ZINIT_HOME
-  ZINIT_HOME="$DATA/zinit/source"
-
+  local ZINIT_HOME="$DATA/zinit/source"
   if [[ ! -d "$ZINIT_HOME" ]]; then
     echo "installing zinit to $ZINIT_HOME..."
     mkdir -p "$(dirname "$ZINIT_HOME")"
@@ -96,6 +123,9 @@ function install_or_update_homebrew() {
     fi
   fi
   eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  # Will update homebrew itself
+  brew update
 }
 
 function install_or_update_cargo() {
@@ -125,12 +155,15 @@ function install_or_update_cargo() {
 }
 
 function install_or_update_alacritty() {
-  local ALACRITTY_HOME
-  ALACRITTY_HOME="$DATA/alacritty"
-
   if [[ "$(uname)" == "Darwin" ]]; then
     echo "skip installing Alacritty, may be managed by Homebrew"
-  else # must be Ubuntu
+
+  elif [[ "$(lsb_release -si)" == "Ubuntu" ]]; then
+    echo "skip installing Alacritty, may be managed by APT"
+
+  else
+    local ALACRITTY_HOME="$DATA/alacritty"
+
     if [[ ! -d "$ALACRITTY_HOME" ]]; then
       echo "download Alacritty to $ALACRITTY_HOME..."
 
@@ -141,8 +174,8 @@ function install_or_update_alacritty() {
       cargo build --release
       sudo ln -sf "$(pwd)/target/release/alacritty" "/usr/local/bin/"
       sudo ln -sf "$(pwd)/extra/logo/alacritty-term.svg" "/usr/share/pixmaps//Alacritty.svg"
-      desktop-file-install "extra/linux/Alacritty.desktop"
-      update-desktop-database "$DATA/applications"
+      sudo desktop-file-install "extra/linux/Alacritty.desktop"
+      sudo update-desktop-database "$DATA/applications"
       popd || exit
     else
       pushd "$ALACRITTY_HOME" || exit
@@ -164,36 +197,39 @@ function install_or_update_alacritty() {
   fi
 }
 
-link "bin" "$HOME/bin"
-link "zprofile" "$HOME/.zprofile"
+if [[ "$(uname)" == "Darwin" ]]; then
+  include "macos/sysctl.conf" "/etc/sysctl.conf"
 
-# May auto-generated by some other tools, delete it first
-if [[ ! -L "$HOME/.zshrc" ]]; then
-  rm -f "$HOME/.zshrc"
+elif [[ "$(lsb_release -si)" == "Ubuntu" ]]; then
+  link "ubuntu/sysctl.conf"                    "/etc/sysctl.d/99-local.conf"
+  link "ubuntu/limits.d/99-nofile-limits.conf" "/etc/security/limits.d/99-nofile-limits.conf"
+
+  install_apt_dependencies
 fi
-link "zshrc" "$HOME/.zshrc"
+
+install_or_update_homebrew
+brew bundle --upgrade --file "$SOURCE_DIR/Brewfile"
+
+# Rustup may detect the rust installed by Homebrew
+RUSTUP_INIT_SKIP_PATH_CHECK=yes \
+  install_or_update_cargo
+# May require Rust environment
+install_or_update_alacritty
+
+install_or_update_zinit
+
+link "bin" "$HOME/bin"
+link "fonts" "$HOME/.fonts"
+link "gitconfig" "$HOME/.gitconfig"
 
 link "p10k.zsh" "$HOME/.p10k.zsh"
+link "zshrc" "$HOME/.zshrc"
 link "zshrc-macos" "$HOME/.zshrc-macos"
-link "gitconfig" "$HOME/.gitconfig"
-link "fonts" "$HOME/.fonts"
 
-link "config/fontconfig" "$CONFIG/fontconfig"
 link "config/mise" "$CONFIG/mise"
 link "config/alacritty" "$CONFIG/alacritty"
 link "config/zellij" "$CONFIG/zellij"
 link "config/nvim" "$CONFIG/nvim"
 link "config/mcphub" "$CONFIG/mcphub"
-
-install_apt_dependencies
-
-install_or_update_zinit
-install_or_update_homebrew
-
-# Rustup may detect the rust installed by Homebrew
-RUSTUP_INIT_SKIP_PATH_CHECK=yes \
-  install_or_update_cargo
-
-brew bundle --file "$SOURCE_DIR/Brewfile"
 
 mise install
