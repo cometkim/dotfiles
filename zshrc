@@ -15,8 +15,8 @@ eval "$(zellij setup --generate-auto-start zsh)"
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/source"
-source "$ZINIT_SOURCE/zinit.zsh"
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/source"
+source "$ZINIT_HOME/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit ice depth=1
