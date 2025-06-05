@@ -27,9 +27,9 @@ return {
     },
   },
   config = function()
-    vim.g.enable_autoformat = true
+    vim.g.enable_autoformat = false
 
-    require("conform").setup({
+    require("conform").setup {
       format_on_save = function(bufnr)
         if not vim.g.enable_autoformat then
           return
@@ -45,7 +45,7 @@ return {
           lsp_format = "first"
         }
       end,
-    })
+    }
 
     vim.api.nvim_create_user_command("AutoFormatEnable", function()
       vim.g.enable_autoformat = true
