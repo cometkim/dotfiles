@@ -1,23 +1,33 @@
+local get_provider_id = function(provider, model)
+  return provider .. "-" .. model
+end
+
 local get_avante_providers = function()
   local A = require("avante.config")
   local P = require("ai-gateway.providers")
 
   ---@type { [string]: AvanteSupportedProvider }
-  local p = {}
+  local providers = {}
 
   -- Hide default providers in avante.nvim model selector
   for name in pairs(A._defaults.providers) do
-    p[name] = { hide_in_model_selector = true }
+    providers[name] = { hide_in_model_selector = true }
   end
 
   for provider, provider_config in pairs(P.providers) do
-    for model, _ in pairs(provider_config.models) do
-      local id = P.get_provider_id(provider, model)
-      p[id] = P.get_avante_provider_config(provider, model)
+    for model, model_config in pairs(provider_config.models) do
+      local id = get_provider_id(provider, model)
+      providers[id] = vim.tbl_extend("force", {
+        model = model_config.model_name,
+        display_name = provider .. "/" .. model,
+        endpoint = provider_config.endpoint,
+        api_key_name = provider_config.api_key_name,
+        hide_in_model_selector = false,
+      }, model_config.avante)
     end
   end
 
-  return p
+  return providers
 end
 
 local config = {
@@ -47,15 +57,10 @@ local config = {
   config = function()
     dofile(vim.g.base46_cache .. "avante")
 
-    local P = require("ai-gateway.providers")
-
     require("avante").setup {
+      mode = "agentic",
       providers = get_avante_providers(),
-      provider = P.get_provider_id("anthropic", "claude-4-sonnet"),
-      cursor_applying_provider = P.get_provider_id("mistral", "devstral"),
-      behaviour = {
-        enable_cursor_planning_mode = true,
-      },
+      provider = get_provider_id("anthropic", "claude-4-sonnet"),
       selector = {
         exclude_auto_select = { "NvimTree" },
       },

@@ -50,7 +50,7 @@ return {
           openai_compatible = {
             name = "devstral",
             model = P.providers.mistral.models.devstral.model_name,
-            end_point = P.providers.mistral.endpoint .. "/v1/chat/completions",
+            end_point = P.providers.mistral.endpoint .. "/chat/completions",
             api_key = P.providers.mistral.api_key_name,
             stream = true,
             optional = {
