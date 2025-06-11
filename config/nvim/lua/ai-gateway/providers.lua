@@ -90,7 +90,7 @@ M.providers = {
         },
       },
       ["o4-mini-high"] = {
-        model_name = "o4-mini",
+        model_name = "o4-mini-high",
         avante = {
           __inherited_from = "openai",
           timeout = constants.timeout.reasoning,
