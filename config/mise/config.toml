@@ -13,6 +13,8 @@ zig = "0.13.0"
 bun = "1.2.13"
 hermes = "0.13.0"
 binaryen = "122"
+"npm:@anthropic-ai/claude-code" = "1.0.18"
+"npm:ccusage" = "0.7.0"
 
 [settings]
 asdf_compat = true
