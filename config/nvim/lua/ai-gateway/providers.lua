@@ -327,6 +327,20 @@ M.providers = {
   ollama = {
     endpoint = "http://localhost:11434",
     models = {
+      ["deepseek-r1-8b"] = {
+        model_name = "deepseek-r1:8b",
+        avante = {
+          __inherited_from = "ollama",
+          timeout = constants.timeout.slow,
+          extra_request_body = {
+            options = {
+              num_ctx = 2048,
+              keep_alive = "5m",
+              temperature = 0.6,
+            },
+          },
+        },
+      },
       ["qwen3-8b"] = {
         model_name = "qwen3:8b",
         avante = {
