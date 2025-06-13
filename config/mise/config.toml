@@ -2,19 +2,19 @@
 pbkit = "asdf:pbkit/asdf-pbkit"
 
 [tools]
-deno = "2.3.3"
-java = "temurin-23.0.0+37"
-python = "3.12.2"
-terraform = "1.9.7"
+deno = "2.3.6"
+java = "temurin-24.0.1"
+python = "3.13.5"
+terraform = "1.12.2"
 node = "24.2.0"
-go = "1.23.2"
+go = "1.24.4"
 pbkit = "0.0.72"
-zig = "0.13.0"
-bun = "1.2.13"
+zig = "0.14.1"
+bun = "1.2.16"
 hermes = "0.13.0"
-binaryen = "122"
-"npm:@anthropic-ai/claude-code" = "1.0.18"
-"npm:ccusage" = "0.7.0"
+binaryen = "123"
+"npm:@anthropic-ai/claude-code" = "1.0.22"
+"npm:ccusage" = "0.8.0"
 
 [settings]
 asdf_compat = true
