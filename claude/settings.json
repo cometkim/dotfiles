@@ -1,0 +1,18 @@
+{
+  "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Read(~/.zshrc)",
+      "Bash(ls)",
+      "Bash(lsb_release)",
+      "Bash(uname)",
+      "Bash(git log)",
+      "Bash(git diff)"
+    ],
+    "deny": [
+      "Read(~/.zshrc-credentials)",
+      "Read(**/.env)",
+      "Git"
+    ]
+  }
+}

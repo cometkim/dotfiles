@@ -236,4 +236,7 @@ link "config/zellij" "$CONFIG/zellij"
 link "config/nvim" "$CONFIG/nvim"
 link "config/mcphub" "$CONFIG/mcphub"
 
+link "claude/settings.json" "$HOME/.claude/settings.json"
+link "claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
+
 mise install
