@@ -7,12 +7,16 @@
       "Bash(lsb_release)",
       "Bash(uname)",
       "Bash(git log)",
-      "Bash(git diff)"
+      "Bash(git diff)",
+      "Bash(git status)"
     ],
     "deny": [
       "Read(~/.zshrc-credentials)",
-      "Read(**/.env)",
-      "Git"
+      "Read(**/.env)"
     ]
+  },
+  "env": {
+    "DISABLE_AUTOUPDATER": "1",
+    "DISABLE_TELEMETRY": "1"
   }
 }

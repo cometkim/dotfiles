@@ -36,6 +36,14 @@ My workspace is always placed under `~/Workspace` path.
 
 ## Git Workflow
 
+> [!IMPORTANT]
+>
+> Don't use `git` if the working directory is not a git repository, or no commits.
+>
+> Using `git` actions should be performed in a separated branch per session.
+> Session branches should have name as `claude-code/{session-id}`.
+> Switch to proper session branch before running any `git` command.
+
 Always use GitHub workflow, so projects are mostly have two remote `upstream` and `origin`.
 
 - If the Git repository is my own (`cometkim`), then I use `origin` as the main remote and no `upstream`.
