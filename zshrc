@@ -109,8 +109,6 @@ alias ll="lsd -l"
 alias lla="lsd -la"
 alias lt="lsd --tree"
 
-alias git-ui="gitui"
-
 export ZSHRC="$HOME/.zshrc"
 alias zshrc="$EDITOR $ZSHRC"
 
