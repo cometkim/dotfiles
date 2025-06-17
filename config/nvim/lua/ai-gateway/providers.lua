@@ -167,23 +167,20 @@ M.providers = {
     endpoint = M.ai_gateway .. "/google-ai-studio/v1beta/models",
     api_key_name = "GEMINI_API_KEY",
     models = {
-      ["gemini-2.5-flash-no-think"] = {
-        model_name = "gemini-2.5-flash-preview-05-20",
+      ["gemini-2.5-flash-lite"] = {
+        model_name = "gemini-2.5-flash-lite-preview-06-17",
         avante = {
           __inherited_from = "gemini",
           timeout = constants.timeout.normal,
           extra_request_body = {
             generationConfig = {
               temperature = 0.6,
-              thinkingConfig = {
-                thinkingBudget = 0,
-              },
             },
           },
         },
       },
       ["gemini-2.5-flash"] = {
-        model_name = "gemini-2.5-flash-preview-05-20",
+        model_name = "gemini-2.5-flash",
         avante = {
           __inherited_from = "gemini",
           timeout = constants.timeout.reasoning,
@@ -195,34 +192,10 @@ M.providers = {
         },
       },
       ["gemini-2.5-pro"] = {
-        model_name = "gemini-2.5-pro-preview-06-05",
+        model_name = "gemini-2.5-pro",
         avante = {
           __inherited_from = "gemini",
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
-        },
-      },
-      ["gemini-2.0-flash"] = {
-        model_name = "gemini-2.0-flash",
-        avante = {
-          __inherited_from = "gemini",
-          timeout = constants.timeout.normal,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
-        }
-      },
-      ["gemini-2.0-flash-lite"] = {
-        model_name = "gemini-2.0-flash-lite",
-        avante = {
-          __inherited_from = "gemini",
-          timeout = constants.timeout.normal,
           extra_request_body = {
             generationConfig = {
               temperature = 0.6,
