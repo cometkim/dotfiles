@@ -42,6 +42,17 @@ M.providers = {
           },
         },
       },
+      ["claude-4-opus"] = {
+        model_name = "claude-opus-4-0",
+        avante = {
+          __inherited_from = "claude",
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 0.6,
+            max_tokens = 20480,
+          },
+        },
+      },
       ["claude-3.5-haiku"] = {
         model_name = "claude-3-5-haiku-latest",
         avante = {
