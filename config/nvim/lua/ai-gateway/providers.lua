@@ -32,7 +32,7 @@ M.providers = {
     api_key_name = "ANTHROPIC_API_KEY",
     models = {
       ["claude-4-sonnet"] = {
-        model_name = "claude-4-sonnet-20250514",
+        model_name = "claude-sonnet-4-0",
         avante = {
           __inherited_from = "claude",
           timeout = constants.timeout.reasoning,
@@ -284,7 +284,7 @@ M.providers = {
         },
       },
       ["devstral"] = {
-        model_name = "devstral-small-2505",
+        model_name = "devstral-small-latest",
         avante = {
           __inherited_from = "openai",
           timeout = constants.timeout.normal,
