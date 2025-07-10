@@ -71,8 +71,8 @@
 [includeIf "gitdir:~/Workspace/src/github.com/daangn/"]
   path = .gitconfig-daangn
 
-[includeIf "gitdir:~/Workspace/src/github.com/karrot-emu/"]
-  path = .gitconfig-daangn
-
 [includeIf "gitdir:~/Workspace/src/github.com/karrotmini/"]
   path = .gitconfig-daangn
+
+[includeIf "gitdir:~/Workspace/src/github.com/karrot-emu/"]
+  path = .gitconfig-karrot-emu
