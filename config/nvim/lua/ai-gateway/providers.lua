@@ -115,6 +115,17 @@ M.providers = {
     endpoint = M.ai_gateway .. "/groq/v1",
     api_key_name = "GROQ_API_KEY",
     models = {
+      ["kimi-k2"] = {
+        model_name = "moonshotai/kimi-k2-instruct",
+        avante = {
+          __inherited_from = "openai",
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            max_completion_tokens = 16384,
+            temperature = 0.6,
+          },
+        },
+      },
       ["qwq-32b"] = {
         model_name = "qwen-qwq-32b",
         avante = {
