@@ -222,21 +222,22 @@ install_or_update_alacritty
 
 install_or_update_zinit
 
-link "bin" "$HOME/bin"
-link "fonts" "$HOME/.fonts"
+link "bin"       "$HOME/bin"
+link "fonts"     "$HOME/.fonts"
 link "gitconfig" "$HOME/.gitconfig"
 
-link "p10k.zsh" "$HOME/.p10k.zsh"
-link "zshrc" "$HOME/.zshrc"
+link "p10k.zsh"    "$HOME/.p10k.zsh"
+link "zshrc"       "$HOME/.zshrc"
 link "zshrc-macos" "$HOME/.zshrc-macos"
 
-link "config/mise" "$CONFIG/mise"
+link "config/mise"      "$CONFIG/mise"
 link "config/alacritty" "$CONFIG/alacritty"
-link "config/zellij" "$CONFIG/zellij"
-link "config/nvim" "$CONFIG/nvim"
-link "config/mcphub" "$CONFIG/mcphub"
+link "config/zellij"    "$CONFIG/zellij"
+link "config/nvim"      "$CONFIG/nvim"
+link "config/mcphub"    "$CONFIG/mcphub"
+link "config/AGENT.md"  "$CONFIG/AGENT.md"
 
 link "claude/settings.json" "$HOME/.claude/settings.json"
-link "claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
+link "config/AGENT.md"      "$HOME/.claude/CLAUDE.md"
 
 mise install
