@@ -38,13 +38,8 @@ eval "$(zoxide init zsh)"
 # curl (Cloudflare patch for HTTP/3 support)
 export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
 
-# fzf
-if [[ -f "$HOME/.fzf.zsh" ]]; then
-  source "$HOME/.fzf.zsh"
-fi
-export FZF_DEFAULT_COMMAND="fd --type file --color=always"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--ansi"
+# Television (fuzzy finder)
+eval "$(tv init zsh)"
 
 # mise
 eval "$(mise activate zsh)"
