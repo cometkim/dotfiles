@@ -115,6 +115,17 @@ M.providers = {
     endpoint = M.ai_gateway .. "/groq/v1",
     api_key_name = "GROQ_API_KEY",
     models = {
+      ["qwen3-32b"] = {
+        model_name = "qwen/qwen3-32b",
+        avante = {
+          __inherited_from = "openai",
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            max_completion_tokens = 40960,
+            temperature = 0.6,
+          },
+        },
+      },
       ["kimi-k2"] = {
         model_name = "moonshotai/kimi-k2-instruct",
         avante = {
@@ -122,17 +133,6 @@ M.providers = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
             max_completion_tokens = 16384,
-            temperature = 0.6,
-          },
-        },
-      },
-      ["qwq-32b"] = {
-        model_name = "qwen-qwq-32b",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            max_completion_tokens = 32768,
             temperature = 0.6,
           },
         },
@@ -148,39 +148,6 @@ M.providers = {
           },
         },
       },
-      ["llama-3.3-70b"] = {
-        model_name = "llama-3.3-70b-versatile",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.normal,
-          extra_request_body = {
-            max_completion_tokens = 32768,
-            temperature = 0.6,
-          },
-        },
-      },
-      ["llama-4-scout-17b"] = {
-        model_name = "meta-llama/llama-4-scout-17b-16e-instruct",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-            max_completion_tokens = 8192,
-          }
-        },
-      },
-      ["llama-4-maverick-17b"] = {
-        model_name = "meta-llama/llama-4-maverick-17b-128e-instruct",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-            max_completion_tokens = 8192,
-          },
-        },
-      },
     },
   },
 
@@ -190,7 +157,7 @@ M.providers = {
     api_key_name = "GEMINI_API_KEY",
     models = {
       ["gemini-2.5-flash-lite"] = {
-        model_name = "gemini-2.5-flash-lite-preview-06-17",
+        model_name = "gemini-2.5-flash-lite",
         avante = {
           __inherited_from = "gemini",
           timeout = constants.timeout.normal,
@@ -225,69 +192,6 @@ M.providers = {
           },
         },
       },
-      ["gemma-3n"] = {
-        model_name = "gemma-3n-e4b-it",
-        avante = {
-          __inherited_from = "gemini",
-          timeout = constants.timeout.fast,
-          disable_tools = true,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
-        },
-      },
-    },
-  },
-
-  -- Cloudflare models
-  --
-  -- Too expensive and slow -- prefer Groq
-  cloudflare = {
-    endpoint = M.ai_gateway .. "/workers-ai/v1",
-    api_key_name = "CLOUDFLARE_AI_API_TOKEN",
-    models = {
-      ["llama-3.3-70b"] = {
-        model_name = "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.normal,
-          extra_request_body = {
-            temperature = 0.6,
-          },
-        },
-      },
-      ["llama-4-scout-17b"] = {
-        model_name = "@cf/meta/llama-4-scout-17b-16e-instruct",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-          },
-        },
-      },
-      ["qwen-2.5-coder-32b"] = {
-        model_name = "@cf/qwen/qwen2.5-coder-32b-instruct",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.normal,
-          extra_request_body = {
-            temperature = 0,
-          },
-        },
-      },
-      ["qwq-32b"] = {
-        model_name = "@cf/qwen/qwq-32b",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-          },
-        },
-      },
     },
   },
 
@@ -300,19 +204,20 @@ M.providers = {
         avante = {
           __inherited_from = "openai",
           timeout = constants.timeout.normal,
-          extra_request_body = {
-            max_tokens = 4096,
-          },
         },
       },
-      ["devstral"] = {
+      ["devstral-small"] = {
         model_name = "devstral-small-latest",
         avante = {
           __inherited_from = "openai",
           timeout = constants.timeout.normal,
-          extra_request_body = {
-            max_tokens = 4096,
-          },
+        },
+      },
+      ["devstral-medium"] = {
+        model_name = "devstral-medium-latest",
+        avante = {
+          __inherited_from = "openai",
+          timeout = constants.timeout.normal,
         },
       },
     },

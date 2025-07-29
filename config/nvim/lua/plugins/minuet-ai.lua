@@ -7,7 +7,6 @@ return {
       { "hrsh7th/nvim-cmp" },
     },
     config = function()
-      local P = require("ai-gateway.providers")
       require("minuet").setup {
         cmp = {
           enable_auto_complete = true,
@@ -37,24 +36,21 @@ return {
             dismiss = "<A-e>",
           },
         },
-        -- Cannot use openai_fim_compatible
-        --
-        -- Because Cloudflare AI gateway doesn't support `/completions` endpoint,
-        -- but only the `/chat/completions` endpoint.
-        provider = "openai_compatible",
         request_timeout = 3,
-        throttle = 600, -- Increase to reduce costs and avoid rate limits
-        debounce = 300, -- Increase to reduce costs and avoid rate limits
+        throttle = 1000, -- Increase to reduce costs and avoid rate limits
+        debounce = 400, -- Increase to reduce costs and avoid rate limits
         context_window = 32768,
+        provider = "codestral",
         provider_options = {
-          openai_compatible = {
-            name = "devstral",
-            model = P.providers.mistral.models.devstral.model_name,
-            end_point = P.providers.mistral.endpoint .. "/chat/completions",
-            api_key = P.providers.mistral.api_key_name,
+          codestral = {
+            name = "codestral",
+            model = "codestral-latest",
+            end_point = "https://codestral.mistral.ai/v1/fim/completions",
+            api_key = "CODESTRAL_API_KEY",
             stream = true,
             optional = {
-              max_tokens = 512,
+              max_tokens = 256,
+              stop = { '\n\n' },
             },
           },
         },
