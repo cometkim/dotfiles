@@ -1,7 +1,3 @@
-local get_provider_id = function(provider, model)
-  return provider .. "-" .. model
-end
-
 local get_avante_providers = function()
   local A = require("avante.config")
   local P = require("ai-gateway.providers")
@@ -14,17 +10,30 @@ local get_avante_providers = function()
     providers[name] = { hide_in_model_selector = true }
   end
 
-  for provider, provider_config in pairs(P.providers) do
-    for model, model_config in pairs(provider_config.models) do
-      local id = get_provider_id(provider, model)
-      providers[id] = vim.tbl_extend("force", {
-        model = model_config.model_name,
-        display_name = provider .. "/" .. model,
-        endpoint = provider_config.endpoint,
-        api_key_name = provider_config.api_key_name,
-        hide_in_model_selector = false,
-      }, model_config.avante)
-    end
+  local openrouter = P.providers["openrouter"]
+  for _, model in pairs(openrouter.models) do
+    providers[model.model_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
+      hide_in_model_selector = false,
+      endpoint = openrouter.endpoint,
+      api_key_name = openrouter.api_key_name,
+      model = model.model_name,
+      display_name = model.model_name,
+      extra_request_body = {
+        temperature = 0.6,
+      },
+    }, model.avante)
+  end
+
+  local ollama = P.providers["ollama"]
+  for _, model in pairs(ollama.models) do
+    providers["ollama/" .. model.model_name] = vim.tbl_extend("force", {
+      __inherited_from = "ollama",
+      hide_in_model_selector = false,
+      endpoint = ollama.endpoint,
+      model = model.model_name,
+      display_name = "ollama/" .. model.model_name,
+    }, model.avante)
   end
 
   return providers
@@ -60,7 +69,7 @@ local config = {
     require("avante").setup {
       mode = "agentic",
       providers = get_avante_providers(),
-      provider = get_provider_id("anthropic", "claude-4-sonnet"),
+      provider = "@preset/coder",
       selector = {
         exclude_auto_select = { "NvimTree" },
       },

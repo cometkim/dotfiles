@@ -17,6 +17,7 @@ local constants = {
     normal = 10000,
     reasoning = 30000,
     slow = 60000, -- e.g. ollama models
+    research = 300000,
   },
 }
 
@@ -26,198 +27,146 @@ M.ai_gateway = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c
 -- Models configuration
 ---@type { [string]: ProviderConfig }
 M.providers = {
-  -- Anthropic models
-  anthropic = {
-    endpoint = M.ai_gateway .. "/anthropic",
-    api_key_name = "ANTHROPIC_API_KEY",
+  openrouter = {
+    endpoint = M.ai_gateway .. "/openrouter",
+    api_key_name = "OPENROUTER_API_KEY",
     models = {
-      ["claude-4-sonnet"] = {
-        model_name = "claude-sonnet-4-0",
+      ["coder"] = {
+        model_name = "@preset/coder",
         avante = {
-          __inherited_from = "claude",
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["instruct"] = {
+        model_name = "@preset/instruct",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["instruct-thinking"] = {
+        model_name = "@preset/instruct-thinking",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["claude-4-sonnet"] = {
+        model_name = "anthropic/claude-sonnet-4",
+        avante = {
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-            max_tokens = 20480,
-          },
         },
       },
       ["claude-4-opus"] = {
-        model_name = "claude-opus-4-0",
+        model_name = "anthropic/claude-opus-4",
         avante = {
-          __inherited_from = "claude",
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 0.6,
-            max_tokens = 20480,
-          },
         },
       },
       ["claude-3.5-haiku"] = {
-        model_name = "claude-3-5-haiku-latest",
+        model_name = "anthropic/claude-3.5-haiku",
         avante = {
-          __inherited_from = "claude",
           timeout = constants.timeout.normal,
-          extra_request_body = {
-            temperature = 0.6,
-            max_tokens = 8192,
-          },
         },
       },
-    },
-  },
-
-  -- OpenAI models
-  openai = {
-    endpoint = M.ai_gateway .. "/openai/v1",
-    api_key_name = "OPENAI_API_KEY",
-    models = {
       ["gpt-4.1"] = {
-        model_name = "gpt-4.1",
+        model_name = "openai/gpt-4.1",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.normal,
         },
       },
       ["gpt-4.1-mini"] = {
-        model_name = "gpt-4.1-mini",
+        model_name = "openai/gpt-4.1-mini",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.normal,
         },
       },
-      ["o3"] = {
-        model_name = "o3",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-        },
-      },
       ["o4-mini"] = {
-        model_name = "o4-mini",
+        model_name = "openai/o4-mini",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.reasoning,
         },
       },
       ["o4-mini-high"] = {
-        model_name = "o4-mini-high",
+        model_name = "openai/o4-mini-high",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.reasoning,
         },
       },
-    },
-  },
-
-  -- Groq models
-  groq = {
-    endpoint = M.ai_gateway .. "/groq/v1",
-    api_key_name = "GROQ_API_KEY",
-    models = {
-      ["qwen3-32b"] = {
-        model_name = "qwen/qwen3-32b",
+      ["o3"] = {
+        model_name = "openai/o3",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            max_completion_tokens = 40960,
-            temperature = 0.6,
-          },
         },
       },
-      ["kimi-k2"] = {
-        model_name = "moonshotai/kimi-k2-instruct",
+      ["o3-pro"] = {
+        model_name = "openai/o3-pro",
         avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            max_completion_tokens = 16384,
-            temperature = 0.6,
-          },
+          timeout = constants.timeout.research,
         },
       },
-      ["deepseek-r1-70b"] = {
-        model_name = "deepseek-r1-distill-llama-70b",
-        avante = {
-          __inherited_from = "openai",
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            max_completion_tokens = 32768,
-            temperature = 0.6,
-          },
-        },
-      },
-    },
-  },
-
-  -- Google AI Studio - Gemini models
-  google = {
-    endpoint = M.ai_gateway .. "/google-ai-studio/v1beta/models",
-    api_key_name = "GEMINI_API_KEY",
-    models = {
       ["gemini-2.5-flash-lite"] = {
-        model_name = "gemini-2.5-flash-lite",
+        model_name = "google/gemini-2.5-flash-lite",
         avante = {
-          __inherited_from = "gemini",
           timeout = constants.timeout.normal,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
         },
       },
       ["gemini-2.5-flash"] = {
-        model_name = "gemini-2.5-flash",
+        model_name = "google/gemini-2.5-flash",
         avante = {
-          __inherited_from = "gemini",
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
         },
       },
       ["gemini-2.5-pro"] = {
-        model_name = "gemini-2.5-pro",
+        model_name = "google/gemini-2.5-pro",
         avante = {
-          __inherited_from = "gemini",
           timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            generationConfig = {
-              temperature = 0.6,
-            },
-          },
         },
       },
-    },
-  },
-
-  mistral = {
-    endpoint = M.ai_gateway .. "/mistral/v1",
-    api_key_name = "MISTRAL_API_KEY",
-    models = {
-      ["codestral"] = {
-        model_name = "codestral-latest",
+      ["codestral-2508"] = {
+        model_name = "mistralai/codestral-2508",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.normal,
         },
       },
       ["devstral-small"] = {
-        model_name = "devstral-small-latest",
+        model_name = "mistralai/devstral-small",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.normal,
         },
       },
       ["devstral-medium"] = {
-        model_name = "devstral-medium-latest",
+        model_name = "mistralai/devstral-medium",
         avante = {
-          __inherited_from = "openai",
           timeout = constants.timeout.normal,
+        },
+      },
+      ["qwen3-coder"] = {
+        model_name = "qwen/qwen3-coder",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["qwen3-235b-a22b-2507"] = {
+        model_name = "qwen/qwen3-235b-a22b-2507",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["qwen3-235b-a22b-thinking-2507"] = {
+        model_name = "qwen/qwen3-235b-a22b-thinking-2507",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["kimi-k2"] = {
+        model_name = "moonshotai/kimi-k2",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["deepseek-r1-0528"] = {
+        model_name = "deepseek/deepseek-r1-0528",
+        avante = {
+          timeout = constants.timeout.reasoning,
         },
       },
     },
