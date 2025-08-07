@@ -67,6 +67,42 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
+      ["gpt-5"] = {
+        model_name = "openai/gpt-5",
+        avante = {
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 1,
+          },
+        },
+      },
+      ["gpt-5-chat"] = {
+        model_name = "openai/gpt-5-chat",
+        avante = {
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 1,
+          },
+        },
+      },
+      ["gpt-5-mini"] = {
+        model_name = "openai/gpt-5-mini",
+        avante = {
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 1,
+          },
+        },
+      },
+      ["gpt-5-nano"] = {
+        model_name = "openai/gpt-5-nano",
+        avante = {
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 1,
+          },
+        },
+      },
       ["gpt-4.1"] = {
         model_name = "openai/gpt-4.1",
         avante = {
