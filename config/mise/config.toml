@@ -2,20 +2,20 @@
 pbkit = "asdf:pbkit/asdf-pbkit"
 
 [tools]
-deno = "2.4.2"
+deno = "2.4.5"
 java = "temurin-24.0.2"
-python = "3.13.5"
-terraform = "1.12.2"
-node = "24.4.1"
-go = "1.24.5"
+python = "3.13.7"
+terraform = "1.13.1"
+node = "24.7.0"
+go = "1.25.0"
 pbkit = "0.0.72"
-zig = "0.14.1"
-bun = "1.2.19"
+zig = "0.15.1"
+bun = "1.2.21"
 hermes = "0.13.0"
 binaryen = "123"
-"npm:@anthropic-ai/claude-code" = "1.0.61"
-"npm:ccusage" = "15.5.2"
-"npm:@sourcegraph/amp" = "0.0.1753689738-g787882"
+"npm:@anthropic-ai/claude-code" = "1.0.96"
+"npm:ccusage" = "16.2.0"
+"npm:@sourcegraph/amp" = "0.0.1756483277-gc920f4"
 
 [settings]
 asdf_compat = true
