@@ -232,6 +232,7 @@ link "zshrc-macos" "$HOME/.zshrc-macos"
 
 link "config/mise"       "$CONFIG/mise"
 link "config/alacritty"  "$CONFIG/alacritty"
+link "config/ghostty"    "$CONFIG/ghostty"
 link "config/zellij"     "$CONFIG/zellij"
 link "config/nvim"       "$CONFIG/nvim"
 link "config/television" "$CONFIG/television"
