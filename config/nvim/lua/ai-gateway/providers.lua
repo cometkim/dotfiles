@@ -103,40 +103,10 @@ M.providers = {
           },
         },
       },
-      ["gpt-4.1"] = {
-        model_name = "openai/gpt-4.1",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["gpt-4.1-mini"] = {
-        model_name = "openai/gpt-4.1-mini",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["o4-mini"] = {
-        model_name = "openai/o4-mini",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["o4-mini-high"] = {
-        model_name = "openai/o4-mini-high",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
       ["o3"] = {
         model_name = "openai/o3",
         avante = {
           timeout = constants.timeout.reasoning,
-        },
-      },
-      ["o3-pro"] = {
-        model_name = "openai/o3-pro",
-        avante = {
-          timeout = constants.timeout.research,
         },
       },
       ["gemini-2.5-flash-lite"] = {
@@ -157,7 +127,7 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["codestral-2508"] = {
+      ["codestral"] = {
         model_name = "mistralai/codestral-2508",
         avante = {
           timeout = constants.timeout.normal,
@@ -181,26 +151,20 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["qwen3-235b-a22b-2507"] = {
+      ["qwen3"] = {
         model_name = "qwen/qwen3-235b-a22b-2507",
         avante = {
           timeout = constants.timeout.normal,
         },
       },
-      ["qwen3-235b-a22b-thinking-2507"] = {
+      ["qwen3-thinking"] = {
         model_name = "qwen/qwen3-235b-a22b-thinking-2507",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
       ["kimi-k2"] = {
-        model_name = "moonshotai/kimi-k2",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["deepseek-r1-0528"] = {
-        model_name = "deepseek/deepseek-r1-0528",
+        model_name = "moonshotai/kimi-k2-0905",
         avante = {
           timeout = constants.timeout.reasoning,
         },
