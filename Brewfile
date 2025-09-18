@@ -4,6 +4,7 @@ brew "awscli-local"
 brew "bat"
 brew "capnp"
 brew "cmake"
+brew "curl"
 brew "dust"
 brew "fd"
 brew "fontconfig"
@@ -28,9 +29,6 @@ brew "wget"
 brew "yarn"
 brew "zellij"
 brew "zoxide"
-
-# HTTP/3 enabled cURL
-brew "cloudflare/cloudflare/curl"
 
 if OS.linux?
   brew "pinentry"
