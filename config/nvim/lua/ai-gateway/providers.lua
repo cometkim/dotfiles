@@ -49,8 +49,8 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["claude-4-sonnet"] = {
-        model_name = "anthropic/claude-sonnet-4",
+      ["claude-4.5-sonnet"] = {
+        model_name = "anthropic/claude-sonnet-4.5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
