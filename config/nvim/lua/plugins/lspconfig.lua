@@ -4,43 +4,28 @@ return {
     "b0o/schemastore.nvim",
   },
   config = function()
-    dofile(vim.g.base46_cache .. "semantic_tokens")
-
-    local lspconfig = require "lspconfig"
     local nvlsp = require "nvchad.configs.lspconfig"
     local schemastore = require "schemastore"
     local utils = require "utils"
 
     nvlsp.defaults()
 
-    lspconfig.html.setup {
+    vim.lsp.config("*", {
       on_attach = nvlsp.on_attach,
       on_init = nvlsp.on_init,
       capabilities = nvlsp.capabilities,
-    }
+    })
 
-    lspconfig.cssls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
-
-    lspconfig.jsonls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
+    vim.lsp.config("jsonls", {
       settings = {
         json = {
           validate = { enable = true },
           schemas = schemastore.json.schemas(),
         },
       },
-    }
+    })
 
-    lspconfig.yamlls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
+    vim.lsp.config("yamlls", {
       settings = {
         yaml = {
           validate = true,
@@ -51,53 +36,25 @@ return {
           schemas = schemastore.yaml.schemas(),
         },
       },
-    }
+    })
 
-    -- TOML
-    lspconfig.taplo.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
-
-    -- TypeScript
-    lspconfig.ts_ls.setup {
-      on_attach = function(client, bufnr)
+    vim.lsp.config("ts_ls", {
+      root_dir = function(_, on_dir)
         if not utils.is_deno() then
-          nvlsp.on_attach(client, bufnr)
-        else
-          client.stop(true)
+          on_dir(vim.fn.getcwd())
         end
       end,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
+    })
 
-    -- Deno
-    lspconfig.denols.setup {
-      on_attach = function(client, bufnr)
+    vim.lsp.config("denols", {
+      root_dir = function(_, on_dir)
         if utils.is_deno() then
-          nvlsp.on_attach(client, bufnr)
-        else
-          client.stop(true)
+          on_dir(vim.fn.getcwd())
         end
       end,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
+    })
 
-    -- https://biomejs.dev
-    lspconfig.biome.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    }
-
-    -- OCaml Platform
-    lspconfig.ocamllsp.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
+    vim.lsp.config("ocamllsp", {
       settings = {
         ocamllsp = {
           extendedHover = {
@@ -116,13 +73,13 @@ return {
           },
         },
       },
-    }
+    })
 
-    -- Rust
-    lspconfig.rust_analyzer.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
+    vim.lsp.config("rust_analyzer", {
+      on_attach = function(client, bufnr)
+        nvlsp.on_attach(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end,
       settings = {
         ["rust-analyzer"] = {
           imports = {
@@ -139,17 +96,25 @@ return {
           procMacro = {
             enable = true,
           },
-          checkOnSave = {
+          check = {
             command = "clippy",
           },
         },
-      },
-    }
+      }
+    })
 
-    lspconfig.rescriptls.setup {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
+    vim.lsp.enable {
+      "html",
+      "cssls",
+      "jsonls",
+      "yamlls",
+      "taplo",
+      "ts_ls",
+      "denols",
+      "biome",
+      "ocamllsp",
+      "rust_analyzer",
+      "rescriptls",
     }
   end,
 }
