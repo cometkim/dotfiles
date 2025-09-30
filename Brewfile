@@ -30,6 +30,8 @@ brew "yarn"
 brew "zellij"
 brew "zoxide"
 
+brew "sst/tap/opencode"
+
 if OS.linux?
   brew "pinentry"
   brew "zsh"
