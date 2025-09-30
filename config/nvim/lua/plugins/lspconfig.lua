@@ -56,21 +56,18 @@ return {
 
     vim.lsp.config("ocamllsp", {
       settings = {
-        ocamllsp = {
-          extendedHover = {
-            enable = true,
-          },
-          duneDiagnostics = {
-            enable = true,
-          },
-          inlayHints = {
-            enable = true,
-            hintLetBindings = true,
-            hintPatternVariables = true,
-          },
-          codelens = {
-            enable = true,
-          },
+        extendedHover = {
+          enable = true,
+        },
+        duneDiagnostics = {
+          enable = true,
+        },
+        inlayHints = {
+          hintLetBindings = true,
+          hintPatternVariables = true,
+        },
+        codelens = {
+          enable = true,
         },
       },
     })
