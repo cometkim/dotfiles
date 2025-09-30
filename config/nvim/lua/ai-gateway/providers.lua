@@ -76,6 +76,15 @@ M.providers = {
           },
         },
       },
+      ["gpt-5-codex"] = {
+        model_name = "openai/gpt-5-codex",
+        avante = {
+          timeout = constants.timeout.reasoning,
+          extra_request_body = {
+            temperature = 1,
+          },
+        },
+      },
       ["gpt-5-chat"] = {
         model_name = "openai/gpt-5-chat",
         avante = {
@@ -145,12 +154,6 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["qwen3-coder"] = {
-        model_name = "qwen/qwen3-coder",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
       ["qwen3"] = {
         model_name = "qwen/qwen3-235b-a22b-2507",
         avante = {
@@ -161,6 +164,30 @@ M.providers = {
         model_name = "qwen/qwen3-235b-a22b-thinking-2507",
         avante = {
           timeout = constants.timeout.reasoning,
+        },
+      },
+      ["qwen3-max"] = {
+        model_name = "qwen/qwen3-max",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["qwen3-coder"] = {
+        model_name = "qwen/qwen3-coder",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["qwen3-coder-plus"] = {
+        model_name = "qwen/qwen3-coder-plus",
+        avante = {
+          timeout = constants.timeout.normal,
+        },
+      },
+      ["qwen3-coder-flash"] = {
+        model_name = "qwen/qwen3-coder-flash",
+        avante = {
+          timeout = constants.timeout.normal,
         },
       },
       ["kimi-k2"] = {
