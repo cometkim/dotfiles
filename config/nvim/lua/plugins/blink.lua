@@ -4,6 +4,14 @@ return {
     "Kaiser-Yang/blink-cmp-avante",
   },
   opts = {
+    enabled = function ()
+      local disabled_filetypes = {
+        "TelescopePrompt",
+        "NvimTree",
+        "DressingInput",
+      }
+      return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
+    end,
     sources = {
       default = {
         "avante",
