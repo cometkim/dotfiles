@@ -60,6 +60,8 @@ export RUSTUP_HOME="$HOME/.rustup"
 export CARGO_HOME="$HOME/.cargo"
 export PATH="$CARGO_HOME/bin:$PATH"
 
+export RUSTC_WRAPPER="$(which sccache)"
+
 # PNPM (for global bins)
 export PNPM_HOME="$HOME/.pnpm"
 export PATH="$PNPM_HOME:$PATH"
