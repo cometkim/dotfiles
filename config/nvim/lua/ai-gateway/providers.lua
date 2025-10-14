@@ -196,6 +196,12 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
+      ["glm-4.6"] = {
+        model_name = "z-ai/glm-4.6",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
     },
   },
 
