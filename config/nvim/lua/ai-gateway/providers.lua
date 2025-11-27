@@ -55,8 +55,8 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["claude-4.1-opus"] = {
-        model_name = "anthropic/claude-opus-4.1",
+      ["claude-4.5-opus"] = {
+        model_name = "anthropic/claude-opus-4.5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -67,8 +67,8 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["gpt-5"] = {
-        model_name = "openai/gpt-5",
+      ["gpt-5.1"] = {
+        model_name = "openai/gpt-5.1",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
@@ -76,17 +76,8 @@ M.providers = {
           },
         },
       },
-      ["gpt-5-codex"] = {
-        model_name = "openai/gpt-5-codex",
-        avante = {
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 1,
-          },
-        },
-      },
-      ["gpt-5-chat"] = {
-        model_name = "openai/gpt-5-chat",
+      ["gpt-5.1-codex"] = {
+        model_name = "openai/gpt-5.1-codex",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
@@ -112,12 +103,6 @@ M.providers = {
           },
         },
       },
-      ["o3"] = {
-        model_name = "openai/o3",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
       ["gemini-2.5-flash-lite"] = {
         model_name = "google/gemini-2.5-flash-lite",
         avante = {
@@ -130,8 +115,8 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["gemini-2.5-pro"] = {
-        model_name = "google/gemini-2.5-pro",
+      ["gemini-3-pro"] = {
+        model_name = "google/gemini-3-pro-preview",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -198,6 +183,12 @@ M.providers = {
       },
       ["glm-4.6"] = {
         model_name = "z-ai/glm-4.6",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["minimax-m2"] = {
+        model_name = "minimax/minimax-m2",
         avante = {
           timeout = constants.timeout.reasoning,
         },
