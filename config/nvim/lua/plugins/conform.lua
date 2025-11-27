@@ -30,6 +30,16 @@ return {
     vim.g.enable_autoformat = false
 
     require("conform").setup {
+      formatters_by_ft = {
+        lua = { "stylelua" },
+        javascript = { "biome-check", lsp_format = "prefer" },
+        javascriptreact = { "biome-check", lsp_format = "prefer" },
+        typescript = { "biome-check", lsp_format = "prefer" },
+        typescriptreact = { "biome-check", lsp_format = "prefer" },
+        json = { "biome", lsp_format = "prefer" },
+        css = { "biome", lsp_format = "prefer" },
+        rust = { "rustfmt" },
+      },
       format_on_save = function(bufnr)
         if not vim.g.enable_autoformat then
           return
@@ -42,7 +52,7 @@ return {
 
         return {
           timeout_ms = 500,
-          lsp_format = "first"
+          lsp_format = "prefer",
         }
       end,
     }
