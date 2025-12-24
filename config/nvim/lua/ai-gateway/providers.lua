@@ -67,8 +67,8 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["gpt-5.1"] = {
-        model_name = "openai/gpt-5.1",
+      ["gpt-5.2"] = {
+        model_name = "openai/gpt-5.2",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
@@ -85,17 +85,8 @@ M.providers = {
           },
         },
       },
-      ["gpt-5-mini"] = {
-        model_name = "openai/gpt-5-mini",
-        avante = {
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 1,
-          },
-        },
-      },
-      ["gpt-5-nano"] = {
-        model_name = "openai/gpt-5-nano",
+      ["gpt-5.1-codex-mini"] = {
+        model_name = "openai/gpt-5.1-codex-mini",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
@@ -109,14 +100,14 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["gemini-2.5-flash"] = {
-        model_name = "google/gemini-2.5-flash",
+      ["gemini-3-pro"] = {
+        model_name = "google/gemini-3-pro-preview",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["gemini-3-pro"] = {
-        model_name = "google/gemini-3-pro-preview",
+      ["gemini-3-flash"] = {
+        model_name = "google/gemini-3-flash-preview",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -127,40 +118,10 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
-      ["devstral-small"] = {
-        model_name = "mistralai/devstral-small",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["devstral-medium"] = {
-        model_name = "mistralai/devstral-medium",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["qwen3"] = {
-        model_name = "qwen/qwen3-235b-a22b-2507",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["qwen3-thinking"] = {
-        model_name = "qwen/qwen3-235b-a22b-thinking-2507",
+      ["devstral-2"] = {
+        model_name = "mistralai/devstral-2512",
         avante = {
           timeout = constants.timeout.reasoning,
-        },
-      },
-      ["qwen3-max"] = {
-        model_name = "qwen/qwen3-max",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["qwen3-coder"] = {
-        model_name = "qwen/qwen3-coder",
-        avante = {
-          timeout = constants.timeout.normal,
         },
       },
       ["qwen3-coder-plus"] = {
@@ -175,20 +136,26 @@ M.providers = {
           timeout = constants.timeout.normal,
         },
       },
+      ["deepseek-v3.2"] = {
+        model_name = "deepseek/deepseek-v3.2",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
       ["kimi-k2"] = {
         model_name = "moonshotai/kimi-k2-0905",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["glm-4.6"] = {
-        model_name = "z-ai/glm-4.6",
+      ["glm-4.7"] = {
+        model_name = "z-ai/glm-4.7",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["minimax-m2"] = {
-        model_name = "minimax/minimax-m2",
+      ["minimax-m2.1"] = {
+        model_name = "minimax/minimax-m2.1",
         avante = {
           timeout = constants.timeout.reasoning,
         },
