@@ -17,7 +17,6 @@ binaryen = "125"
 "npm:ccusage" = "17.1.8"
 "npm:@sourcegraph/amp" = "0.0.1765296079-gee64bc"
 "npm:@openai/codex" = "0.66.0"
-"npm:@google/gemini-cli" = "0.19.4"
 
 [settings]
 asdf_compat = true
