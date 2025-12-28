@@ -29,11 +29,10 @@ brew "sccache"
 brew "television"
 brew "watchman"
 brew "wget"
+brew "witr"
 brew "yarn"
 brew "zellij"
 brew "zoxide"
-
-brew "sst/tap/opencode"
 
 if OS.linux?
   brew "pinentry"
@@ -48,6 +47,9 @@ if OS.mac?
 
   tap  "jorgelbg/tap"
   brew "pinentry-touchid"
+
+  tap "productdevbook/tap"
+  cask "portkiller"
 
   cask "1password"
   cask "1password-cli"
