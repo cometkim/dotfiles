@@ -1,5 +1,8 @@
 {
-  "theme": "dark",
+  "env": {
+    "DISABLE_AUTOUPDATER": "1",
+    "DISABLE_TELEMETRY": "1"
+  },
   "permissions": {
     "allow": [
       "Read(~/.zshrc)",
@@ -15,8 +18,9 @@
       "Read(**/.env)"
     ]
   },
-  "env": {
-    "DISABLE_AUTOUPDATER": "1",
-    "DISABLE_TELEMETRY": "1"
+  "alwaysThinkingEnabled": true,
+  "theme": "dark",
+  "enabledPlugins": {
+    "claude-mem@thedotmack": true
   }
 }
