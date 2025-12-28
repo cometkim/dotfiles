@@ -15,8 +15,9 @@ hermes = "0.13.0"
 binaryen = "125"
 "npm:@anthropic-ai/claude-code" = "2.0.76"
 "npm:ccusage" = "17.2.0"
-"npm:@sourcegraph/amp" = "0.0.1766577683-g66e5b8"
+"npm:@sourcegraph/amp" = "0.0.1766937678-g9acadc"
 "npm:@openai/codex" = "0.77.0"
+"github:sst/opencode" = "1.0.204"
 
 [settings]
 asdf_compat = true

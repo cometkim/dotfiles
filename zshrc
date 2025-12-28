@@ -115,11 +115,8 @@ alias vimrc="$EDITOR $VIMRC"
 export TERMRC="$HOME/.config/alacritty/alacritty.yml"
 alias termrc="$EDITOR $TERMRC"
 
-alias cd="z"
 alias j="z"
-alias ..="z .."
-
-alias asdf="mise"
+alias ..="cd .."
 
 alias tf="terraform"
 
