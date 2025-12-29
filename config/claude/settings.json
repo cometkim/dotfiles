@@ -1,4 +1,6 @@
 {
+  "theme": "dark",
+  "alwaysThinkingEnabled": true,
   "env": {
     "DISABLE_AUTOUPDATER": "1",
     "DISABLE_TELEMETRY": "1"
@@ -18,8 +20,6 @@
       "Read(**/.env)"
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "theme": "dark",
   "enabledPlugins": {
     "claude-mem@thedotmack": true
   }

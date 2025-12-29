@@ -236,10 +236,8 @@ link "config/ghostty"    "$CONFIG/ghostty"
 link "config/zellij"     "$CONFIG/zellij"
 link "config/nvim"       "$CONFIG/nvim"
 link "config/television" "$CONFIG/television"
+link "config/claude"     "$HOME/.claude"
 link "config/opencode"   "$CONFIG/opencode"
 link "config/AGENTS.md"  "$CONFIG/AGENTS.md"
-
-link "claude/settings.json" "$HOME/.claude/settings.json"
-link "config/AGENTS.md"     "$HOME/.claude/CLAUDE.md"
 
 mise install
