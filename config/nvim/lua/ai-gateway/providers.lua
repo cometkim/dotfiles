@@ -31,24 +31,6 @@ M.providers = {
     endpoint = M.ai_gateway .. "/openrouter",
     api_key_name = "OPENROUTER_API_KEY",
     models = {
-      ["coder"] = {
-        model_name = "@preset/coder",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["instruct"] = {
-        model_name = "@preset/instruct",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["instruct-thinking"] = {
-        model_name = "@preset/instruct-thinking",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
       ["claude-4.5-sonnet"] = {
         model_name = "anthropic/claude-sonnet-4.5",
         avante = {
@@ -76,17 +58,8 @@ M.providers = {
           },
         },
       },
-      ["gpt-5.1-codex"] = {
-        model_name = "openai/gpt-5.1-codex",
-        avante = {
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 1,
-          },
-        },
-      },
-      ["gpt-5.1-codex-mini"] = {
-        model_name = "openai/gpt-5.1-codex-mini",
+      ["gpt-5.2-codex"] = {
+        model_name = "openai/gpt-5.2-codex",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
@@ -112,44 +85,26 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["codestral"] = {
-        model_name = "mistralai/codestral-2508",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["devstral-2"] = {
-        model_name = "mistralai/devstral-2512",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["qwen3-coder-plus"] = {
-        model_name = "qwen/qwen3-coder-plus",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
-      ["qwen3-coder-flash"] = {
-        model_name = "qwen/qwen3-coder-flash",
-        avante = {
-          timeout = constants.timeout.normal,
-        },
-      },
       ["deepseek-v3.2"] = {
         model_name = "deepseek/deepseek-v3.2",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["kimi-k2"] = {
-        model_name = "moonshotai/kimi-k2-0905",
+      ["kimi-k2.5"] = {
+        model_name = "moonshotai/kimi-k2.5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
       ["glm-4.7"] = {
         model_name = "z-ai/glm-4.7",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["glm-4.7-flash"] = {
+        model_name = "z-ai/glm-4.7-flash",
         avante = {
           timeout = constants.timeout.reasoning,
         },
