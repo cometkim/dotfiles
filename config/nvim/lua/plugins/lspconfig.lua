@@ -21,7 +21,7 @@ return {
       "yamlls",
       "taplo",
       "ts_ls",
-      "tsgo",
+      -- "tsgo",
       "tailwindcss",
       "denols",
       "biome",
