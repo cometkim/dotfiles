@@ -2,23 +2,23 @@
 pbkit = "asdf:pbkit/asdf-pbkit"
 
 [tools]
-deno = "2.6.4"
+deno = "2.6.6"
 java = "temurin-25.0.1"
 python = "3.14.2"
 terraform = "1.14.3"
-node = "25.2.1"
-go = "1.25.5"
+node = "25.5.0"
+go = "1.25.6"
 pbkit = "0.0.72"
 zig = "0.15.2"
-bun = "1.3.5"
+bun = "1.3.6"
 hermes = "0.13.0"
 binaryen = "125"
-"npm:@anthropic-ai/claude-code" = "2.1.1"
-"npm:ccusage" = "17.2.1"
-"npm:@sourcegraph/amp" = "0.0.1767859285-g4bed5a"
-"npm:@openai/codex" = "0.79.0"
-"github:sst/opencode" = "1.1.6"
-"npm:opencode-supermemory" = "0.1.6"
+"npm:@anthropic-ai/claude-code" = "2.1.20"
+"npm:ccusage" = "18.0.5"
+"npm:@sourcegraph/amp" = "0.0.1769492758-gb98cad"
+"npm:@openai/codex" = "0.91.0"
+"github:sst/opencode" = "1.1.36"
+"npm:opencode-supermemory" = "0.1.8"
 
 [settings]
 asdf_compat = true
