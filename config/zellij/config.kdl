@@ -133,9 +133,9 @@ keybinds clear-defaults=true {
     shared_except "locked" "tab" {
         bind "Ctrl t" { SwitchToMode "tab"; }
     }
-    shared_except "locked" "pane" {
-        bind "Ctrl p" { SwitchToMode "pane"; }
-    }
+    // shared_except "locked" "pane" {
+    //     bind "Ctrl p" { SwitchToMode "pane"; }
+    // }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
     }
