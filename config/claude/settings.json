@@ -1,6 +1,4 @@
 {
-  "theme": "dark",
-  "alwaysThinkingEnabled": true,
   "env": {
     "DISABLE_TELEMETRY": "1"
   },
@@ -21,5 +19,8 @@
   },
   "enabledPlugins": {
     "claude-mem@thedotmack": true
-  }
+  },
+  "alwaysThinkingEnabled": true,
+  "theme": "dark",
+  "model": "opus"
 }
