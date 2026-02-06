@@ -31,14 +31,20 @@ M.providers = {
     endpoint = M.ai_gateway .. "/openrouter",
     api_key_name = "OPENROUTER_API_KEY",
     models = {
-      ["claude-4.5-sonnet"] = {
-        model_name = "anthropic/claude-sonnet-4.5",
+      ["claude-4.6-opus"] = {
+        model_name = "anthropic/claude-opus-4.6",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
       ["claude-4.5-opus"] = {
         model_name = "anthropic/claude-opus-4.5",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["claude-4.5-sonnet"] = {
+        model_name = "anthropic/claude-sonnet-4.5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -58,8 +64,8 @@ M.providers = {
           },
         },
       },
-      ["gpt-5.2-codex"] = {
-        model_name = "openai/gpt-5.2-codex",
+      ["gpt-5.3-codex"] = {
+        model_name = "openai/gpt-5.3-codex",
         avante = {
           timeout = constants.timeout.reasoning,
           extra_request_body = {
