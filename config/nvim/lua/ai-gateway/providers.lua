@@ -31,37 +31,22 @@ M.providers = {
     endpoint = M.ai_gateway .. "/openrouter",
     api_key_name = "OPENROUTER_API_KEY",
     models = {
-      ["claude-4.6-opus"] = {
+      ["claude-opus-4.6"] = {
         model_name = "anthropic/claude-opus-4.6",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["claude-4.5-opus"] = {
-        model_name = "anthropic/claude-opus-4.5",
+      ["claude-sonnet-4.6"] = {
+        model_name = "anthropic/claude-sonnet-4.6",
         avante = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["claude-4.5-sonnet"] = {
-        model_name = "anthropic/claude-sonnet-4.5",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["claude-4.5-haiku"] = {
+      ["claude-haiku-4.5"] = {
         model_name = "anthropic/claude-4.5-haiku",
         avante = {
           timeout = constants.timeout.normal,
-        },
-      },
-      ["gpt-5.2"] = {
-        model_name = "openai/gpt-5.2",
-        avante = {
-          timeout = constants.timeout.reasoning,
-          extra_request_body = {
-            temperature = 1,
-          },
         },
       },
       ["gpt-5.3-codex"] = {
@@ -73,38 +58,26 @@ M.providers = {
           },
         },
       },
+      ["gemini-3.1-pro"] = {
+        model_name = "google/gemini-3.1-pro-preview",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
+      ["gemini-3.0-flash"] = {
+        model_name = "google/gemini-3-flash-preview",
+        avante = {
+          timeout = constants.timeout.reasoning,
+        },
+      },
       ["gemini-2.5-flash-lite"] = {
         model_name = "google/gemini-2.5-flash-lite",
         avante = {
           timeout = constants.timeout.normal,
         },
       },
-      ["gemini-3-pro"] = {
-        model_name = "google/gemini-3-pro-preview",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["gemini-3-flash"] = {
-        model_name = "google/gemini-3-flash-preview",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["deepseek-v3.2"] = {
-        model_name = "deepseek/deepseek-v3.2",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["kimi-k2.5"] = {
-        model_name = "moonshotai/kimi-k2.5",
-        avante = {
-          timeout = constants.timeout.reasoning,
-        },
-      },
-      ["glm-4.7"] = {
-        model_name = "z-ai/glm-4.7",
+      ["glm-5.0"] = {
+        model_name = "z-ai/glm-5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -115,8 +88,8 @@ M.providers = {
           timeout = constants.timeout.reasoning,
         },
       },
-      ["minimax-m2.1"] = {
-        model_name = "minimax/minimax-m2.1",
+      ["minimax-m2.5"] = {
+        model_name = "minimax/minimax-m2.5",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -128,8 +101,8 @@ M.providers = {
   ollama = {
     endpoint = "http://localhost:11434",
     models = {
-      ["deepseek-r1-8b"] = {
-        model_name = "deepseek-r1:8b",
+      ["glm-4.7-flash:q4_K_M"] = {
+        model_name = "glm-4.7-flash:q4_K_M",
         avante = {
           __inherited_from = "ollama",
           timeout = constants.timeout.slow,
@@ -142,8 +115,8 @@ M.providers = {
           },
         },
       },
-      ["qwen3-8b"] = {
-        model_name = "qwen3:8b",
+      ["qwen3-vl:8b"] = {
+        model_name = "qwen3-vl:8b",
         avante = {
           __inherited_from = "ollama",
           timeout = constants.timeout.slow,
@@ -156,8 +129,22 @@ M.providers = {
           },
         },
       },
-      ["gemma3-4b"] = {
-        model_name = "gemma3:4b",
+      ["translategemma:4b"] = {
+        model_name = "translategemma:4b",
+        avante = {
+          __inherited_from = "ollama",
+          timeout = constants.timeout.slow,
+          extra_request_body = {
+            options = {
+              num_ctx = 1024,
+              keep_alive = "5m",
+              temperature = 0.6,
+            },
+          },
+        },
+      },
+      ["lfm2.5-thinking:1.2b"] = {
+        model_name = "lfm2.5-thinking:1.2b",
         avante = {
           __inherited_from = "ollama",
           timeout = constants.timeout.slow,

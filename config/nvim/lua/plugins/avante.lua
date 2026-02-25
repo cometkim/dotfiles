@@ -69,7 +69,7 @@ return {
     require("avante").setup {
       mode = "agentic",
       providers = get_avante_providers(),
-      provider = "@preset/coder",
+      provider = "openai/gpt-5.3-codex",
       selector = {
         exclude_auto_select = { "NvimTree" },
       },
