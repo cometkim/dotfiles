@@ -16,7 +16,6 @@ binaryen = "126"
 opencode = "1.2.13"
 "npm:@sourcegraph/amp" = "0.0.1772036468-gdc13c5"
 "npm:@openai/codex" = "0.105.0"
-"npm:opencode-supermemory" = "2.0.2"
 "npm:command-code" = "0.17.6"
 
 [settings]

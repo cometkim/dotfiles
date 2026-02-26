@@ -5,7 +5,6 @@
     "lsp": true
   },
   "plugin": [
-    "opencode-supermemory",
     "opencode-anthropic-auth"
   ],
   "mcp": {
