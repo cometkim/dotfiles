@@ -119,64 +119,14 @@ M.providers = {
     },
   },
 
-  -- Ollama models
-  ollama = {
-    endpoint = "http://localhost:11434",
+  -- Powered by Backend.AI GO
+  backend_ai = {
+    endpoint = "http://localhost:39080/v1",
     models = {
-      ["glm-4.7-flash:q4_K_M"] = {
-        model_name = "glm-4.7-flash:q4_K_M",
+      ["unsloth/Qwen3.5-9B"] = {
+        model_name = "unsloth/Qwen3.5-9B",
         avante = {
-          __inherited_from = "ollama",
           timeout = constants.timeout.slow,
-          extra_request_body = {
-            options = {
-              num_ctx = 2048,
-              keep_alive = "5m",
-              temperature = 0.6,
-            },
-          },
-        },
-      },
-      ["qwen3-vl:8b"] = {
-        model_name = "qwen3-vl:8b",
-        avante = {
-          __inherited_from = "ollama",
-          timeout = constants.timeout.slow,
-          extra_request_body = {
-            options = {
-              num_ctx = 2048,
-              keep_alive = "5m",
-              temperature = 0.6,
-            },
-          },
-        },
-      },
-      ["translategemma:4b"] = {
-        model_name = "translategemma:4b",
-        avante = {
-          __inherited_from = "ollama",
-          timeout = constants.timeout.slow,
-          extra_request_body = {
-            options = {
-              num_ctx = 1024,
-              keep_alive = "5m",
-              temperature = 0.6,
-            },
-          },
-        },
-      },
-      ["lfm2.5-thinking:1.2b"] = {
-        model_name = "lfm2.5-thinking:1.2b",
-        avante = {
-          __inherited_from = "ollama",
-          timeout = constants.timeout.slow,
-          extra_request_body = {
-            options = {
-              num_ctx = 1024,
-              keep_alive = "5m",
-              temperature = 0.6,
-            },
-          },
         },
       },
     },

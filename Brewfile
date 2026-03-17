@@ -20,7 +20,6 @@ brew "hyperfine"
 brew "lsd"
 brew "mise"
 brew "neovim"
-brew "ollama"
 brew "opam"
 brew "pnpm"
 brew "ripgrep"
@@ -49,6 +48,9 @@ if OS.mac?
 
   tap "productdevbook/tap"
   cask "portkiller"
+
+  tap "lablup/tap"
+  cask "backend-ai-go"
 
   cask "1password"
   cask "1password-cli"

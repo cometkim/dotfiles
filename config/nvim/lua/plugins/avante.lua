@@ -57,14 +57,14 @@ local get_avante_providers = function()
     }, model.avante)
   end
 
-  local ollama = P.providers["ollama"]
-  for _, model in pairs(ollama.models) do
-    providers["ollama/" .. model.model_name] = vim.tbl_extend("force", {
-      __inherited_from = "ollama",
+  local backend_ai = P.providers["backend_ai"]
+  for _, model in pairs(backend_ai.models) do
+    providers["local/" .. model.model_name] = vim.tbl_extend("force", {
+      __inherited_from = "openai",
       hide_in_model_selector = false,
-      endpoint = ollama.endpoint,
+      endpoint = backend_ai.endpoint,
       model = model.model_name,
-      display_name = "ollama/" .. model.model_name,
+      display_name = "local/" .. model.model_name,
     }, model.avante)
   end
 
