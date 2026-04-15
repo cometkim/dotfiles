@@ -66,6 +66,13 @@ export RUSTC_WRAPPER="$(which sccache)"
 export PNPM_HOME="$HOME/.pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+# Android Studio
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
+export PATH="$ANDROID_HOME/emulator:$PATH"
+export PATH="$ANDROID_HOME/tools:$PATH"
+export PATH="$ANDROID_HOME/tools/bin:$PATH"
+
 # Docker Client
 if [[ -d "~/.orbstack" ]]; then
   # Use OrbStack on MacOS
