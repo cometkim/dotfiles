@@ -17,10 +17,22 @@
       "Read(**/.env)"
     ]
   },
+  "model": "opus[1m]",
   "enabledPlugins": {
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "chrome-devtools-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ChromeDevTools/chrome-devtools-mcp"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
-  "theme": "dark",
-  "model": "opus"
+  "showThinkingSummaries": true,
+  "effortLevel": "high",
+  "theme": "dark"
 }
