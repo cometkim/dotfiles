@@ -28,6 +28,9 @@ return {
       "ocamllsp",
       "rust_analyzer",
       "rescriptls",
+      -- "pyright",
+      "ty",
+      "ruff",
     }
   end,
 }
