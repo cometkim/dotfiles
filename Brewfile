@@ -53,6 +53,9 @@ if OS.mac?
   tap "lablup/tap"
   cask "backend-ai-go"
 
+  tap "cometkim/tap"
+  brew "op-fast"
+
   cask "1password"
   cask "1password-cli"
   cask "alacritty"
