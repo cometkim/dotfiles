@@ -1,6 +1,6 @@
 local get_avante_providers = function()
   local A = require("avante.config")
-  local P = require("ai-gateway.providers")
+  local P = require("configs.ai-providers")
 
   ---@type { [string]: AvanteSupportedProvider }
   local providers = {}
@@ -10,61 +10,43 @@ local get_avante_providers = function()
     providers[name] = { hide_in_model_selector = true }
   end
 
-  local zai = P.providers["zai"]
-  for _, model in pairs(zai.models) do
-    providers["z-ai/" .. model.model_name] = vim.tbl_extend("force", {
+  local glm_coding_plan = P.providers["glm_coding_plan"]
+  for model_key, model in pairs(glm_coding_plan.models) do
+    providers[model_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       hide_in_model_selector = false,
-      endpoint = zai.endpoint,
-      api_key_name = zai.api_key_name,
+      endpoint = glm_coding_plan.endpoint,
+      api_key_name = glm_coding_plan.api_key_name,
       model = model.model_name,
-      display_name = "z-ai/" .. model.model_name,
+      display_name = model.model_name .. " (GLM Coding Plan)",
+      extra_headers = glm_coding_plan.extra_headers,
       extra_request_body = {
         temperature = 0.6,
       },
     }, model.avante)
   end
 
-  -- local openai = P.providers["openai"]
-  -- for _, model in pairs(openai.models) do
-  --   providers["openai/" .. model.model_name] = vim.tbl_extend("force", {
-  --     __inherited_from = "openai",
-  --     hide_in_model_selector = false,
-  --     endpoint = openai.endpoint,
-  --     api_key_name = openai.api_key_name,
-  --     model = model.model_name,
-  --     display_name = "openai/" .. model.model_name,
-  --     use_response_api = true,
-  --     support_previous_response_id = true,
-  --     extra_request_body = {
-  --       temperature = 0.6,
-  --     },
-  --   }, model.avante)
-  -- end
-
-  local openrouter = P.providers["openrouter"]
-  for _, model in pairs(openrouter.models) do
-    providers[model.model_name] = vim.tbl_extend("force", {
+  local unified = P.providers["unified"]
+  for model_key, model in pairs(unified.models) do
+    providers[model_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       hide_in_model_selector = false,
-      endpoint = openrouter.endpoint,
-      api_key_name = openrouter.api_key_name,
+      endpoint = unified.endpoint,
+      api_key_name = unified.api_key_name,
       model = model.model_name,
       display_name = model.model_name,
-      extra_request_body = {
-        temperature = 0.6,
-      },
+      extra_headers = unified.extra_headers,
     }, model.avante)
   end
 
-  local backend_ai = P.providers["backend_ai"]
-  for _, model in pairs(backend_ai.models) do
-    providers["local/" .. model.model_name] = vim.tbl_extend("force", {
+  local bai_go = P.providers["bai_go"]
+  for model_key, model in pairs(bai_go.models) do
+    providers[model_key] = vim.tbl_extend("force", {
       __inherited_from = "openai",
       hide_in_model_selector = false,
-      endpoint = backend_ai.endpoint,
+      endpoint = bai_go.endpoint,
       model = model.model_name,
-      display_name = "local/" .. model.model_name,
+      display_name = model.model_name .. " (Local)",
     }, model.avante)
   end
 
@@ -101,7 +83,7 @@ return {
     require("avante").setup {
       mode = "agentic",
       providers = get_avante_providers(),
-      provider = "z-ai/glm-5",
+      provider = "glm-5.1",
       selector = {
         exclude_auto_select = { "NvimTree" },
       },
