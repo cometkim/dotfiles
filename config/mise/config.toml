@@ -17,6 +17,8 @@ opencode = "1.14.20"
 "npm:@sourcegraph/amp" = "0.0.1776882341-gbc4d06"
 "npm:@openai/codex" = "0.122.0"
 "npm:command-code" = "0.22.4"
+"npm:chrome-devtools-mcp" = "0.23.0"
+"npm:@z_ai/mcp-server" = "0.1.4"
 
 [settings]
 asdf_compat = true

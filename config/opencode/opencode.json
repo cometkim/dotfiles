@@ -10,11 +10,11 @@
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["bunx", "chrome-devtools-mcp@latest", "--no-usage-statistics"]
+      "command": ["chrome-devtools-mcp", "--no-usage-statistics"]
     },
     "zai-mcp-server": {
       "type": "local",
-      "command": ["bunx", "@z_ai/mcp-server"],
+      "command": ["zai-mcp-server"],
       "environment": {
         "Z_AI_API_KEY": "{env:ZAI_API_KEY}",
         "Z_AI_MODE": "ZAI"
