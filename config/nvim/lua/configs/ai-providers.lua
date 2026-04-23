@@ -23,15 +23,23 @@ local constants = {
   },
 }
 
+local gateway_authorization_token = os.getenv("CF_AIG_TOKEN")
+
+---@type table<string, string>
+local gateway_authorization_headers = {}
+if gateway_authorization_token then
+  gateway_authorization_headers = {
+    ["cf-aig-authorization"] = "Bearer " .. gateway_authorization_token,
+  }
+end
+
 -- Models configuration
 ---@type { [string]: ProviderConfig }
 M.providers = {
   glm_coding_plan = {
     endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/custom-zai/api/coding/paas/v4",
     api_key_name = "ZAI_API_KEY",
-    extra_headers = {
-      ["cf-aig-authorization"] = "Bearer " .. os.getenv("CF_AIG_TOKEN")
-    },
+    extra_headers = gateway_authorization_headers,
     models = {
       ["glm-5.1"] = {
         model_name = "glm-5.1",
@@ -51,9 +59,6 @@ M.providers = {
   unified = {
     endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/compat",
     api_key_name = "CF_AIG_TOKEN",
-    -- extra_headers = {
-    --   ["cf-aig-authorization"] = "Bearer " .. os.getenv("CF_AIG_TOKEN")
-    -- },
     models = {
       -- ["claude-opus-4.6"] = {
       --   model_name = "anthropic/claude-opus-4.6",
