@@ -25,6 +25,7 @@ bindings = [
   # Prefer Zellij
   { key = "T", mods = "Alt", action = "None" },
   { key = "N", mods = "Command", action = "None" },
+  { key = "Return", mods = "Shift", chars = "\u001B\r" },
 ]
 
 [general]
