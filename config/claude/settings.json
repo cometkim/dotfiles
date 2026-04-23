@@ -21,7 +21,8 @@
   "enabledPlugins": {
     "claude-mem@thedotmack": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "chrome-devtools-plugins": {
@@ -29,10 +30,16 @@
         "source": "github",
         "repo": "ChromeDevTools/chrome-devtools-mcp"
       }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
     }
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
   "showThinkingSummaries": true,
-  "effortLevel": "high",
   "theme": "dark"
 }
