@@ -6,6 +6,8 @@ return {
     { "saghen/blink.cmp" },
   },
   config = function()
+    local P = require("configs.ai-providers")
+
     require("minuet").setup {
       blink = {
         enable_auto_complete = true,
@@ -39,13 +41,34 @@ return {
       throttle = 1000,   -- Increase to reduce costs and avoid rate limits
       debounce = 400,    -- Increase to reduce costs and avoid rate limits
       context_window = 32768,
-      provider = "codestral",
+      provider = "openai_fim_compatible",
       provider_options = {
+        openai_fim_compatible = {
+          name = "deepseek",
+          model = "deepseek-v4-flash",
+          end_point = P.gateway_endpoint .. "/deepseek/beta/completions",
+          api_key = "CF_AIG_TOKEN",
+          optional = {
+            max_tokens = 256,
+            top_p = 0.9,
+          }
+        },
+        openai_compatible = {
+          name = "opencode_go",
+          model = "deepseek-v4-flash",
+          end_point = P.gateway_endpoint .. "/custom-opencode-go/zen/go/v1/chat/completions",
+          api_key = "CF_AIG_TOKEN",
+          optional = {
+            max_tokens = 256,
+            top_p = 0.9,
+            thinking = { type = "disabled" },
+          },
+        },
         codestral = {
           name = "codestral",
           model = "codestral-latest",
-          end_point = "https://codestral.mistral.ai/v1/fim/completions",
-          api_key = "CODESTRAL_API_KEY",
+          end_point = P.gateway_endpoint .. "/custom-codestral/v1/fim/completions",
+          api_key = "CF_AIG_TOKEN",
           stream = true,
           optional = {
             max_tokens = 256,

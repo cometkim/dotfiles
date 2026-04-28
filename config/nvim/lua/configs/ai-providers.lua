@@ -33,11 +33,13 @@ if gateway_authorization_token then
   }
 end
 
+M.gateway_endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway"
+
 -- Models configuration
 ---@type { [string]: ProviderConfig }
 M.providers = {
   glm_coding_plan = {
-    endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/custom-zai/api/coding/paas/v4",
+    endpoint = M.gateway_endpoint .. "/custom-zai/api/coding/paas/v4",
     api_key_name = "ZAI_API_KEY",
     extra_headers = gateway_authorization_headers,
     models = {
@@ -57,7 +59,7 @@ M.providers = {
   },
 
   unified = {
-    endpoint = "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/compat",
+    endpoint = M.gateway_endpoint .. "/compat",
     api_key_name = "CF_AIG_TOKEN",
     models = {
       -- ["claude-opus-4.6"] = {

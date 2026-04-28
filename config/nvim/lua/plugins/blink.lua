@@ -14,13 +14,13 @@ return {
     end,
     sources = {
       default = {
+        "minuet",
         "avante",
         "lazydev",
         "lsp",
         "path",
         "buffer",
         "snippets",
-        "minuet",
       },
       providers = {
         avante = {
