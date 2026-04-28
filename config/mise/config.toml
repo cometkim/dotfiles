@@ -35,3 +35,6 @@ package_manager = "bun"
 
 [settings.cargo]
 binstall_only = true
+
+[settings.python]
+uv_venv_auto = "source"
