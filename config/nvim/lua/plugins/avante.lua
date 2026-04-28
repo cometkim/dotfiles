@@ -55,6 +55,7 @@ end
 
 return {
   "yetone/avante.nvim",
+  cond = vim.env.WORK_MODE ~= "true",
   event = "VeryLazy",
   version = false,
   keys = {

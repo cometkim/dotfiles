@@ -4,7 +4,7 @@ return {
     "Kaiser-Yang/blink-cmp-avante",
   },
   opts = {
-    enabled = function ()
+    enabled = function()
       local disabled_filetypes = {
         "TelescopePrompt",
         "NvimTree",
@@ -13,15 +13,20 @@ return {
       return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
     end,
     sources = {
-      default = {
-        "minuet",
-        "avante",
-        "lazydev",
-        "lsp",
-        "path",
-        "buffer",
-        "snippets",
-      },
+      default = (function()
+        local sources = {
+          "lazydev",
+          "lsp",
+          "path",
+          "buffer",
+          "snippets",
+        }
+        if vim.env.WORK_MODE ~= "true" then
+          table.insert(sources, 0, "avante")
+          table.insert(sources, 0, "minuet")
+        end
+        return sources
+      end)(),
       providers = {
         avante = {
           name = "Avante",

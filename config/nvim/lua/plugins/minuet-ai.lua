@@ -1,5 +1,6 @@
 return {
   "milanglacier/minuet-ai.nvim",
+  cond = vim.env.WORK_MODE ~= "true",
   event = "VeryLazy",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
