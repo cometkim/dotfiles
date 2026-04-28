@@ -10,11 +10,16 @@
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["chrome-devtools-mcp", "--no-usage-statistics"]
+      "command": [
+        "chrome-devtools-mcp",
+        "--no-usage-statistics"
+      ]
     },
     "zai-mcp-server": {
       "type": "local",
-      "command": ["zai-mcp-server"],
+      "command": [
+        "zai-mcp-server"
+      ],
       "environment": {
         "Z_AI_API_KEY": "{env:ZAI_API_KEY}",
         "Z_AI_MODE": "ZAI"
@@ -47,6 +52,50 @@
     }
   },
   "provider": {
+    "cloudflare-ai-gateway:opencode-go": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OpenCode Go (Gateway)",
+      "options": {
+        "baseURL": "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/custom-opencode-go/zen/go/v1",
+        "apiKey": "{env:CF_AIG_TOKEN}"
+      },
+      "models": {
+        "glm-5.1": {
+          "name": "GLM-5.1"
+        },
+        "kimi-k2.6": {
+          "name": "Kimi K2.6"
+        },
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro"
+        },
+        "deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash"
+        },
+        "mimo-v2.5-pro": {
+          "name": "MiMo-V2.5-Pro"
+        },
+        "minimax-m2.7": {
+          "name": "MiniMax M2.7"
+        },
+        "qwen3.6-plus": {
+          "name": "Qwen3.6 Plus"
+        }
+      }
+    },
+    "cloudflare-ai-gateway:glm-coding-plan": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "GLM Coding Plan (Gateway)",
+      "options": {
+        "baseURL": "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/custom-zai/api/coding/paas/v4",
+        "apiKey": "{env:CF_AIG_TOKEN}"
+      },
+      "models": {
+        "glm-5.1": {
+          "name": "GLM-5.1"
+        }
+      }
+    },
     "backend.ai": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Backend.AI GO",
