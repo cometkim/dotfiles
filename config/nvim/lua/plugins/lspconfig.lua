@@ -8,12 +8,6 @@ return {
 
     nvlsp.defaults()
 
-    vim.lsp.config("*", {
-      on_attach = nvlsp.on_attach,
-      on_init = nvlsp.on_init,
-      capabilities = nvlsp.capabilities,
-    })
-
     vim.lsp.enable {
       "html",
       "cssls",

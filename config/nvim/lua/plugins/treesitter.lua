@@ -69,19 +69,10 @@ return {
   "nvim-treesitter/nvim-treesitter",
   branch = "main",
   lazy = false,
-  build = ":TSUpdate",
+  opts = {
+    ensure_installed = ensure_installed,
+  },
   config = function()
-    local ts = require "nvim-treesitter"
-
-    local already_installed = ts.get_installed()
-    local parsers_to_install = vim.iter(ensure_installed)
-    :filter(function(parser)
-      return not vim.tbl_contains(already_installed, parser)
-    end)
-    :totable()
-
-    ts.install(parsers_to_install)
-
     vim.api.nvim_create_autocmd('FileType', {
       callback = function()
         -- Enable treesitter highlighting and disable regex syntax

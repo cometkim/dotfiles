@@ -5,6 +5,27 @@
 ---@type ChadrcConfig
 local M = {}
 
+M.mason = {
+  pkgs = {
+    "biome",
+    "css-lsp",
+    "deno",
+    "html-lsp",
+    "json-lsp",
+    "lua-language-server",
+    "ocaml-lsp",
+    "rescript-language-server",
+    "ruff",
+    "rust-analyzer",
+    "stylua",
+    "tailwindcss-language-server",
+    "taplo",
+    "ty",
+    "typescript-language-server",
+    "yaml-language-server",
+  },
+}
+
 M.base46 = {
   theme = "chadracula",
   integrations = {
