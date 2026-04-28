@@ -19,6 +19,12 @@ opencode = "1.14.20"
 "npm:command-code" = "0.22.4"
 "npm:chrome-devtools-mcp" = "0.23.0"
 "npm:@z_ai/mcp-server" = "0.1.4"
+cargo-binstall = "1.18.1"
+cargo-dist = "0.31.0"
+"cargo:cargo-update" = "20.0.0"
+"cargo:cargo-run-bin" = "1.7.5"
+"cargo:cargo-nextest" = "0.9.133"
+"cargo:cargo-bloat" = "0.12.1"
 
 [settings]
 asdf_compat = true
@@ -26,3 +32,6 @@ idiomatic_version_file_enable_tools = ["python"]
 
 [settings.npm]
 package_manager = "bun"
+
+[settings.cargo]
+binstall_only = true
