@@ -31,7 +31,7 @@ return {
 
     require("conform").setup {
       formatters_by_ft = {
-        lua = { "stylelua" },
+        lua = { "stylua" },
         javascript = { "biome-check", lsp_format = "prefer" },
         javascriptreact = { "biome-check", lsp_format = "prefer" },
         typescript = { "biome-check", lsp_format = "prefer" },
