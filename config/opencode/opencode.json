@@ -61,38 +61,70 @@
       },
       "models": {
         "glm-5.1": {
-          "name": "GLM-5.1"
+          "name": "GLM-5.1",
+          "limit": {
+            "context": 202752,
+            "output": 32768
+          }
         },
         "kimi-k2.6": {
-          "name": "Kimi K2.6"
+          "name": "Kimi K2.6",
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
         },
         "deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro"
+          "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
         },
         "deepseek-v4-flash": {
-          "name": "DeepSeek V4 Flash"
+          "name": "DeepSeek V4 Flash",
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
         },
         "mimo-v2.5-pro": {
-          "name": "MiMo-V2.5-Pro"
+          "name": "MiMo-V2.5-Pro",
+          "limit": {
+            "context": 1048576,
+            "output": 128000
+          }
         },
         "minimax-m2.7": {
-          "name": "MiniMax M2.7"
+          "name": "MiniMax M2.7",
+          "limit": {
+            "context": 204800,
+            "output": 131072
+          }
         },
         "qwen3.6-plus": {
-          "name": "Qwen3.6 Plus"
+          "name": "Qwen3.6 Plus",
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
         }
       }
     },
     "cloudflare-ai-gateway:glm-coding-plan": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "GLM Coding Plan (Gateway)",
+      "name": "Z.AI Coding Plan (Gateway)",
       "options": {
         "baseURL": "https://gateway.ai.cloudflare.com/v1/fe86c3d78b514b31fdd1a74181c2c4ce/ai-gateway/custom-zai/api/coding/paas/v4",
         "apiKey": "{env:CF_AIG_TOKEN}"
       },
       "models": {
         "glm-5.1": {
-          "name": "GLM-5.1"
+          "name": "GLM-5.1",
+          "limit": {
+            "context": 200000,
+            "output": 131072
+          }
         }
       }
     },
@@ -103,7 +135,12 @@
         "baseURL": "http://localhost:39080/v1"
       },
       "models": {
-        "unsloth/Qwen3.5-9B": {}
+        "unsloth/Qwen3.5-9B": {
+          "limit": {
+            "context": 262144,
+            "output": 32000
+          }
+        }
       }
     }
   }
