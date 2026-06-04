@@ -106,7 +106,7 @@
         "mimo-v2.5": {
           "name": "MiMo-V2.5",
           "limit": {
-            "context": 100000,
+            "context": 1000000,
             "output": 128000
           }
         }
@@ -133,7 +133,7 @@
         "qwen3.7-max": {
           "name": "Qwen3.7 Max",
           "limit": {
-            "context": 100000,
+            "context": 1000000,
             "output": 65536
           },
           "headers": {
