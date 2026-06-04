@@ -1,6 +1,8 @@
+local utils = require("utils")
+
 return {
   "milanglacier/minuet-ai.nvim",
-  cond = vim.env.WORK_MODE ~= "true",
+  cond = not utils.is_ai_denied(),
   event = "VeryLazy",
   dependencies = {
     { "nvim-lua/plenary.nvim" },

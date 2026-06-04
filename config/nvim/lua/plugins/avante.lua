@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 local get_avante_providers = function()
   local A = require("avante.config")
   local P = require("configs.ai-providers")
@@ -55,7 +57,7 @@ end
 
 return {
   "yetone/avante.nvim",
-  cond = vim.env.WORK_MODE ~= "true",
+  cond = not utils.is_ai_denied(),
   event = "VeryLazy",
   version = false,
   keys = {

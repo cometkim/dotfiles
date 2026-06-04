@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
   "saghen/blink.cmp",
   dependencies = {
@@ -21,7 +23,7 @@ return {
           "buffer",
           "snippets",
         }
-        if vim.env.WORK_MODE ~= "true" then
+        if not utils.is_ai_denied() then
           table.insert(sources, 0, "avante")
           table.insert(sources, 0, "minuet")
         end
