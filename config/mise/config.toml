@@ -32,6 +32,8 @@ zig = "0.16.0"
 "cargo:cargo-nextest" = "0.9.137"
 "cargo:cargo-update" = "20.0.0"
 "cargo:cargo-run-bin" = "1.7.5"
+"cargo:wasm-bindgen-cli" = "0.2.122"
+"cargo:wasm-pack" = "0.15.0"
 
 "npm:chrome-devtools-mcp" = "1.1.1"
 "npm:typescript-language-server" = "5.3.0"
