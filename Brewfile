@@ -34,6 +34,9 @@ brew "yarn"
 brew "zellij"
 brew "zoxide"
 
+tap "aovestdipaperino/tap"
+brew "tokensave"
+
 if OS.linux?
   brew "pinentry"
   brew "zsh"

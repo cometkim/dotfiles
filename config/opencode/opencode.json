@@ -8,6 +8,10 @@
     "opencode-claude-auth@1.5.4"
   ],
   "mcp": {
+    "tokensave": {
+      "type": "local",
+      "command": ["tokensave", "serve"]
+    },
     "slack": {
       "type": "remote",
       "url": "https://mcp.slack.com/mcp",

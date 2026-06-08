@@ -1,48 +1,160 @@
 {
+  "theme": "dark",
+  "model": "opus[1m]",
+  "effortLevel": "max",
+  "alwaysThinkingEnabled": true,
+  "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
   "env": {
     "DISABLE_TELEMETRY": "1"
   },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "repo": "anthropics/skills",
+        "source": "github"
+      }
+    },
+    "chrome-devtools-plugins": {
+      "source": {
+        "repo": "ChromeDevTools/chrome-devtools-mcp",
+        "source": "github"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "claude-mem@thedotmack": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "slack@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tokensave",
+            "args": ["hook-pre-tool-use"]
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tokensave",
+            "args": ["hook-stop"]
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tokensave",
+            "args": ["hook-prompt-submit"]
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
-      "Read(~/.zshrc)",
+      "Bash(git diff)",
+      "Bash(git log)",
+      "Bash(git status)",
       "Bash(ls)",
       "Bash(lsb_release)",
       "Bash(uname)",
-      "Bash(git log)",
-      "Bash(git diff)",
-      "Bash(git status)"
+      "Read(~/.zshrc)",
+      "mcp__tokensave__tokensave_affected",
+      "mcp__tokensave__tokensave_ast_grep_rewrite",
+      "mcp__tokensave__tokensave_body",
+      "mcp__tokensave__tokensave_branch_diff",
+      "mcp__tokensave__tokensave_branch_list",
+      "mcp__tokensave__tokensave_branch_search",
+      "mcp__tokensave__tokensave_by_qualified_name",
+      "mcp__tokensave__tokensave_call_chain",
+      "mcp__tokensave__tokensave_callees",
+      "mcp__tokensave__tokensave_callers",
+      "mcp__tokensave__tokensave_callers_for",
+      "mcp__tokensave__tokensave_changelog",
+      "mcp__tokensave__tokensave_circular",
+      "mcp__tokensave__tokensave_commit_context",
+      "mcp__tokensave__tokensave_complexity",
+      "mcp__tokensave__tokensave_config",
+      "mcp__tokensave__tokensave_constructors",
+      "mcp__tokensave__tokensave_context",
+      "mcp__tokensave__tokensave_coupling",
+      "mcp__tokensave__tokensave_dead_code",
+      "mcp__tokensave__tokensave_dependency_depth",
+      "mcp__tokensave__tokensave_derives",
+      "mcp__tokensave__tokensave_diagnose",
+      "mcp__tokensave__tokensave_diagnostics",
+      "mcp__tokensave__tokensave_diff_context",
+      "mcp__tokensave__tokensave_distribution",
+      "mcp__tokensave__tokensave_doc_coverage",
+      "mcp__tokensave__tokensave_dsm",
+      "mcp__tokensave__tokensave_field_sites",
+      "mcp__tokensave__tokensave_file_dependents",
+      "mcp__tokensave__tokensave_files",
+      "mcp__tokensave__tokensave_find_exact_symbol",
+      "mcp__tokensave__tokensave_gini",
+      "mcp__tokensave__tokensave_god_class",
+      "mcp__tokensave__tokensave_health",
+      "mcp__tokensave__tokensave_hotspots",
+      "mcp__tokensave__tokensave_impact",
+      "mcp__tokensave__tokensave_implementations",
+      "mcp__tokensave__tokensave_impls",
+      "mcp__tokensave__tokensave_inheritance_depth",
+      "mcp__tokensave__tokensave_insert_at",
+      "mcp__tokensave__tokensave_insert_at_symbol",
+      "mcp__tokensave__tokensave_largest",
+      "mcp__tokensave__tokensave_module_api",
+      "mcp__tokensave__tokensave_multi_str_replace",
+      "mcp__tokensave__tokensave_node",
+      "mcp__tokensave__tokensave_outline",
+      "mcp__tokensave__tokensave_port_order",
+      "mcp__tokensave__tokensave_port_status",
+      "mcp__tokensave__tokensave_pr_context",
+      "mcp__tokensave__tokensave_rank",
+      "mcp__tokensave__tokensave_read",
+      "mcp__tokensave__tokensave_record_code_area",
+      "mcp__tokensave__tokensave_record_decision",
+      "mcp__tokensave__tokensave_recursion",
+      "mcp__tokensave__tokensave_redundancy",
+      "mcp__tokensave__tokensave_rename_preview",
+      "mcp__tokensave__tokensave_replace_symbol",
+      "mcp__tokensave__tokensave_run_affected_tests",
+      "mcp__tokensave__tokensave_runtime",
+      "mcp__tokensave__tokensave_search",
+      "mcp__tokensave__tokensave_session_end",
+      "mcp__tokensave__tokensave_session_recall",
+      "mcp__tokensave__tokensave_session_start",
+      "mcp__tokensave__tokensave_signature",
+      "mcp__tokensave__tokensave_signature_search",
+      "mcp__tokensave__tokensave_similar",
+      "mcp__tokensave__tokensave_simplify_scan",
+      "mcp__tokensave__tokensave_status",
+      "mcp__tokensave__tokensave_str_replace",
+      "mcp__tokensave__tokensave_test_map",
+      "mcp__tokensave__tokensave_test_risk",
+      "mcp__tokensave__tokensave_todos",
+      "mcp__tokensave__tokensave_type_hierarchy",
+      "mcp__tokensave__tokensave_unsafe_patterns",
+      "mcp__tokensave__tokensave_unused_imports"
     ],
     "deny": [
       "Read(~/.zshrc-credentials)",
       "Read(**/.env)"
     ]
-  },
-  "model": "opus[1m]",
-  "enabledPlugins": {
-    "claude-mem@thedotmack": true,
-    "chrome-devtools-mcp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "slack@claude-plugins-official": false
-  },
-  "extraKnownMarketplaces": {
-    "chrome-devtools-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "ChromeDevTools/chrome-devtools-mcp"
-      }
-    },
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    }
-  },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
-  "showThinkingSummaries": true,
-  "theme": "dark",
-  "skipWorkflowUsageWarning": true
+  }
 }
