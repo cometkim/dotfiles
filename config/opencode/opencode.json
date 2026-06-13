@@ -80,11 +80,11 @@
             "output": 32768
           }
         },
-        "kimi-k2.6": {
-          "name": "Kimi K2.6",
+        "kimi-k2.7-code": {
+          "name": "Kimi K2.7 Code",
           "limit": {
             "context": 262144,
-            "output": 65536
+            "output": 262144
           }
         },
         "deepseek-v4-pro": {
