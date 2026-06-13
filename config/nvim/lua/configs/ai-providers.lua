@@ -43,8 +43,8 @@ M.providers = {
     api_key_name = "ZAI_API_KEY",
     extra_headers = gateway_authorization_headers,
     models = {
-      ["glm-5.1"] = {
-        model_name = "glm-5.1",
+      ["glm-5.2"] = {
+        model_name = "glm-5.2",
         avante = {
           timeout = constants.timeout.reasoning,
         },

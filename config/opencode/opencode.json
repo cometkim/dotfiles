@@ -164,6 +164,16 @@
         "apiKey": "{env:CF_AIG_TOKEN}"
       },
       "models": {
+        "glm-5.2": {
+          "name": "GLM-5.2",
+          "limit": {
+            "context": 1000000,
+            "output": 131072
+          },
+          "options": {
+            "reasoningEffort": "max"
+          }
+        },
         "glm-5.1": {
           "name": "GLM-5.1",
           "limit": {

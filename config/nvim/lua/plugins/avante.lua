@@ -86,7 +86,7 @@ return {
     require("avante").setup {
       mode = "agentic",
       providers = get_avante_providers(),
-      provider = "glm-5.1",
+      provider = "glm-5.2",
       selector = {
         exclude_auto_select = { "NvimTree" },
       },
