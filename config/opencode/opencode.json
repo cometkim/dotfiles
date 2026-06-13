@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "small_model": "cloudflare-ai-gateway:glm-coding-plan/glm-4.5-air",
   "autoupdate": false,
   "tools": {
     "lsp": true
