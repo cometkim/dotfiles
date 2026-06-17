@@ -43,6 +43,8 @@ zig = "0.16.0"
 "npm:@z_ai/mcp-server" = "0.1.4"
 "npm:opencode-claude-auth" = "1.5.4"
 
+"go:golang.org/x/tools/gopls" = "0.22.0"
+
 [settings]
 asdf_compat = true
 idiomatic_version_file_enable_tools = ["python"]
