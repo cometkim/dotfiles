@@ -2,3 +2,5 @@
 /fonts/.uuid
 lazy-lock.json
 package-lock.json
+
+*.local.toml
