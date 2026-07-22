@@ -73,11 +73,32 @@
         "apiKey": "{env:CF_AIG_TOKEN}"
       },
       "models": {
+        "grok-4.5": {
+          "name": "Grok 4.5",
+          "limit": {
+            "context": 500000,
+            "output": 500000
+          }
+        },
+        "glm-5.2": {
+          "name": "GLM-5.2",
+          "limit": {
+            "context": 1000000,
+            "output": 131072
+          }
+        },
         "glm-5.1": {
           "name": "GLM-5.1",
           "limit": {
             "context": 202752,
             "output": 32768
+          }
+        },
+        "kimi-k3": {
+          "name": "Kimi K3",
+          "limit": {
+            "context": 1048576,
+            "output": 131072
           }
         },
         "kimi-k2.7-code": {
@@ -145,10 +166,10 @@
             "cf-aig-authorization": "Bearer {env:CF_AIG_TOKEN}"
           }
         },
-        "qwen3.6-plus": {
-          "name": "Qwen3.6 Plus",
+        "qwen3.7-plus": {
+          "name": "Qwen3.7 Plus",
           "limit": {
-            "context": 262144,
+            "context": 1000000,
             "output": 65536
           },
           "headers": {
