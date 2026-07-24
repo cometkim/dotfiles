@@ -38,7 +38,9 @@
           {
             "type": "command",
             "command": "tokensave",
-            "args": ["hook-pre-tool-use"]
+            "args": [
+              "hook-pre-tool-use"
+            ]
           }
         ]
       }
@@ -49,7 +51,9 @@
           {
             "type": "command",
             "command": "tokensave",
-            "args": ["hook-stop"]
+            "args": [
+              "hook-stop"
+            ]
           }
         ]
       }
@@ -60,7 +64,9 @@
           {
             "type": "command",
             "command": "tokensave",
-            "args": ["hook-prompt-submit"]
+            "args": [
+              "hook-prompt-submit"
+            ]
           }
         ]
       }
@@ -127,7 +133,6 @@
       "mcp__tokensave__tokensave_module_api",
       "mcp__tokensave__tokensave_multi_str_replace",
       "mcp__tokensave__tokensave_node",
-      "mcp__tokensave__tokensave_outline",
       "mcp__tokensave__tokensave_port_order",
       "mcp__tokensave__tokensave_port_status",
       "mcp__tokensave__tokensave_pr_context",

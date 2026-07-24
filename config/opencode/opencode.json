@@ -11,7 +11,10 @@
   "mcp": {
     "tokensave": {
       "type": "local",
-      "command": ["tokensave", "serve"]
+      "command": [
+        "tokensave",
+        "serve"
+      ]
     },
     "slack": {
       "type": "remote",
@@ -227,5 +230,8 @@
         }
       }
     }
-  }
+  },
+  "instructions": [
+    "tokensave.md"
+  ]
 }
