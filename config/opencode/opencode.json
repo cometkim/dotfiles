@@ -90,13 +90,6 @@
             "output": 131072
           }
         },
-        "glm-5.1": {
-          "name": "GLM-5.1",
-          "limit": {
-            "context": 202752,
-            "output": 32768
-          }
-        },
         "kimi-k3": {
           "name": "Kimi K3",
           "limit": {
@@ -206,11 +199,11 @@
             "reasoningEffort": "max"
           }
         },
-        "glm-5.1": {
-          "name": "GLM-5.1",
+        "glm-4.5-air": {
+          "name": "GLM-4.5-Air",
           "limit": {
-            "context": 200000,
-            "output": 131072
+            "context": 131072,
+            "output":	98304
           }
         }
       }
