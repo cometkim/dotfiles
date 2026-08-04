@@ -49,7 +49,7 @@ return {
         openai_fim_compatible = {
           name = "deepseek",
           model = "deepseek-v4-flash",
-          end_point = P.gateway_endpoint .. "/deepseek/beta/completions",
+          end_point = P.gateway_endpoint .. "/deepseek/completions",
           api_key = "CF_AIG_TOKEN",
           optional = {
             max_tokens = 256,
