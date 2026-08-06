@@ -1,6 +1,5 @@
 - Check host (MacOS or Ubuntu) before running any OS-dependent scripts.
 - Don't rely on the `git` command, I rarely commit my local changes, but always do it myself.
-- Prefer using Node.js (w/ `.mjs` and top-level await) or Bash, rather than Python for scripting.
 - My workspace is always placed under `$WORKSPACE` (`~/Workspace`) path.
   - Projects: `~/Workspace/src/{url}`, url is same with the upstream repo. (E.g. `~/Workspace/src/github.com/cometkim/dotfiles`)
   - Temp, PoCs: `~/Workspace/tmp/{name}`
@@ -19,6 +18,5 @@
   - Check `packageManager` setting first. (I never use `npm` and `npx`)
 - For Python projects
   - Use `uv` managed python environment instead of global `python` installation.
-  - Use `ty` for type checking
 - For Rust projects
-  - `edition = 2024`
+  - `cargo nextest` instead the default runner
