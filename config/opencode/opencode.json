@@ -5,25 +5,7 @@
   "tools": {
     "lsp": true
   },
-  "plugin": [
-    "opencode-claude-auth@1.5.4"
-  ],
   "mcp": {
-    "tokensave": {
-      "type": "local",
-      "command": [
-        "tokensave",
-        "serve"
-      ]
-    },
-    "slack": {
-      "type": "remote",
-      "url": "https://mcp.slack.com/mcp",
-      "oauth": {
-        "clientId": "1601185624273.8899143856786",
-        "redirectUri": "http://localhost:3118/callback"
-      }
-    },
     "chrome-devtools": {
       "type": "local",
       "command": [
@@ -223,8 +205,5 @@
         }
       }
     }
-  },
-  "instructions": [
-    "tokensave.md"
-  ]
+  }
 }
