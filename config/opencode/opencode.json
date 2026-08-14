@@ -141,8 +141,8 @@
             "cf-aig-authorization": "Bearer {env:CF_AIG_TOKEN}"
           }
         },
-        "qwen3.7-max": {
-          "name": "Qwen3.7 Max",
+        "qwen3.8-max": {
+          "name": "Qwen3.8 Max",
           "limit": {
             "context": 1000000,
             "output": 65536
@@ -171,6 +171,16 @@
         "apiKey": "{env:CF_AIG_TOKEN}"
       },
       "models": {
+        "glm-5.3": {
+          "name": "GLM-5.3",
+          "limit": {
+            "context": 1000000,
+            "output": 131072
+          },
+          "options": {
+            "reasoningEffort": "max"
+          }
+        },
         "glm-5.2": {
           "name": "GLM-5.2",
           "limit": {

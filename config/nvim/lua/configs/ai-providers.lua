@@ -43,8 +43,8 @@ M.providers = {
     api_key_name = "ZAI_API_KEY",
     extra_headers = gateway_authorization_headers,
     models = {
-      ["glm-5.2"] = {
-        model_name = "glm-5.2",
+      ["glm-5.3"] = {
+        model_name = "glm-5.3",
         avante = {
           timeout = constants.timeout.reasoning,
         },
@@ -98,8 +98,8 @@ M.providers = {
       --     timeout = constants.timeout.reasoning,
       --   },
       -- },
-      ["kimi-k2.6"] = {
-        model_name = "workers-ai/@cf/moonshotai/kimi-k2.6",
+      ["kimi-k2.7-code"] = {
+        model_name = "workers-ai/@cf/moonshotai/kimi-k2.7-code",
         avante = {
           timeout = constants.timeout.reasoning,
         },
