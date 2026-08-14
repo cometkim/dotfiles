@@ -1,13 +1,23 @@
 {
-  "model": "claude-opus-5[1m]",
-  "effortLevel": "xhigh",
-  "alwaysThinkingEnabled": true,
-  "showThinkingSummaries": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "dark",
   "env": {
     "DISABLE_TELEMETRY": "1"
   },
+  "permissions": {
+    "allow": [
+      "Bash(git diff)",
+      "Bash(git log)",
+      "Bash(git status)",
+      "Bash(ls)",
+      "Bash(lsb_release)",
+      "Bash(uname)",
+      "Read(~/.zshrc)"
+    ],
+    "deny": [
+      "Read(~/.zshrc-credentials)",
+      "Read(**/.env)"
+    ]
+  },
+  "model": "claude-fable-5[1m]",
   "enabledPlugins": {
     "chrome-devtools-mcp@claude-plugins-official": true,
     "claude-mem@thedotmack": true,
@@ -30,19 +40,9 @@
       }
     }
   },
-  "permissions": {
-    "allow": [
-      "Bash(git diff)",
-      "Bash(git log)",
-      "Bash(git status)",
-      "Bash(ls)",
-      "Bash(lsb_release)",
-      "Bash(uname)",
-      "Read(~/.zshrc)"
-    ],
-    "deny": [
-      "Read(~/.zshrc-credentials)",
-      "Read(**/.env)"
-    ]
-  }
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
+  "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark"
 }
