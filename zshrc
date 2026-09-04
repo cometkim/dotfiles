@@ -35,9 +35,6 @@ zinit wait lucid for \
 # zoxide
 eval "$(zoxide init zsh)"
 
-# curl (Cloudflare patch for HTTP/3 support)
-export PATH="$(brew --prefix cloudflare/cloudflare/curl)/bin:$PATH"
-
 # Television (fuzzy finder)
 eval "$(tv init zsh)"
 
