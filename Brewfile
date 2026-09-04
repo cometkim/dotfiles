@@ -36,7 +36,6 @@ brew "zoxide"
 
 if OS.linux?
   brew "pinentry"
-  brew "zsh"
 end
 
 if OS.mac?

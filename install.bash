@@ -3,6 +3,13 @@
 set -eo pipefail
 
 SOURCE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd "$SOURCE_DIR"
+
+if [[ -r /etc/os-release ]]; then
+  source /etc/os-release
+  OS_ID="${ID:-}"
+  OS_CODENAME="${VERSION_CODENAME:-}"
+fi
 
 DATA="${XDG_DATA_HOME:-${HOME}/.local/share}"
 mkdir -p "$DATA"
@@ -58,28 +65,30 @@ function include() {
 }
 
 function install_apt_dependencies() {
-  local DIST_NAME="$(lsb_release -sc 2>/dev/null)"
   local INSTALL_DIR="/etc/apt/sources.list.d"
-  local ADDITIONAL_PACKAGES=()
+  local -a ADDITIONAL_PACKAGES=()
 
-  find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources" | while read -r file; do
+  local file
+  while IFS= read -r file; do
     echo "Preparing $file"
     sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
     ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
-  done
+  done < <(find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources")
 
-  if [[ -d "ubuntu/sources.d/$DIST_NAME" ]]; then
-    find "ubuntu/sources.d/$DIST_NAME" -type f -name "*.sources" | while read -r file; do
+  if [[ -d "ubuntu/sources.d/$OS_CODENAME" ]]; then
+    while IFS= read -r file; do
       echo "Preparing $file"
       sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
       ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
-    done
+    done < <(find "ubuntu/sources.d/$OS_CODENAME" -type f -name "*.sources")
   fi
 
   sudo apt update
   sudo apt upgrade -y
 
   sudo apt install -y \
+    curl \
+    git \
     zlib1g-dev \
     libncurses5-dev \
     libgdbm-dev \
@@ -100,6 +109,7 @@ function install_apt_dependencies() {
     python3 \
     wget \
     alacritty \
+    zsh \
     "${ADDITIONAL_PACKAGES[@]}"
 
   sudo apt autoremove -y
@@ -126,20 +136,21 @@ function install_or_update_homebrew() {
       sudo ln -sf "/home/linuxbrew/.linuxbrew" "/opt/homebrew"
     fi
   fi
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv bash)"
 
   # Will update homebrew itself
   brew update
 }
 
 function install_or_update_cargo() {
-  source "$HOME/.cargo/env" &> /dev/null |:
-
   if [[ ! -x "$(command -v rustup)" ]]; then
-    curl -fsSL "https://sh.rustup.rs" | bash
+    curl -fsSL "https://sh.rustup.rs" \
+      | bash -s -- -y --default-toolchain stable --no-modify-path
   else
     rustup self update
   fi
+
+  source "$HOME/.cargo/env" &> /dev/null || :
 
   if [[ ! -x "$(command -v cargo)" ]]; then
     rustup install stable
@@ -147,57 +158,37 @@ function install_or_update_cargo() {
   fi
 }
 
-function install_or_update_alacritty() {
-  if [[ "$(uname)" == "Darwin" ]]; then
-    echo "skip installing Alacritty, may be managed by Homebrew"
+function set_default_terminal() {
+  local TERMINAL="$(command -v alacritty)"
 
-  elif [[ "$(lsb_release -si)" == "Ubuntu" ]]; then
-    echo "skip installing Alacritty, may be managed by APT"
+  sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$TERMINAL" 50
+  sudo update-alternatives --set x-terminal-emulator "$TERMINAL"
 
+  if command -v gsettings > /dev/null \
+    && [[ -n "$DBUS_SESSION_BUS_ADDRESS" ]] \
+    && gsettings writable org.gnome.settings-daemon.plugins.media-keys custom-keybindings > /dev/null 2>&1 \
+    && gsettings list-relocatable-schemas 2> /dev/null | grep -qx "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"; then
+    local KB="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['$KB']"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KB name 'Terminal'
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KB command 'alacritty'
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KB binding '<Primary><Alt>t'
   else
-    local ALACRITTY_HOME="$DATA/alacritty"
-
-    if [[ ! -d "$ALACRITTY_HOME" ]]; then
-      echo "download Alacritty to $ALACRITTY_HOME..."
-
-      mkdir -p "$(dirname "$ALACRITTY_HOME")"
-      git clone "https://github.com/alacritty/alacritty.git" "$ALACRITTY_HOME"
-
-      pushd "$ALACRITTY_HOME" || exit
-      cargo build --release
-      sudo ln -sf "$(pwd)/target/release/alacritty" "/usr/local/bin/"
-      sudo ln -sf "$(pwd)/extra/logo/alacritty-term.svg" "/usr/share/pixmaps//Alacritty.svg"
-      sudo desktop-file-install "extra/linux/Alacritty.desktop"
-      sudo update-desktop-database "$DATA/applications"
-      popd || exit
-    else
-      pushd "$ALACRITTY_HOME" || exit
-
-      local BEFORE_HASH
-      BEFORE_HASH="$(git rev-parse HEAD)"
-
-      git pull
-
-      local AFTER_HASH
-      AFTER_HASH="$(git rev-parse HEAD)"
-
-      if [[ "$BEFORE_HASH" != "$AFTER_HASH" ]]; then
-        echo "update detected, rebuilding Alacritty..."
-        cargo build --release
-      fi
-      popd || exit
-    fi
+    echo "skip rebinding Ctrl+Alt+T (no GNOME/D-Bus session)"
   fi
 }
 
 if [[ "$(uname)" == "Darwin" ]]; then
   include "macos/sysctl.conf" "/etc/sysctl.conf"
 
-elif [[ "$(lsb_release -si)" == "Ubuntu" ]]; then
+elif [[ "$OS_ID" == "ubuntu" ]]; then
   link "ubuntu/sysctl.conf"                    "/etc/sysctl.d/99-local.conf"
   link "ubuntu/limits.d/99-nofile-limits.conf" "/etc/security/limits.d/99-nofile-limits.conf"
 
   install_apt_dependencies
+
+  sudo chsh -s /usr/bin/zsh "$USER"
+  set_default_terminal
 fi
 
 install_or_update_homebrew
@@ -206,8 +197,6 @@ brew bundle --upgrade --file "$SOURCE_DIR/Brewfile"
 # Rustup may detect the rust installed by Homebrew
 RUSTUP_INIT_SKIP_PATH_CHECK=yes \
   install_or_update_cargo
-# May require Rust environment
-install_or_update_alacritty
 
 install_or_update_zinit
 

@@ -1,5 +1,7 @@
 [tool_alias]
 pbkit = "asdf:pbkit/asdf-pbkit"
+binaryen = "asdf:cometkim/asdf-binaryen"
+hermes = "asdf:cometkim/asdf-hermes"
 
 [tools]
 binaryen = "132"
