@@ -189,7 +189,7 @@ function install_apt_dependencies() {
     pkg-config \
     python3 \
     wget \
-    alacritty \
+    desktop-file-utils \
     zsh \
     "${ADDITIONAL_PACKAGES[@]}"
 
@@ -239,8 +239,60 @@ function install_or_update_cargo() {
   fi
 }
 
+# The apt package is way too old, so build it from source
+function install_or_update_alacritty() {
+  if [[ "$(uname)" != "Linux" ]]; then
+    echo "skip installing Alacritty, may be managed by Homebrew"
+    return
+  fi
+
+  local ALACRITTY_HOME="$DATA/alacritty"
+  local NEEDS_BUILD=1
+
+  if [[ ! -d "$ALACRITTY_HOME" ]]; then
+    echo "cloning Alacritty to $ALACRITTY_HOME..."
+    mkdir -p "$(dirname "$ALACRITTY_HOME")"
+    git clone "https://github.com/alacritty/alacritty.git" "$ALACRITTY_HOME"
+  else
+    local BEFORE_HASH AFTER_HASH
+    BEFORE_HASH="$(git -C "$ALACRITTY_HOME" rev-parse HEAD)"
+    git -C "$ALACRITTY_HOME" pull
+    AFTER_HASH="$(git -C "$ALACRITTY_HOME" rev-parse HEAD)"
+
+    if [[ "$BEFORE_HASH" == "$AFTER_HASH" && -x "$ALACRITTY_HOME/target/release/alacritty" ]]; then
+      echo "Alacritty is up to date"
+      NEEDS_BUILD=0
+    elif [[ "$BEFORE_HASH" != "$AFTER_HASH" ]]; then
+      echo "update detected, rebuilding Alacritty..."
+    fi
+  fi
+
+  if [[ "$NEEDS_BUILD" == 1 ]]; then
+    (
+      cd "$ALACRITTY_HOME"
+      cargo build --release --locked
+    )
+  fi
+
+  sudo ln -sf "$ALACRITTY_HOME/target/release/alacritty" "/usr/local/bin/alacritty"
+  sudo ln -sf "$ALACRITTY_HOME/extra/logo/alacritty-term.svg" "/usr/share/pixmaps/Alacritty.svg"
+
+  if command -v desktop-file-install > /dev/null; then
+    sudo desktop-file-install --dir="/usr/share/applications" \
+      "$ALACRITTY_HOME/extra/linux/Alacritty.desktop"
+    sudo update-desktop-database "/usr/share/applications"
+  else
+    echo "skip installing desktop entry (desktop-file-utils not found)"
+  fi
+}
+
 function set_default_terminal() {
   local TERMINAL="$(command -v alacritty)"
+
+  if [[ -z "$TERMINAL" ]]; then
+    echo "skip setting default terminal (alacritty not found)"
+    return
+  fi
 
   sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$TERMINAL" 50
   sudo update-alternatives --set x-terminal-emulator "$TERMINAL"
@@ -278,6 +330,9 @@ brew bundle --upgrade --file "$SOURCE_DIR/Brewfile"
 # Rustup may detect the rust installed by Homebrew
 RUSTUP_INIT_SKIP_PATH_CHECK=yes \
   install_or_update_cargo
+
+# May require Rust environment
+install_or_update_alacritty
 
 install_or_update_zinit
 
