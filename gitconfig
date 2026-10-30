@@ -76,3 +76,7 @@
 
 [includeIf "gitdir:~/Workspace/src/github.com/karrot-emu/"]
   path = .gitconfig-karrot-emu
+
+# Ignored silently on platforms where the file doesn't exist
+[include]
+  path = ~/.gitconfig-windows

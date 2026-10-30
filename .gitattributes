@@ -1,0 +1,2 @@
+# Normalize line endings for a repo shared across macOS, Linux and Windows.
+* text=auto eol=lf

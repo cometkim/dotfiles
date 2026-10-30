@@ -1,0 +1,5 @@
+# Git for Windows bundles its own GnuPG, but only Git Bash puts it on PATH.
+# PowerShell/VS Code resolve `gpg` to a standalone GnuPG install instead,
+# so point at the bundled one explicitly to keep a single keyring (~/.gnupg).
+[gpg]
+  program = C:/Program Files/Git/usr/bin/gpg.exe
