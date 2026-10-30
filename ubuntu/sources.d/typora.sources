@@ -1,7 +1,7 @@
 Types: deb
 URIs: https://typora.io/linux
 Suites: ./
-Components: 
+Components:
 Signed-by: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQENBFfnQVEBCADPtPh703CFkr0xRRZpVoD04jSYn7Kg6DssR+2ItivGup9bu5B9

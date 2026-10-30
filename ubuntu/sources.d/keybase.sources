@@ -2,7 +2,6 @@ Types: deb
 URIs: http://prerelease.keybase.io/deb
 Suites: stable
 Components: main
-Architectures: amd64
 Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFKLi6cBEACcP/W6NBY1Dy+1Tm6LWOpPGbP1DsxP+ggIA0LmxaXWwL6g/2Kv

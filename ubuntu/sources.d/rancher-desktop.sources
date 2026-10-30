@@ -1,6 +1,5 @@
 Types: deb
 URIs: https://download.opensuse.org/repositories/isv:/Rancher:/stable/deb/
-Architectures: amd64
 Suites: ./
 Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  Version: GnuPG v2.4.4 (GNU/Linux)

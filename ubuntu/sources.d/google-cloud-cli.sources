@@ -2,7 +2,6 @@ Types: deb
 URIs: https://packages.cloud.google.com/apt
 Suites: cloud-sdk
 Components: main
-Architectures: amd64
 Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  xsBNBGCRt7MBCADkYJHHQQoL6tKrW/LbmfR9ljz7ib2aWno4JO3VKQvLwjyUMPpq

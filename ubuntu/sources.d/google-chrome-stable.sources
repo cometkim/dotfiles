@@ -2,7 +2,6 @@ Types: deb
 URIs: https://dl.google.com/linux/chrome/deb/
 Suites: stable
 Components: main
-Architectures: amd64
 Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFcMjNMBEAC6Wr5QuLIFgz1V1EFPlg8ty2TsjQEl4VWftUAqWlMevJFWvYEx

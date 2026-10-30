@@ -2,7 +2,6 @@ Types: deb
 URIs: https://packagecloud.io/slacktechnologies/slack/debian/
 Suites: jessie
 Components: main
-Architectures: amd64
 Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
  .
  mQINBFbGA48BEAC2S2NI8thjLDFCqjjWweQ2M6KF4+9+r4XFejsImspzDHm3+LhM
