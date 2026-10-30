@@ -5,6 +5,39 @@ set -eo pipefail
 SOURCE_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SOURCE_DIR"
 
+SKIP_APT_SOURCES=""
+
+function usage() {
+  echo "Usage: $(basename "$0") [--skip-apt-sources[=<name>,...]]"
+  echo
+  echo "Options:"
+  echo "  --skip-apt-sources            Skip all additional apt sources under ubuntu/sources.d"
+  echo "  --skip-apt-sources=<names>    Skip only the given comma-separated sources"
+  echo "                                e.g. --skip-apt-sources=keybase,slack,typora"
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --skip-apt-sources)
+      SKIP_APT_SOURCES="all"
+      ;;
+    --skip-apt-sources=*)
+      SKIP_APT_SOURCES="${1#*=}"
+      [[ -z "$SKIP_APT_SOURCES" ]] && SKIP_APT_SOURCES="all"
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+  shift
+done
+
 if [[ -r /etc/os-release ]]; then
   source /etc/os-release
   OS_ID="${ID:-}"
@@ -20,6 +53,8 @@ mkdir -p "$CONFIG"
 WORKDIR="$HOME/Workspace"
 mkdir -p "$WORKDIR/src"
 mkdir -p "$WORKDIR/tmp"
+
+APT_SOURCES_INSTALL_DIR="/etc/apt/sources.list.d"
 
 function do_prefix() {
   case "$1" in
@@ -64,23 +99,69 @@ function include() {
   done < "$SRC"
 }
 
+function list_apt_source_files() {
+  find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources"
+  if [[ -n "$OS_CODENAME" && -d "ubuntu/sources.d/$OS_CODENAME" ]]; then
+    find "ubuntu/sources.d/$OS_CODENAME" -type f -name "*.sources"
+  fi
+}
+
+function should_skip_apt_source() {
+  local name="$1"
+  [[ -z "$SKIP_APT_SOURCES" ]] && return 1
+  [[ "$SKIP_APT_SOURCES" == "all" ]] && return 0
+  local -a candidates
+  local candidate
+  IFS=', ' read -ra candidates <<< "$SKIP_APT_SOURCES"
+  for candidate in "${candidates[@]}"; do
+    [[ "$candidate" == "$name" ]] && return 0
+  done
+  return 1
+}
+
+function remove_stale_apt_source() {
+  local name="$1"
+  local link="$APT_SOURCES_INSTALL_DIR/$name.sources"
+  if [[ -L "$link" && "$(readlink "$link")" == "$SOURCE_DIR"/* ]]; then
+    echo "Removing stale apt source: $link"
+    sudo rm "$link"
+  fi
+}
+
 function install_apt_dependencies() {
-  local INSTALL_DIR="/etc/apt/sources.list.d"
   local -a ADDITIONAL_PACKAGES=()
 
-  local file
+  local file name
+  local -a ALL_SOURCE_NAMES=()
   while IFS= read -r file; do
-    echo "Preparing $file"
-    sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
-    ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
-  done < <(find "ubuntu/sources.d" -maxdepth 1 -type f -name "*.sources")
+    name="$(basename "$file" .sources)"
+    ALL_SOURCE_NAMES+=("$name")
 
-  if [[ -d "ubuntu/sources.d/$OS_CODENAME" ]]; then
-    while IFS= read -r file; do
-      echo "Preparing $file"
-      sudo ln -sf "$(realpath "$file")" "$INSTALL_DIR/$(basename "$file")"
-      ADDITIONAL_PACKAGES+=("$(basename "$file" .sources)")
-    done < <(find "ubuntu/sources.d/$OS_CODENAME" -type f -name "*.sources")
+    if should_skip_apt_source "$name"; then
+      echo "Skipping $file"
+      remove_stale_apt_source "$name"
+      continue
+    fi
+
+    echo "Preparing $file"
+    sudo ln -sf "$(realpath "$file")" "$APT_SOURCES_INSTALL_DIR/$(basename "$file")"
+    ADDITIONAL_PACKAGES+=("$name")
+  done < <(list_apt_source_files)
+
+  if [[ -n "$SKIP_APT_SOURCES" && "$SKIP_APT_SOURCES" != "all" ]]; then
+    local -a candidates
+    local candidate found
+    IFS=', ' read -ra candidates <<< "$SKIP_APT_SOURCES"
+    for candidate in "${candidates[@]}"; do
+      [[ -z "$candidate" ]] && continue
+      found=0
+      for name in "${ALL_SOURCE_NAMES[@]}"; do
+        [[ "$name" == "$candidate" ]] && found=1
+      done
+      if [[ "$found" != 1 ]]; then
+        echo "warning: no apt source named '$candidate' to skip" >&2
+      fi
+    done
   fi
 
   sudo apt update
